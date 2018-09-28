@@ -17,6 +17,7 @@
         "import/order": [ "warn", { "newlines-between": "always" } ],
 
         "react/jsx-filename-extension": "off",
-        "react/jsx-one-expression-per-line": "off"
+        "react/jsx-one-expression-per-line": "off",
+        "react/jsx-indent": [ "warn", 4 ]
     }
 }
