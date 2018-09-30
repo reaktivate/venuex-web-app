@@ -1,6 +1,9 @@
-const rewireEslint = require('react-app-rewire-eslint'); // eslint-disable-line import/no-extraneous-dependencies
+/* eslint-disable import/no-extraneous-dependencies */
+const rewireEslint = require('react-app-rewire-eslint');
+const rewireStyledComponents = require('react-app-rewire-styled-components');
 
 module.exports = (config, env) => {
-  config = rewireEslint(config, env);
-  return config;
+    config = rewireStyledComponents(config, env);
+    config = rewireEslint(config, env);
+    return config;
 };
