@@ -1,0 +1,21 @@
+{
+  "venues" : {
+    "test_venue" : {
+      "name" : "Test Venue",
+      "theme" : {
+        "colors" : {
+          "primary" : "#ff0000"
+        }
+      }
+    },
+    "test_venue2" : {
+      "name" : "Test Venue 2",
+      "theme" : {
+        "colors" : {
+          "primary" : "#0000ff",
+          "secondary" : "#0033aa"
+        }
+      }
+    }
+  }
+}

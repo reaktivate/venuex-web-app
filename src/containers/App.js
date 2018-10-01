@@ -8,6 +8,9 @@ import configureStore from '../store';
 import routes from '../routes';
 import firebase from '../firebase';
 
+import VenueConfigProvider from './VenueConfigProvider';
+import VenueThemeProvider from './VenueThemeProvider';
+
 
 class App extends Component {
 
@@ -34,9 +37,13 @@ class App extends Component {
         const { store, history } = this.state;
         return (
             <Provider store={store}>
-                <ConnectedRouter history={history}>
-                    { routes }
-                </ConnectedRouter>
+                <VenueConfigProvider>
+                    <VenueThemeProvider>
+                        <ConnectedRouter history={history}>
+                            { routes }
+                        </ConnectedRouter>
+                    </VenueThemeProvider>
+                </VenueConfigProvider>
             </Provider>
         );
     }

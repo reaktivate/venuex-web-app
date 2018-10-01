@@ -1,4 +1,4 @@
-import coreReducers, { setVenueId } from '../core';
+import coreReducers, { setVenueId, getVenueId } from '../core';
 
 
 describe('reducers', () => {
@@ -9,6 +9,10 @@ describe('reducers', () => {
                 type: 'SET_VENUE_ID',
                 payload: 'testVenue'
             });
+        });
+
+        it('selector', () => {
+            expect(getVenueId({ venueId: 'testVenue' })).toEqual('testVenue');
         });
 
         it('reducer', () => {
