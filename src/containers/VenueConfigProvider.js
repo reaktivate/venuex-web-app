@@ -3,11 +3,19 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { firebaseConnect, isLoaded, isEmpty } from 'react-redux-firebase';
 import { FoldingCube } from 'styled-spinkit';
+import reactHOC from 'react-hoc';
 
 import { getVenueId, firebaseGet } from '../reducers/core';
 import Screen from '../components/Screen';
 
-export const VenueConfigContext = React.createContext();
+
+export const VenueConfig = React.createContext();
+
+export const withVenueConfig = reactHOC(WrappedComponent => props => (
+    <VenueConfig.Consumer>
+        { venueConfig => <WrappedComponent venueConfig={venueConfig} {...props} /> }
+    </VenueConfig.Consumer>
+), 'withVenueConfig');
 
 
 const VenueConfigProvider = ({ venueConfig, venueId, children }) => {
@@ -25,9 +33,9 @@ const VenueConfigProvider = ({ venueConfig, venueId, children }) => {
     }
 
     return (
-        <VenueConfigContext.Provider value={venueConfig}>
+        <VenueConfig.Provider value={venueConfig}>
             {children}
-        </VenueConfigContext.Provider>
+        </VenueConfig.Provider>
     );
 };
 
@@ -41,3 +49,6 @@ export default compose(
         venueConfig: firebaseGet(state, `data/venues/${getVenueId(state)}`)
     }))
 )(VenueConfigProvider);
+
+
+export const __forTesting = { VenueConfigProvider };

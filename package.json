@@ -10,6 +10,7 @@
     "normalize.css": "^8.0.0",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
+    "react-hoc": "^0.1.8",
     "react-redux": "^5.0.7",
     "react-redux-firebase": "^2.1.8",
     "react-router": "^4.3.1",
@@ -27,13 +28,19 @@
     "eject": "react-app-rewired eject"
   },
   "devDependencies": {
+    "enzyme": "^3.6.0",
+    "enzyme-adapter-react-16": "^1.5.0",
     "eslint": "^4.10.0",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-plugin-import": "^2.7.0",
     "eslint-plugin-jsx-a11y": "^5.1.1",
     "eslint-plugin-react": "^7.4.0",
+    "jest-enzyme": "^6.1.2",
     "react-app-rewire-eslint": "^0.2.3",
     "react-app-rewire-styled-components": "^3.0.2",
     "react-app-rewired": "^1.6.2"
+  },
+  "resolutions": {
+    "hoist-non-react-statics": "3.0.1"
   }
 }

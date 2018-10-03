@@ -3,7 +3,7 @@ import { ThemeProvider } from 'styled-components';
 
 import defaultTheme from '../config/defaultTheme.json';
 
-import { VenueConfigContext } from './VenueConfigProvider';
+import { withVenueConfig } from './VenueConfigProvider';
 
 
 const venueConfigToTheme = ({ theme }) => ({
@@ -12,15 +12,11 @@ const venueConfigToTheme = ({ theme }) => ({
 });
 
 
-const VenueThemeProvider = ({ children }) => (
-    <VenueConfigContext.Consumer>
-        { venueConfig => (
-            <ThemeProvider theme={venueConfigToTheme(venueConfig)}>
-                {children}
-            </ThemeProvider>
-        ) }
-    </VenueConfigContext.Consumer>
+const VenueThemeProvider = ({ venueConfig, children }) => (
+    <ThemeProvider theme={venueConfigToTheme(venueConfig)}>
+        {children}
+    </ThemeProvider>
 );
 
 
-export default VenueThemeProvider;
+export default withVenueConfig(VenueThemeProvider);
