@@ -1,15 +1,16 @@
 import React from 'react';
 import { ThemeProvider } from 'styled-components';
+import merge from 'lodash/merge';
 
 import defaultTheme from '../config/defaultTheme.json';
 
 import { withVenueConfig } from './VenueConfigProvider';
 
 
-const venueConfigToTheme = ({ theme }) => ({
-    ...defaultTheme,
-    ...theme
-});
+const venueConfigToTheme = ({ theme }) => merge(
+    defaultTheme,
+    theme
+);
 
 
 const VenueThemeProvider = ({ venueConfig, children }) => (
@@ -20,3 +21,5 @@ const VenueThemeProvider = ({ venueConfig, children }) => (
 
 
 export default withVenueConfig(VenueThemeProvider);
+
+export const __forTesting = { VenueThemeProvider };

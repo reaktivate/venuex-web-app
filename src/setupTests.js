@@ -1,5 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import 'jest-enzyme';
+import 'jest-styled-components';
 
 import { configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
