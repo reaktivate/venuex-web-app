@@ -7,7 +7,7 @@
     "rules": {
         "arrow-parens": [ "warn", "as-needed" ],
         "comma-dangle": "off",
-        "indent": [ "warn", 4, { "SwitchCase": 1 } ],
+        "indent": [ "warn", 2, { "SwitchCase": 1 } ],
         "no-confusing-arrow": "off",
         "no-mixed-operators": "off",
         "no-nested-ternary": "off",
@@ -15,13 +15,20 @@
         "no-plusplus": "off",
         "no-shadow": "off",
         "no-underscore-dangle": "off",
+
         "padded-blocks": "off",
 
         "import/order": [ "warn", { "newlines-between": "always" } ],
+        "import/no-extraneous-dependencies": "off",
+        "import/no-unresolved": "off",
+        "import/extensions": "off",
 
+        "jsx-a11y/click-events-have-key-events": "off",
+        "jsx-a11y/no-static-element-interactions": "off",
         "react/jsx-filename-extension": "off",
-        "react/jsx-indent": [ "warn", 4 ],
+        "react/jsx-indent": [ "warn", 2 ],
         "react/jsx-one-expression-per-line": "off",
+        "react/no-unescaped-entities": "off",
         "react/prop-types": "off"
     }
 }

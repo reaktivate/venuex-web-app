@@ -7,7 +7,9 @@ import rootReducer from './reducers';
 
 
 const rrfConfig = {
-    userProfile: 'users'
+    userProfile: 'users',
+    enableLogging: true,
+    logErrors: true,
 };
 
 

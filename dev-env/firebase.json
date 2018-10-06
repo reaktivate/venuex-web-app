@@ -17,5 +17,36 @@
         }
       }
     }
+  },
+
+  "events": {
+    "event-id": {
+      "venueId": "test_venue",
+      "start": 1538608707111,
+      "end": 1538608707111,
+      "type": "some_type",
+      "name": "Some name"
+    },
+    "event-id2": {
+      "venueId": "test_venue",
+      "start": 1538608707111,
+      "end": 1538608707111,
+      "type": "some_type",
+      "name": "Some name 2"
+    },
+    "event-id3": {
+      "venueId": "test_venue",
+      "start": 1538608707111,
+      "end": 1538608707111,
+      "type": "some_type",
+      "name": "Some name 3"
+    },
+    "event-id4": {
+      "venueId": "test_venue",
+      "start": 1538608707111,
+      "end": 1538608707111,
+      "type": "some_type",
+      "name": "Some name 4"
+    }
   }
 }
