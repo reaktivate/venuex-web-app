@@ -12,6 +12,7 @@ _Note: This project was bootstrapped with [Create React App](https://github.com/
 - [Linting](#linting)
 - [Whitelabeling / CSS styling](#whitelabeling--css-styling)
 - [Firebase Configuration](#firebase-configuration)
+- [Venue ID](#venue-id)
 - [Environment Variables](#environment-variables)
 - [Running Tests](#running-tests)
 - [Continuous Integration](#continuous-integration)
@@ -100,6 +101,11 @@ To avoid run-time errors due to invalid venue configuration, the venue theme loa
 [Firebase Javascript SDK](https://firebase.google.com/docs/web/setup) is initialized in `src/firebase.js`, with the config values taken from the corresponding `REACT_APP_FIREBASE_` [environment variables](#environment-variables).
 
 To reduce the chance of accidental data corruption/production outage, **keep the project's test and development Firebase instances separate from the production instance**.
+
+
+## Venue ID
+
+By default, venue ID is equal to the venue's domain name and is automatically derived from the page URL. It can be overridden through `REACT_APP_VENUE_ID` [environment variable](#environment-variables) for ease of local development.
 
 
 ## Environment Variables
