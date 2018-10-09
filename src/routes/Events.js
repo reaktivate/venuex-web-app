@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { firebaseConnect, isLoaded } from 'react-redux-firebase';
 import SidebarLayout from 'components/Sidebar.js';
 import Calendar from 'components/Calendar';
+import AddEventModal from 'components/events/AddEventModal';
 import moment from 'moment';
 
 const LegendItem = styled.div`
@@ -59,6 +60,7 @@ class Events extends PureComponent {
 
   state = {
     date: moment(),
+    isAddingEvent: false,
   };
 
   handleNextMonth = () => {
@@ -73,16 +75,24 @@ class Events extends PureComponent {
     });
   }
 
+  handleAdd = () => {
+    this.setState({
+      isAddingEvent: true,
+    });
+  }
+
   render() {
     const { eventsByDate } = this.props;
     return (
       <SidebarLayout>
         <div style={{ flex: 1, padding: 20 }}>
+          <AddEventModal isOpen={this.state.isAddingEvent} />
           <Calendar
             events={eventsByDate}
             date={this.state.date}
             onNextMonth={this.handleNextMonth}
             onPreviousMonth={this.handlePreviousMonth}
+            onAdd={this.handleAdd}
           />
           <div>
             <LegendItem opacity="FF"><div /> = 1st payment</LegendItem>

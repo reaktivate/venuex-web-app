@@ -9,8 +9,8 @@ import registerServiceWorker from './registerServiceWorker';
 import './index.css';
 
 const venueId = process.env.REACT_APP_VENUE_ID || url.parse(window.location.href).hostname;
-const venuexConfig = window.__venuex__ || { venueId: 1 };
-const { venueId } = venuexConfig;
+// const venuexConfig = window.__venuex__ || { venueId: 1 };
+// const { venueId } = venuexConfig;
 
 ReactDOM.render(
     <App venueId={venueId} />,
