@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components';
 import leftArrowIcon from 'assets/caret-left-custom.svg';
 import rightArrowIcon from 'assets/caret-right-custom.svg';
 import closeIcon from 'assets/close.svg';
+import plusIcon from 'assets/plus.svg';
 import moment from 'moment';
 
 const Container = styled.div`
@@ -163,6 +164,23 @@ const ExpandedHeader = styled.div`
   }
 `;
 
+const AddButton = styled.div`
+  height: 50px;
+  width: 50px;
+  background-color: ${props => props.theme.colors.primary};
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 2px 2px 0 rgba(125, 125, 125, 0.2);
+  cursor: pointer;
+`;
+
+const AddIcon = styled.img`
+  height: 17px;
+  width: 17px;
+`;
+
 export default class Calendar extends PureComponent {
 
   state = {
@@ -180,7 +198,8 @@ export default class Calendar extends PureComponent {
       events,
       date,
       onNextMonth,
-      onPreviousMonth
+      onPreviousMonth,
+      onAdd,
     } = this.props;
     const weekdays = [1, 2, 3, 4, 5, 6, 7].map(dateNumber => (
       moment(date).set('date', dateNumber).format('ddd')
@@ -195,7 +214,11 @@ export default class Calendar extends PureComponent {
             <div>{date.format('MMMM YYYY')}</div>
             <ArrowIcon src={rightArrowIcon} onClick={onNextMonth} />
           </MonthPicker>
-          <div />
+          <div>
+            <AddButton onClick={onAdd}>
+              <AddIcon src={plusIcon} />
+            </AddButton>
+          </div>
         </Header>
         <WeekdaysBar>
           {weekdays.map(day => (
