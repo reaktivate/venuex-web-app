@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'connected-react-router';
-import { createBrowserHistory } from 'history';
+import { createHashHistory } from 'history';
 
 import { setVenueId } from '../reducers/core';
 import configureStore from '../store';
@@ -18,7 +18,7 @@ class App extends Component {
         super(...args);
 
         const initialState = {};
-        const history = createBrowserHistory();
+        const history = createHashHistory();
 
         this.state = {
             store: configureStore({
