@@ -39,7 +39,6 @@ const VenueConfigProvider = ({ venueConfig, venueId, children }) => {
     );
 };
 
-
 export default compose(
     firebaseConnect((props, store) => [
         `venues/${getVenueId(store.getState())}`

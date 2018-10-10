@@ -3,7 +3,7 @@ import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'connected-react-router';
 import { createHashHistory } from 'history';
 
-import { setVenueId } from '../reducers/core';
+import { setVenueId, login } from '../reducers/core';
 import configureStore from '../store';
 import routes from '../routes';
 import firebase from '../firebase';
@@ -32,6 +32,17 @@ class App extends Component {
         this.state.store.dispatch(setVenueId(this.props.venueId));
     }
 
+    componentDidMount() {
+      firebase().auth().onAuthStateChanged(user => {
+        if (user) {
+          // User is signed in.
+          this.state.store.dispatch(login(user));
+          // ...
+        } else {
+          // User is signed out.
+        }
+      });
+    }
 
     render() {
         const { store, history } = this.state;
