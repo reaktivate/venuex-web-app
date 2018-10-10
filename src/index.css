@@ -26,4 +26,5 @@ html, body {
 
 body {
     font-family: 'Montserrat';
+    font-smoothing: antialiased;
 }

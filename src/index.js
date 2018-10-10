@@ -1,5 +1,6 @@
 import 'normalize.css';
 import url from 'url';
+import 'react-datepicker/dist/react-datepicker.css';
 
 import React from 'react';
 import ReactDOM from 'react-dom';

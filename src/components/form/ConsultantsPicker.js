@@ -1,10 +1,14 @@
 import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
+import { firebaseConnect } from 'react-redux-firebase';
 import styled, { css } from 'styled-components';
 import dropdownCaretDown from 'assets/caret-down-custom.svg';
 import dropdownCaretUp from 'assets/caret-up-custom.svg';
 import btnOwnerImage from 'assets/btn-owner.svg';
 import ownerImage from 'assets/owner.svg';
 import Checkbox from 'components/Checkbox';
+import BaseInput from 'components/form/BaseInput';
 
 const Container = styled.div`
   border-bottom: solid 1px #d8d8d8;
@@ -37,6 +41,7 @@ const Dropdown = styled.div`
   background-color: #FFF;
   box-shadow: 2px 2px 10px 0 rgba(0, 0, 0, 0.2);
   border-radius: 2px;
+  z-index: 10;
 `;
 
 const Consultant = styled.div`
@@ -97,24 +102,13 @@ const Group = styled.div`
 
 const Img = styled.img``;
 
-const employees = [
-  {
-    id: 'luisid',
-    name: 'Luis del Giudice',
-  },
-  {
-    id: 'denisseid',
-    name: 'Denisse Garcia',
-  }
-];
-
-export default class ConsultantsPicker extends PureComponent {
+class ConsultantsPicker extends PureComponent {
 
   state = {
     isOpen: false,
   };
 
-  getEmployeeById = (id) => employees.filter(emp => emp.id === id)[0];
+  getEmployeeById = (id) => this.props.employees.filter(emp => emp.id === id)[0];
 
   handleToggle = () => {
     this.setState(({ isOpen }) => ({
@@ -171,53 +165,75 @@ export default class ConsultantsPicker extends PureComponent {
       owner: null,
     };
     return (
-      <Container>
-        <PickContainer onClick={this.handleToggle}>
-          <Placeholder>
-            {value.picked.length === 0 ? 'Pick a staff' : value.picked.map(id => (
-              <Group key={id}>
-                <Picture src="https://placehold.it/100x100" />
-                <Name>{this.getEmployeeById(id).name}</Name>
-              </Group>
-            ))}
-          </Placeholder>
-          <ArrowIcon
-            src={this.state.isOpen ?
-              dropdownCaretUp : dropdownCaretDown}
-          />
-        </PickContainer>
-        {this.state.isOpen &&
-          <Dropdown>
-            {employees.map(employee => {
-              const { value } = this.props.input;
-              const isPicked = value && value.picked.indexOf(employee.id) !== -1;
-              const isOwner = value.owner === employee.id;
-              return (
-                <Consultant picked={isPicked} isOwner={isOwner} key={employee.id}>
-                  <Group>
-                    <Checkbox
-                      checked={isPicked}
-                      onUncheck={() =>
-                        this.handleEmployeeUnchecked(employee.id)}
-                      onCheck={() =>
-                        this.handleEmployeeChecked(employee.id)}
-                    />
-                    <Picture src="https://placehold.it/100x100" />
-                    <Name>{employee.name}</Name>
-                  </Group>
-                  <Group>
-                    <Img
-                      alt=""
-                      className="assign-badge"
-                      src={isOwner ? ownerImage : btnOwnerImage}
-                      onClick={() => this.handleAssignClicked(employee.id)}
-                    />
-                  </Group>
-                </Consultant>
-              );
-            })}
-          </Dropdown>}
-      </Container>
+      <BaseInput label="Consultant:">
+        <Container>
+          <PickContainer onClick={this.handleToggle}>
+            <Placeholder>
+              {value.picked.length === 0 ? 'Pick a staff' : value.picked.map(id => (
+                <Group key={id} style={{ margin: '10px 0px' }}>
+                  <Picture src={this.getEmployeeById(id).picture} />
+                  <Name style={{ marginRight: 10 }}>{this.getEmployeeById(id).name}</Name>
+                  {value.owner === id && <Img src={ownerImage} />}
+                </Group>
+              ))}
+            </Placeholder>
+            <ArrowIcon
+              src={this.state.isOpen ?
+                dropdownCaretUp : dropdownCaretDown}
+            />
+          </PickContainer>
+          {this.state.isOpen &&
+            <Dropdown>
+              {this.props.employees.map(employee => {
+                const { value } = this.props.input;
+                const isPicked = value && value.picked.indexOf(employee.id) !== -1;
+                const isOwner = value.owner === employee.id;
+                return (
+                  <Consultant picked={isPicked} isOwner={isOwner} key={employee.id}>
+                    <Group>
+                      <Checkbox
+                        checked={isPicked}
+                        onUncheck={() =>
+                          this.handleEmployeeUnchecked(employee.id)}
+                        onCheck={() =>
+                          this.handleEmployeeChecked(employee.id)}
+                      />
+                      <Picture src={employee.picture} />
+                      <Name>{employee.name}</Name>
+                    </Group>
+                    <Group>
+                      <Img
+                        alt=""
+                        className="assign-badge"
+                        src={isOwner ? ownerImage : btnOwnerImage}
+                        onClick={() => this.handleAssignClicked(employee.id)}
+                      />
+                    </Group>
+                  </Consultant>
+                );
+              })}
+            </Dropdown>}
+        </Container>
+      </BaseInput>
     );
   }
 }
+
+export default compose(
+  firebaseConnect(() => [{
+    path: 'employees',
+    queryParams: [
+      'orderByChild=venueId',
+      'equalTo=test_venue'
+    ],
+  }]),
+  connect(state => ({
+    employees: state.firebase.data.employees ? (
+      Object.keys(state.firebase.data.employees).map(key => ({
+        id: key,
+        name: state.firebase.data.employees[key].fullName,
+        picture: state.firebase.data.employees[key].picture,
+      }))
+    ) : [],
+  })),
+)(ConsultantsPicker);
