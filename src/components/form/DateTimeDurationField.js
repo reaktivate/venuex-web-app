@@ -33,13 +33,14 @@ export default props => {
 
 
   return (
-    <BaseInput label={props.label}>
+    <BaseInput {...props}>
       <div style={{ display: 'flex' }}>
         <Spacing>
           <DatePicker
             width="130px"
             selected={value.date}
             onChange={handleChangeDate}
+            {...props}
           />
         </Spacing>
         <Spacing>
@@ -51,6 +52,7 @@ export default props => {
             dateFormat="LT"
             timeIntervals={15}
             timeCaption="Time"
+            {...props}
           />
         </Spacing>
         <Spacing>
@@ -62,6 +64,7 @@ export default props => {
             dateFormat="LT"
             timeIntervals={15}
             timeCaption="Time"
+            {...props}
           />
         </Spacing>
       </div>

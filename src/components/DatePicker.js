@@ -68,6 +68,10 @@ const DatePickerWrapper = styled.div`
       border: none;
       border-bottom: solid 1px #d8d8d8;
 
+      ${props => props.meta && props.meta.error && props.meta.touched && css`
+        border-bottom: solid 1px #c02026;
+      `}
+
       &:focus {
         outline: 0;
       }
@@ -110,7 +114,7 @@ const DatePickerWrapper = styled.div`
 
 
 export default props => (
-  <DatePickerWrapper width={props.width} showTimeSelect={props.showTimeSelect}>
+  <DatePickerWrapper {...props}>
     <DatePicker {...props} />
   </DatePickerWrapper>
 );

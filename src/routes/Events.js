@@ -86,7 +86,10 @@ class Events extends PureComponent {
     return (
       <SidebarLayout>
         <div style={{ flex: 1, padding: 20 }}>
-          <AddEventModal isOpen={this.state.isAddingEvent} />
+          <AddEventModal
+            isOpen={this.state.isAddingEvent}
+            onClose={() => this.setState({ isAddingEvent: false })}
+          />
           <Calendar
             events={eventsByDate}
             date={this.state.date}

@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import BaseInput from 'components/form/BaseInput';
 import dropdownCaretDown from 'assets/caret-down-custom.svg';
 
@@ -15,6 +15,10 @@ const Select = styled.select`
   &:focus {
     outline: 0;
   }
+
+  ${props => props.meta && props.meta.error && props.meta.touched && css`
+    border-bottom: solid 1px #c02026;
+  `}
 `;
 
 const Container = styled.div`
@@ -35,7 +39,7 @@ const Container = styled.div`
 export default props => (
   <BaseInput {...props}>
     <Container>
-      <Select {...props.input}>
+      <Select {...props.input} {...props}>
         <option value="">Select one</option>
         {props.options.map(o => (
           <option value={o.value}>{o.label}</option>
