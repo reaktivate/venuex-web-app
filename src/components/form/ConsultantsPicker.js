@@ -13,6 +13,10 @@ import BaseInput from 'components/form/BaseInput';
 const Container = styled.div`
   border-bottom: solid 1px #d8d8d8;
   position: relative;
+
+  ${props => props.meta && props.meta.error && props.meta.touched && css`
+    border-bottom: solid 1px #c02026;
+  `}
 `;
 
 const PickContainer = styled.div`
@@ -165,8 +169,8 @@ class ConsultantsPicker extends PureComponent {
       owner: null,
     };
     return (
-      <BaseInput label="Consultant:">
-        <Container>
+      <BaseInput label="Consultant:" {...this.props}>
+        <Container {...this.props}>
           <PickContainer onClick={this.handleToggle}>
             <Placeholder>
               {value.picked.length === 0 ? 'Pick a staff' : value.picked.map(id => (

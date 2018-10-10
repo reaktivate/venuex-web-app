@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import BaseInput from 'components/form/BaseInput';
 
 const Input = styled.input`
@@ -14,10 +14,15 @@ const Input = styled.input`
     outline: none;
     border-bottom: solid 1px ${props => props.theme.colors.primary};
   }
+
+  ${props => props.meta && props.meta.error && props.meta.touched && css`
+    border-bottom: solid 1px #c02026;
+  `}
+
 `;
 
 export default props => (
   <BaseInput {...props}>
-    <Input type="text" {...props.input} />
+    <Input type="text" {...props.input} {...props} />
   </BaseInput>
 );

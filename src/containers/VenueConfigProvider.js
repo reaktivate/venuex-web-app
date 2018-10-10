@@ -33,7 +33,7 @@ const VenueConfigProvider = ({ venueConfig, venueId, children }) => {
     }
 
     return (
-        <VenueConfig.Provider value={venueConfig}>
+        <VenueConfig.Provider value={{ id: venueId, ...venueConfig }}>
             {children}
         </VenueConfig.Provider>
     );

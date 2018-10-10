@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import BaseInput from 'components/form/BaseInput';
 
 
@@ -13,6 +13,10 @@ const Textarea = styled.textarea`
     outline: 0;
     border: solid 1px ${props => props.theme.colors.primary};
   }
+
+  ${props => props.meta && props.meta.error && props.meta.touched && css`
+    border-bottom: solid 1px #c02026;
+  `}
 `;
 
 export default props => (
