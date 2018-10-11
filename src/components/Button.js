@@ -31,10 +31,14 @@ const Button = styled.div`
   ${props => props.kind === 'danger' && css`
     color: #c02026;
   `}
+
+  ${props => props.kind === 'white' && css`
+    background-color: #ffffff;
+    color: #fff;
+    border: solid 1px #ededed;
+  `}
 `;
 
 export default ({ label, ...restProps }) => (
-  <Button {...restProps}>
-    {label}
-  </Button>
+  <Button {...restProps}>{label}</Button>
 );
