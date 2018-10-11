@@ -5,7 +5,7 @@ import RoundButton from './RoundButton';
 import plusIcon from '../assets/plus.svg';
 import filterIcon from '../assets/filter.svg';
 
-const TableHeader = styled.div`
+const ManageStaffHeader = styled.div`
   height: 40px; /* not sure what to set this as */
   background-color: #fcfbfc;
   padding: 20px 15px;
@@ -46,7 +46,7 @@ const ActionButtonGroup = styled.div`
 `;
 
 export default ({ label, ...restProps }) => (
-  <TableHeader {...restProps}>
+  <ManageStaffHeader {...restProps}>
     {' '}
     <Button
       label={
@@ -63,5 +63,5 @@ export default ({ label, ...restProps }) => (
       </RoundButton>
       <RoundButton label="U" />
     </ActionButtonGroup>
-  </TableHeader>
+  </ManageStaffHeader>
 );
