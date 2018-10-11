@@ -5,18 +5,19 @@ import { connect } from 'react-redux';
 import Home from './Home';
 import Login from './Login';
 import Events from './Events';
-
+import ManageStaff from './ManageStaff';
 
 const _RedirectRoute = ({ currentUser }) => (
   <React.Fragment>
     {!currentUser && <Redirect to="/login" />}
     <Route exact path="/" component={Home} />
     <Route exact path="/events" component={Events} />
+    <Route exact path="/managestaff" component={ManageStaff} />
   </React.Fragment>
 );
 
 const RedirectRoute = connect(state => ({
-  currentUser: getUser(state),
+  currentUser: getUser(state)
 }))(_RedirectRoute);
 
 const Routes = (
