@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import SidebarLayout from 'components/Sidebar.js';
 import Table from 'components/Table.js';
-import TableHeader from 'components/TableHeader.js';
+import ManageStaffHeader from 'components/ManageStaffHeader.js';
 
 class ManageStaff extends PureComponent {
   state = {};
@@ -10,7 +10,7 @@ class ManageStaff extends PureComponent {
     return (
       <SidebarLayout>
         <Table>
-          <TableHeader />
+          <ManageStaffHeader />
         </Table>
       </SidebarLayout>
     );
