@@ -16,15 +16,21 @@ const Button = styled.div`
   text-transform: uppercase;
   cursor: pointer;
 
-  ${props => props.kind === 'primary' && css`
-    background-color: ${props.theme.colors.primary};
-    color: #FFF;
-    border: solid 1px ${props.theme.colors.primary}
-  `}
+  ${props =>
+    props.kind === 'primary' &&
+    css`
+      background-color: ${props.theme.colors.primary};
+      color: #fff;
+      border: solid 1px ${props.theme.colors.primary};
+    `} ${props =>
+    props.kind === 'white' &&
+    css`
+      background-color: #ffffff;
+      color: #fff;
+      border: solid 1px #ededed;
+    `};
 `;
 
 export default ({ label, ...restProps }) => (
-  <Button {...restProps}>
-    {label}
-  </Button>
+  <Button {...restProps}>{label}</Button>
 );
