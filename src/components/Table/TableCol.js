@@ -6,7 +6,6 @@ const TableCol = styled.div`
   font-size: 12px;
   font-style: normal;
   font-stretch: normal;
-  text-transform: uppercase;
   line-height: normal;
   letter-spacing: 0.3px;
   color: #888888;
@@ -22,6 +21,12 @@ const TableCol = styled.div`
     props.width &&
     css`
       width: ${props.width};
+    `};
+  ${props =>
+    props.emphasize === true &&
+    css`
+      font-weight: bold;
+      color: #222222;
     `};
 `;
 

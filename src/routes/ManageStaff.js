@@ -19,7 +19,7 @@ class ManageStaff extends PureComponent {
             <TableCol width="5%" content={<CheckBox />} />
             <TableCol
               width="20%"
-              content={<ColTitle title="Name" selected sortable />}
+              content={<ColTitle title="Name" selected sortable color="#c0b59d" />}
             />
             <TableCol
               width="20%"
@@ -33,8 +33,8 @@ class ManageStaff extends PureComponent {
           </TableRow>
           <TableRow>
             <TableCol width="5%" content={<CheckBox />} />
-            <TableCol content="First Column" width="20%" />
-            <TableCol content="Second Column" width="20%" />
+            <TableCol content="First Column" width="20%" emphasize />
+            <TableCol content="Second Column" width="20%" emphasize />
             <TableCol content="Third Column" width="20%" />
             <TableCol content="Fourth Column" width="20%" />
           </TableRow>
