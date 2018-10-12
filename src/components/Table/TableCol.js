@@ -1,8 +1,7 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import downArrow from '../../assets/caret-down-custom.svg';
 
-const ColTitle = styled.div`
+const TableCol = styled.div`
   font-family: Montserrat;
   font-size: 12px;
   font-style: normal;
@@ -19,24 +18,13 @@ const ColTitle = styled.div`
       font-weight: bold;
       color: #181818;
     `};
-`;
-
-const ColIcon = styled.img`
-  width: 12px;
-  height: 12px;
-  margin-left: 10.5px;
-  display: none;
-  cursor: pointer;
-
   ${props =>
-    props.sortable === true &&
+    props.width &&
     css`
-      display: block;
+      width: ${props.width};
     `};
 `;
 
-export default ({ title, ...restProps }) => (
-  <ColTitle {...restProps}>
-    {title} <ColIcon src={downArrow} {...restProps} />
-  </ColTitle>
+export default ({ content, ...restProps }) => (
+  <TableCol {...restProps}>{content}</TableCol>
 );
