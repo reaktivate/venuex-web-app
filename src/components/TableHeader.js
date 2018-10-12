@@ -24,7 +24,7 @@ const ColTitle = styled.div`
   color: #888888;
   display: flex;
   align-items: center;
-  justify-content: space-between
+  justify-content: space-around
     ${props =>
       props.selected === 'true' &&
       css`
