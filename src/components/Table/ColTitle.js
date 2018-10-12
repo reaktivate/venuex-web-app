@@ -1,6 +1,6 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import downArrow from '../../assets/caret-down-custom.svg';
+import CaretDown from '../../assets/icons/caret-down.js';
 
 const ColTitle = styled.div`
   font-family: Montserrat;
@@ -21,22 +21,18 @@ const ColTitle = styled.div`
     `};
 `;
 
-const ColIcon = styled.img`
-  width: 12px;
-  height: 12px;
-  margin-left: 10.5px;
-  display: none;
-  cursor: pointer;
-
-  ${props =>
+const ColIcon = styled.div`
+    display: none;
+    ${props =>
     props.sortable === true &&
     css`
-      display: block;
+      display:block;
     `};
 `;
 
 export default ({ title, ...restProps }) => (
   <ColTitle {...restProps}>
-    {title} <ColIcon src={downArrow} {...restProps} />
+    {title}
+    <ColIcon {...restProps}> <CaretDown {...restProps} /> </ColIcon>
   </ColTitle>
 );
