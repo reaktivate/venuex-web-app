@@ -11,6 +11,7 @@ const TableCol = styled.div`
   color: #888888;
   display: flex;
   align-items: center;
+  min-width: 50px;
   ${props =>
     props.selected === true &&
     css`
