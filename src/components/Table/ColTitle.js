@@ -1,6 +1,6 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import CaretDown from '../../assets/icons/caret-down.js';
+import ColIcon from './ColIcon';
 
 const ColTitle = styled.div`
   font-family: Montserrat;
@@ -12,7 +12,7 @@ const ColTitle = styled.div`
   letter-spacing: 0.3px;
   color: #888888;
   display: flex;
-  align-items: center;
+  align-content: center;
   ${props =>
     props.selected === true &&
     css`
@@ -21,18 +21,9 @@ const ColTitle = styled.div`
     `};
 `;
 
-const ColIcon = styled.div`
-    display: none;
-    ${props =>
-    props.sortable === true &&
-    css`
-      display:block;
-    `};
-`;
-
 export default ({ title, ...restProps }) => (
   <ColTitle {...restProps}>
-    {title}
-    <ColIcon {...restProps}> <CaretDown {...restProps} /> </ColIcon>
+    <div>{title}</div>
+    <ColIcon {...restProps} />
   </ColTitle>
 );

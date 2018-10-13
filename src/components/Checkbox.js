@@ -13,9 +13,11 @@ const Root = styled.div`
   justify-content: center;
   cursor: pointer;
 
-  ${props => props.checked && css`
-    background-color: ${props.theme.colors.primary};
-  `}
+  ${props =>
+    props.checked &&
+    css`
+      background-color: ${props.theme.colors.primary};
+    `};
 `;
 
 const Checkmark = styled.img`
@@ -23,16 +25,15 @@ const Checkmark = styled.img`
   height: 10px;
   display: none;
 
-  ${props => props.checked && css`
-    display: block;
-  `}
+  ${props =>
+    props.checked &&
+    css`
+      display: block;
+    `};
 `;
 
 export default ({ checked, onCheck, onUncheck }) => (
-  <Root
-    checked={checked}
-    onClick={() => checked ? onUncheck() : onCheck()}
-  >
+  <Root checked={checked} onClick={() => (checked ? onUncheck() : onCheck())}>
     <Checkmark checked={checked} src={checkmarkWhite} />
   </Root>
 );
