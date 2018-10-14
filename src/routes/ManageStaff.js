@@ -29,10 +29,9 @@ class ManageStaff extends PureComponent {
               <Table.HeaderCell title="Email" sortable color="#c0b59d" />
             </Table.Cell>
 
-            <Table.Cell
-              width="20%"
-              content={<Table.HeaderCell title="Permissions" />}
-            />
+            <Table.Cell width="20%">
+              <Table.HeaderCell title="Permissions" />
+            </Table.Cell>
             <Table.Cell width="20%">
               {' '}
               <Table.HeaderCell

@@ -8,6 +8,7 @@ import styled from 'styled-components';
 const PermissionIcons = styled.div`
   display: flex;
   align-items: center;
+  justify-content: space-between;
   min-width: 110px;
 `;
 
