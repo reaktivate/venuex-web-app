@@ -13,7 +13,7 @@ const ManageStaffHeader = styled.div`
   justify-content: space-between;
   align-items: center
     ${props =>
-    props.kind === 'primary' &&
+      props.kind === 'primary' &&
       css`
         color: red;
       `};
