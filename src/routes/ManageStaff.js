@@ -17,17 +17,16 @@ class ManageStaff extends PureComponent {
         <Table>
           <ManageStaffHeader />
           <TableRow>
-            <TableCol width="5%" content={<CheckBox />} />
-            <TableCol
-              width="20%"
-              content={
-                <ColTitle title="Name" selected sortable color="#c0b59d" />
-              }
-            />
-            <TableCol
-              width="20%"
-              content={<ColTitle title="Email" sortable color="#c0b59d" />}
-            />
+            <TableCol width="5%">
+              <CheckBox />
+            </TableCol>
+            <TableCol width="20%">
+              <ColTitle title="Name" selected sortable color="#c0b59d" />
+            </TableCol>
+            <TableCol width="20%">
+              <ColTitle title="Email" sortable color="#c0b59d" />
+            </TableCol>
+
             <TableCol width="20%" content={<ColTitle title="Permissions" />} />
             <TableCol
               width="20%"
