@@ -1,9 +1,7 @@
 import React, { PureComponent } from 'react';
 import SidebarLayout from 'components/Sidebar.js';
 import Table from 'components/Table/';
-import CheckBox from 'components/Checkbox.js';
-import PermissionsIcons from 'components/PermissionsIcons.js';
-import ManageStaffHeader from 'components/ManageStaffHeader';
+import Icons from 'assets/icons';
 
 class ManageStaff extends PureComponent {
   state = {};
@@ -12,45 +10,95 @@ class ManageStaff extends PureComponent {
     return (
       <SidebarLayout>
         <Table>
-          <ManageStaffHeader />
           <Table.Row>
-            <Table.Cell width="5%">
-              <CheckBox />
-            </Table.Cell>
             <Table.Cell width="20%">
               <Table.HeaderCell
-                title="Name"
+                title="Icon Name"
                 selected
                 sortable
                 color="#c0b59d"
               />
             </Table.Cell>
             <Table.Cell width="20%">
-              <Table.HeaderCell title="Email" sortable color="#c0b59d" />
-            </Table.Cell>
-
-            <Table.Cell width="20%">
-              <Table.HeaderCell title="Permissions" />
-            </Table.Cell>
-            <Table.Cell width="20%">
-              <Table.HeaderCell title="Date Added" sortable color="#c0b59d" />
+              <Table.HeaderCell
+                title="Icon Preview"
+                selected
+                sortable
+                color="#c0b59d"
+              />
             </Table.Cell>
           </Table.Row>
           <Table.Row>
-            <Table.Cell width="5%" content={<CheckBox />} />
-            <Table.Cell content="First Column" width="20%" emphasize />
-            <Table.Cell content="Second Column" width="20%" emphasize />
+            <Table.Cell width="20%">Icons.Bell</Table.Cell>
             <Table.Cell width="20%">
-              <PermissionsIcons color="#c0b59d" />{' '}
+              <Icons.Bell size="40" />
             </Table.Cell>
-            <Table.Cell content="Fourth Column" width="20%" />
           </Table.Row>
           <Table.Row>
-            <Table.Cell width="5%" content={<CheckBox />} />
-            <Table.Cell content="First Column" width="20%" />
-            <Table.Cell content="Second Column" width="20%" />
-            <Table.Cell content="Third Column" width="20%" />
-            <Table.Cell content="Fourth Column" width="20%" />
+            <Table.Cell width="20%">Icons.Billing</Table.Cell>
+            <Table.Cell width="20%">
+              <Icons.Billing size="40" />
+            </Table.Cell>
+          </Table.Row>
+          <Table.Row>
+            <Table.Cell width="20%">Icons.CalendarDelete</Table.Cell>
+            <Table.Cell width="20%">
+              <Icons.CalendarDelete size="40" />
+            </Table.Cell>
+          </Table.Row>
+          <Table.Row>
+            <Table.Cell width="20%">Icons.CalendarEdit</Table.Cell>
+            <Table.Cell width="20%">
+              <Icons.CalendarEdit size="40" />
+            </Table.Cell>
+          </Table.Row>
+          <Table.Row>
+            <Table.Cell width="20%">Icons.CalendarEdit</Table.Cell>
+            <Table.Cell width="20%">
+              <Icons.CalendarEdit size="40" />
+            </Table.Cell>
+          </Table.Row>
+          <Table.Row>
+            <Table.Cell width="20%">Icons.Delete</Table.Cell>
+            <Table.Cell width="20%">
+              <Icons.Delete size="40" />
+            </Table.Cell>
+          </Table.Row>
+          <Table.Row>
+            <Table.Cell width="20%">Icons.ManageStaff</Table.Cell>
+            <Table.Cell width="20%">
+              <Icons.ManageStaff size="40" />
+            </Table.Cell>
+          </Table.Row>
+          <Table.Row>
+            <Table.Cell width="20%">Icons.Rings</Table.Cell>
+            <Table.Cell width="20%">
+              <Icons.Rings size="40" />
+            </Table.Cell>
+          </Table.Row>
+          <Table.Row>
+            <Table.Cell width="20%">Icons.Plus</Table.Cell>
+            <Table.Cell width="20%">
+              <Icons.Plus size="40" />
+            </Table.Cell>
+          </Table.Row>
+          <Table.Row>
+            <Table.Cell width="20%">Icons.Crown</Table.Cell>
+            <Table.Cell width="20%">
+              <Icons.Crown size="40" />
+            </Table.Cell>
+          </Table.Row>
+          <Table.Row>
+            <Table.Cell width="20%">Icons.Celebration</Table.Cell>
+            <Table.Cell width="20%">
+              <Icons.Celebration size="40" />
+            </Table.Cell>
+          </Table.Row>
+          <Table.Row>
+            <Table.Cell width="20%">Icons.Glasses</Table.Cell>
+            <Table.Cell width="20%">
+              <Icons.Glasses size="40" />
+            </Table.Cell>
           </Table.Row>
         </Table>
       </SidebarLayout>

@@ -10,6 +10,7 @@ const Bell = props => (
     />
   </svg>
 );
+
 Bell.defaultProps = {
   size: 24
 };
