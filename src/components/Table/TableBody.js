@@ -1,12 +1,10 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 
-const Table = styled.div`
-  height: 98vh; /* not sure what to set this as */
-  margin: 20px 12.2px 0px 31.8px;
-  border: solid 1px #ededed;
+const TableBody = styled.div`
+  height: fill-available; /* not sure what to set this as */
   background-color: #ffffff;
-
+  overflow-y: scroll;
   width: 100%
     ${props =>
       props.kind === 'primary' &&
@@ -15,4 +13,4 @@ const Table = styled.div`
       `};
 `;
 
-export default ({ label, ...restProps }) => <Table {...restProps} />;
+export default ({ label, ...restProps }) => <TableBody {...restProps} />;
