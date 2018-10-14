@@ -10,7 +10,6 @@ const TableCol = styled.div`
   letter-spacing: 0.3px;
   color: #888888;
   display: flex;
-  align-items: center;
   min-width: 50px;
   ${props =>
     props.selected === true &&
