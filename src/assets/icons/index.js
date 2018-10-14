@@ -5,6 +5,7 @@ import CalendarEdit from './CalendarEdit.js';
 import ManageStaffIcon from './ManageStaffIcon.js';
 import Delete from './Delete.js';
 import Rings from './Rings.js';
+import Plus from './Plus.js';
 
 const Icons = {};
 
@@ -15,5 +16,6 @@ Icons.CalendarEdit = CalendarEdit;
 Icons.ManageStaff = ManageStaffIcon;
 Icons.Delete = Delete;
 Icons.Rings = Rings;
+Icons.Plus = Plus;
 
 export default Icons;

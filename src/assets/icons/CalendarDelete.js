@@ -4,7 +4,7 @@ import { withTheme } from 'styled-components';
 const CalendarDelete = props => (
   <svg width={props.size} height={props.size} {...props} viewBox="0 0 24 22">
     <g
-      fill={props.delete ? props.theme.colors.primary : '#D8D8D8'}
+      fill={props.color ? props.color : props.theme.colors.primary}
       fillRule="evenodd"
     >
       <path d="M2.424 6.711h17.278V5.294c0-.78-.636-1.416-1.417-1.416h-1.417V4.99h-1.611V3.88h-8.39v1.11h-1.61V3.876H3.842c-.781 0-1.417.636-1.417 1.417v1.417zm17.278 3.052v-1.44h-1.89s-1.416-1.643-3.207 0H2.424v9.748c0 .782.636 1.416 1.417 1.416h14.444c.78 0 1.417-.634 1.417-1.416v-1.849l1.61 1.541v.31a3.032 3.032 0 0 1-3.027 3.028H3.84a3.032 3.032 0 0 1-3.028-3.028V5.295A3.032 3.032 0 0 1 3.84 2.267h1.416V.6h1.61v1.667h8.39V.6h1.61v1.667h1.418a3.032 3.032 0 0 1 3.028 3.027V8.18l-1.611 1.583z" />

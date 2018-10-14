@@ -41,7 +41,7 @@ class ManageStaff extends PureComponent {
             <Table.Cell content="First Column" width="20%" emphasize />
             <Table.Cell content="Second Column" width="20%" emphasize />
             <Table.Cell width="20%">
-              <PermissionsIcons color="#c0b59d" delete edit manageStaff />{' '}
+              <PermissionsIcons color="#c0b59d" />{' '}
             </Table.Cell>
             <Table.Cell content="Fourth Column" width="20%" />
           </Table.Row>
