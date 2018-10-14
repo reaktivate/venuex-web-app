@@ -14,6 +14,7 @@ const iconRows = Object.keys(Icons).map(icon => (
     <Table.Cell width="20%">{React.createElement(Icons[icon])}</Table.Cell>
   </Table.Row>
 ));
+
 class ManageStaff extends PureComponent {
   state = {};
 
@@ -40,7 +41,16 @@ class ManageStaff extends PureComponent {
               />
             </Table.Cell>
           </Table.Row>
-          <Table.Body>{iconRows}</Table.Body>
+
+          <Table.Body>
+            <Table.Row>
+              <Table.Cell width="20%">Icons.Bell (alert = true)</Table.Cell>
+              <Table.Cell width="20%">
+                <Icons.Bell alert />
+              </Table.Cell>
+            </Table.Row>
+            {iconRows}
+          </Table.Body>
         </Table>
       </SidebarLayout>
     );
