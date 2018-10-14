@@ -30,6 +30,7 @@ class ManageStaff extends PureComponent {
                 color="#c0b59d"
               />
             </Table.Cell>
+
             <Table.Cell width="20%">
               <Table.HeaderCell
                 title="Icon Preview"
@@ -39,7 +40,7 @@ class ManageStaff extends PureComponent {
               />
             </Table.Cell>
           </Table.Row>
-          {iconRows}
+          <Table.Body>{iconRows}</Table.Body>
         </Table>
       </SidebarLayout>
     );
