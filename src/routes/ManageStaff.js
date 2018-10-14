@@ -1,12 +1,9 @@
 import React, { PureComponent } from 'react';
 import SidebarLayout from 'components/Sidebar.js';
-import Table from 'components/Table/Table.js';
-import ManageStaffHeader from 'components/ManageStaffHeader.js';
-import TableRow from 'components/Table/TableRow.js';
-import ColTitle from 'components/Table/ColTitle.js';
+import Table from 'components/Table/';
 import CheckBox from 'components/Checkbox.js';
-import TableCell from 'components/Table/TableCell.js';
 import PermissionsIcons from 'components/PermissionsIcons.js';
+import ManageStaffHeader from 'components/ManageStaffHeader';
 
 class ManageStaff extends PureComponent {
   state = {};
@@ -16,28 +13,38 @@ class ManageStaff extends PureComponent {
       <SidebarLayout>
         <Table>
           <ManageStaffHeader />
-          <TableRow>
-            <TableCell width="5%">
+          <Table.Row>
+            <Table.Cell width="5%">
               <CheckBox />
-            </TableCell>
-            <TableCell width="20%">
-              <ColTitle title="Name" selected sortable color="#c0b59d" />
-            </TableCell>
-            <TableCell width="20%">
-              <ColTitle title="Email" sortable color="#c0b59d" />
-            </TableCell>
+            </Table.Cell>
+            <Table.Cell width="20%">
+              <Table.HeaderCell
+                title="Name"
+                selected
+                sortable
+                color="#c0b59d"
+              />
+            </Table.Cell>
+            <Table.Cell width="20%">
+              <Table.HeaderCell title="Email" sortable color="#c0b59d" />
+            </Table.Cell>
 
-            <TableCell width="20%" content={<ColTitle title="Permissions" />} />
-            <TableCell
+            <Table.Cell
               width="20%"
-              content={<ColTitle title="Date Added" sortable color="#c0b59d" />}
+              content={<Table.HeaderCell title="Permissions" />}
             />
-          </TableRow>
-          <TableRow>
-            <TableCell width="5%" content={<CheckBox />} />
-            <TableCell content="First Column" width="20%" emphasize />
-            <TableCell content="Second Column" width="20%" emphasize />
-            <TableCell
+            <Table.Cell
+              width="20%"
+              content={
+                <Table.HeaderCell title="Date Added" sortable color="#c0b59d" />
+              }
+            />
+          </Table.Row>
+          <Table.Row>
+            <Table.Cell width="5%" content={<CheckBox />} />
+            <Table.Cell content="First Column" width="20%" emphasize />
+            <Table.Cell content="Second Column" width="20%" emphasize />
+            <Table.Cell
               content={
                 <PermissionsIcons
                   color="#c0b59d"
@@ -49,15 +56,15 @@ class ManageStaff extends PureComponent {
               }
               width="20%"
             />
-            <TableCell content="Fourth Column" width="20%" />
-          </TableRow>
-          <TableRow>
-            <TableCell width="5%" content={<CheckBox />} />
-            <TableCell content="First Column" width="20%" />
-            <TableCell content="Second Column" width="20%" />
-            <TableCell content="Third Column" width="20%" />
-            <TableCell content="Fourth Column" width="20%" />
-          </TableRow>
+            <Table.Cell content="Fourth Column" width="20%" />
+          </Table.Row>
+          <Table.Row>
+            <Table.Cell width="5%" content={<CheckBox />} />
+            <Table.Cell content="First Column" width="20%" />
+            <Table.Cell content="Second Column" width="20%" />
+            <Table.Cell content="Third Column" width="20%" />
+            <Table.Cell content="Fourth Column" width="20%" />
+          </Table.Row>
         </Table>
       </SidebarLayout>
     );
