@@ -9,6 +9,12 @@ import Plus from './Plus.js';
 import Crown from './Crown.js';
 import Celebration from './Celebration';
 import Glasses from './Glasses';
+import Close from './Close';
+import CalendarBlank from './CalendarBlank';
+import User from './User';
+import ChairIcon from './ChairIcon';
+import Room from './Room';
+import Notes from './Notes';
 
 const Icons = {};
 
@@ -23,5 +29,11 @@ Icons.Plus = Plus;
 Icons.Crown = Crown;
 Icons.Celebration = Celebration;
 Icons.Glasses = Glasses;
+Icons.Close = Close;
+Icons.CalendarBlank = CalendarBlank;
+Icons.User = User;
+Icons.ChairIcon = ChairIcon;
+Icons.Room = Room;
+Icons.Notes = Notes;
 
 export default Icons;
