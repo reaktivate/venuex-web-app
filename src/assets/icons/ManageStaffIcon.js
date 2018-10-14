@@ -2,7 +2,7 @@ import React from 'react';
 import { withTheme } from 'styled-components';
 
 const ManageStaffIcon = props => (
-  <svg width={props.width} height={props.height} {...props}>
+  <svg width={props.size} height={props.size} {...props} viewBox="0 0 25 22">
     <g
       fillRule="nonzero"
       fill={props.manageStaff ? props.theme.colors.primary : '#D8D8D8'}
@@ -15,8 +15,7 @@ const ManageStaffIcon = props => (
 );
 
 ManageStaffIcon.defaultProps = {
-  width: 25,
-  height: 22
+  size: 24
 };
 
 export default withTheme(ManageStaffIcon);

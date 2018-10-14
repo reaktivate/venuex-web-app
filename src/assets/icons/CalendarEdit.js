@@ -2,7 +2,7 @@ import React from 'react';
 import { withTheme } from 'styled-components';
 
 const CalendarEdit = props => (
-  <svg width={props.width} height={props.height} {...props}>
+  <svg width={props.size} height={props.size} {...props} viewBox="0 0 26 22">
     <g fill="none" fillRule="evenodd">
       <path
         d="M18.251 2.504h-1.667V.837h-1.11v1.667h-8.89V.837h-1.11v1.667H3.808A2.781 2.781 0 0 0 1.03 5.282V18.06a2.781 2.781 0 0 0 2.778 2.778H18.25a2.781 2.781 0 0 0 2.779-2.778V5.28a2.782 2.782 0 0 0-2.779-2.777zm1.666 15.555c0 .918-.747 1.666-1.666 1.666H3.808c-.92 0-1.667-.748-1.667-1.666v-10h17.776v10zm0-11.11H2.141V5.28c0-.92.747-1.667 1.667-1.667h1.667v1.111h1.11v-1.11h8.888v1.111h1.111v-1.11h1.667c.919 0 1.666.746 1.666 1.665v1.667z"
@@ -30,8 +30,7 @@ const CalendarEdit = props => (
 );
 
 CalendarEdit.defaultProps = {
-  width: 26,
-  height: 22
+  size: 24
 };
 
 export default withTheme(CalendarEdit);

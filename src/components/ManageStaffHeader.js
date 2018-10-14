@@ -3,7 +3,6 @@ import styled, { css } from 'styled-components';
 import plusIcon from 'assets/plus.svg';
 import filterIcon from 'assets/filter.svg';
 import Icons from 'assets/icons';
-import Rings from 'assets/icons/Rings.js';
 import Button from './Button';
 import RoundButton from './RoundButton';
 
@@ -58,7 +57,11 @@ export default ({ label, ...restProps }) => (
       }
       kind="white"
     />
-    <Rings />
+    <div>
+      <Icons.Rings size="75" />
+    </div>
+
+    <Icons.Delete />
     <Icons.Bell />
     <ActionButtonGroup>
       <RoundButton>

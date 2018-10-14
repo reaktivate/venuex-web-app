@@ -2,7 +2,7 @@ import React from 'react';
 import { withTheme } from 'styled-components';
 
 const CalendarDelete = props => (
-  <svg width={props.width} height={props.height} {...props}>
+  <svg width={props.size} height={props.size} {...props} viewBox="0 0 24 22">
     <g
       fill={props.delete ? props.theme.colors.primary : '#D8D8D8'}
       fillRule="evenodd"
@@ -14,8 +14,7 @@ const CalendarDelete = props => (
 );
 
 CalendarDelete.defaultProps = {
-  width: 24,
-  height: 22
+  size: 24
 };
 
 export default withTheme(CalendarDelete);
