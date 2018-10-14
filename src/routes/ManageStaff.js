@@ -3,6 +3,17 @@ import SidebarLayout from 'components/Sidebar.js';
 import Table from 'components/Table/';
 import Icons from 'assets/icons';
 
+console.log(Icons);
+
+const iconRows = Object.keys(Icons).map(icon => (
+  <Table.Row>
+    <Table.Cell width="20%">
+      Icons.
+      {icon}
+    </Table.Cell>
+    <Table.Cell width="20%">{React.createElement(Icons[icon])}</Table.Cell>
+  </Table.Row>
+));
 class ManageStaff extends PureComponent {
   state = {};
 
@@ -28,78 +39,7 @@ class ManageStaff extends PureComponent {
               />
             </Table.Cell>
           </Table.Row>
-          <Table.Row>
-            <Table.Cell width="20%">Icons.Bell</Table.Cell>
-            <Table.Cell width="20%">
-              <Icons.Bell size="40" />
-            </Table.Cell>
-          </Table.Row>
-          <Table.Row>
-            <Table.Cell width="20%">Icons.Billing</Table.Cell>
-            <Table.Cell width="20%">
-              <Icons.Billing size="40" />
-            </Table.Cell>
-          </Table.Row>
-          <Table.Row>
-            <Table.Cell width="20%">Icons.CalendarDelete</Table.Cell>
-            <Table.Cell width="20%">
-              <Icons.CalendarDelete size="40" />
-            </Table.Cell>
-          </Table.Row>
-          <Table.Row>
-            <Table.Cell width="20%">Icons.CalendarEdit</Table.Cell>
-            <Table.Cell width="20%">
-              <Icons.CalendarEdit size="40" />
-            </Table.Cell>
-          </Table.Row>
-          <Table.Row>
-            <Table.Cell width="20%">Icons.CalendarEdit</Table.Cell>
-            <Table.Cell width="20%">
-              <Icons.CalendarEdit size="40" />
-            </Table.Cell>
-          </Table.Row>
-          <Table.Row>
-            <Table.Cell width="20%">Icons.Delete</Table.Cell>
-            <Table.Cell width="20%">
-              <Icons.Delete size="40" />
-            </Table.Cell>
-          </Table.Row>
-          <Table.Row>
-            <Table.Cell width="20%">Icons.ManageStaff</Table.Cell>
-            <Table.Cell width="20%">
-              <Icons.ManageStaff size="40" />
-            </Table.Cell>
-          </Table.Row>
-          <Table.Row>
-            <Table.Cell width="20%">Icons.Rings</Table.Cell>
-            <Table.Cell width="20%">
-              <Icons.Rings size="40" />
-            </Table.Cell>
-          </Table.Row>
-          <Table.Row>
-            <Table.Cell width="20%">Icons.Plus</Table.Cell>
-            <Table.Cell width="20%">
-              <Icons.Plus size="40" />
-            </Table.Cell>
-          </Table.Row>
-          <Table.Row>
-            <Table.Cell width="20%">Icons.Crown</Table.Cell>
-            <Table.Cell width="20%">
-              <Icons.Crown size="40" />
-            </Table.Cell>
-          </Table.Row>
-          <Table.Row>
-            <Table.Cell width="20%">Icons.Celebration</Table.Cell>
-            <Table.Cell width="20%">
-              <Icons.Celebration size="40" />
-            </Table.Cell>
-          </Table.Row>
-          <Table.Row>
-            <Table.Cell width="20%">Icons.Glasses</Table.Cell>
-            <Table.Cell width="20%">
-              <Icons.Glasses size="40" />
-            </Table.Cell>
-          </Table.Row>
+          {iconRows}
         </Table>
       </SidebarLayout>
     );
