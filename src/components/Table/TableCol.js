@@ -30,6 +30,4 @@ const TableCol = styled.div`
     `};
 `;
 
-export default ({ content, ...restProps }) => (
-  <TableCol {...restProps}>{content}</TableCol>
-);
+export default ({ content, ...restProps }) => <TableCol {...restProps} />;
