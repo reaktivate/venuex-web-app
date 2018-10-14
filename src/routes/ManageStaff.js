@@ -6,6 +6,7 @@ import TableRow from 'components/Table/TableRow.js';
 import ColTitle from 'components/Table/ColTitle.js';
 import CheckBox from 'components/Checkbox.js';
 import TableCol from 'components/Table/TableCol.js';
+import PermissionsIcons from 'components/PermissionsIcons.js';
 
 class ManageStaff extends PureComponent {
   state = {};
@@ -37,7 +38,18 @@ class ManageStaff extends PureComponent {
             <TableCol width="5%" content={<CheckBox />} />
             <TableCol content="First Column" width="20%" emphasize />
             <TableCol content="Second Column" width="20%" emphasize />
-            <TableCol content="Third Column" width="20%" />
+            <TableCol
+              content={
+                <PermissionsIcons
+                  color="#c0b59d"
+                  delete
+                  edit
+                  billing
+                  manageStaff
+                />
+              }
+              width="20%"
+            />
             <TableCol content="Fourth Column" width="20%" />
           </TableRow>
           <TableRow>
