@@ -1,9 +1,11 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
+import plusIcon from 'assets/plus.svg';
+import filterIcon from 'assets/filter.svg';
+import Icons from 'assets/icons';
+import Rings from 'assets/icons/Rings.js';
 import Button from './Button';
 import RoundButton from './RoundButton';
-import plusIcon from '../assets/plus.svg';
-import filterIcon from '../assets/filter.svg';
 
 const ManageStaffHeader = styled.div`
   height: 40px; /* not sure what to set this as */
@@ -47,7 +49,6 @@ const ActionButtonGroup = styled.div`
 
 export default ({ label, ...restProps }) => (
   <ManageStaffHeader {...restProps}>
-    {' '}
     <Button
       label={
         <FilterLabel>
@@ -57,6 +58,8 @@ export default ({ label, ...restProps }) => (
       }
       kind="white"
     />
+    <Rings />
+    <Icons.Bell />
     <ActionButtonGroup>
       <RoundButton>
         <AddIcon src={plusIcon} />
