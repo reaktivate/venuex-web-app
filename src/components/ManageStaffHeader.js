@@ -59,6 +59,7 @@ export default ({ label, ...restProps }) => (
     />
     <div>
       <Icons.Rings size="75" />
+      <Icons.Plus size="40" color="#fff" />
     </div>
 
     <Icons.Delete />
