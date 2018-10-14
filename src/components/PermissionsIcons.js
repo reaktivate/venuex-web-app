@@ -7,7 +7,7 @@ import styled from 'styled-components';
 
 const PermissionIcons = styled.div`
   display: flex;
-  align-content: center;
+  align-items: center;
   min-width: 110px;
 `;
 
