@@ -1,8 +1,5 @@
 import React from 'react';
-import CalendarEdit from 'assets/icons/CalendarEdit.js';
-import CalendarDelete from 'assets/icons/CalendarDelete.js';
-import Billing from 'assets/icons/Billing.js';
-import ManageStaffIcon from 'assets/icons/ManageStaffIcon.js';
+import Icons from 'assets/icons';
 import styled from 'styled-components';
 
 const PermissionIcons = styled.div`
@@ -14,9 +11,9 @@ const PermissionIcons = styled.div`
 
 export default ({ ...restProps }) => (
   <PermissionIcons {...restProps}>
-    <CalendarEdit {...restProps} />
-    <CalendarDelete {...restProps} />
-    <Billing {...restProps} />
-    <ManageStaffIcon {...restProps} />
+    <Icons.CalendarEdit {...restProps} />
+    <Icons.CalendarDelete {...restProps} />
+    <Icons.Billing {...restProps} />
+    <Icons.ManageStaff {...restProps} />
   </PermissionIcons>
 );
