@@ -3,8 +3,6 @@ import SidebarLayout from 'components/Sidebar.js';
 import Table from 'components/Table/';
 import Icons from 'assets/icons';
 
-console.log(Icons);
-
 const iconRows = Object.keys(Icons).map(icon => (
   <Table.Row>
     <Table.Cell width="20%">
