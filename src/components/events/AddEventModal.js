@@ -97,6 +97,7 @@ class AddEventModal extends PureComponent {
         10
       ) * 1000,
       name: values.name,
+      notes: values.notes,
       type: values.type,
       room: values.room,
       tableLayout: values.tableLayout,
@@ -155,8 +156,6 @@ class AddEventModal extends PureComponent {
         options: venueConfig.eventsExtraFields[fieldId].options,
       }))
     );
-
-    console.log(venueConfig);
 
     return (
       <Modal

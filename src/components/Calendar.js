@@ -200,6 +200,7 @@ export default class Calendar extends PureComponent {
       onNextMonth,
       onPreviousMonth,
       onAdd,
+      onEventClicked,
     } = this.props;
     const weekdays = [1, 2, 3, 4, 5, 6, 7].map(dateNumber => (
       moment(date).set('date', dateNumber).format('ddd')
@@ -265,7 +266,10 @@ export default class Calendar extends PureComponent {
                             </div>
                           </ExpandedHeader>
                           {eventsThisDate.map(event => (
-                            <CalEvent opacity={event.opacity}>
+                            <CalEvent
+                              opacity={event.opacity}
+                              onClick={() => onEventClicked(event)}
+                            >
                               {event.label}
                             </CalEvent>
                           ))}
@@ -273,7 +277,10 @@ export default class Calendar extends PureComponent {
                         (
                           <React.Fragment>
                             {eventsThisDate.slice(0, 2).map(event => (
-                              <CalEvent opacity={event.opacity}>
+                              <CalEvent
+                                opacity={event.opacity}
+                                onClick={() => onEventClicked(event)}
+                              >
                                 {event.label}
                               </CalEvent>
                             ))}
@@ -283,7 +290,10 @@ export default class Calendar extends PureComponent {
                           </React.Fragment>
                         ) :
                         eventsThisDate.map(event => (
-                          <CalEvent opacity={event.opacity}>
+                          <CalEvent
+                            opacity={event.opacity}
+                            onClick={() => onEventClicked(event)}
+                          >
                             {event.label}
                           </CalEvent>
                         ))}

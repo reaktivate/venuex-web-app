@@ -11,6 +11,7 @@ const _RedirectRoute = ({ currentUser }) => (
   <React.Fragment>
     {!currentUser && <Redirect to="/login" />}
     <Route exact path="/" component={Home} />
+    <Route exact path="/events/:id" component={Events} />
     <Route exact path="/events" component={Events} />
   </React.Fragment>
 );

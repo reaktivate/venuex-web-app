@@ -15,11 +15,21 @@ const Button = styled.div`
   color: #7d7d7d;
   text-transform: uppercase;
   cursor: pointer;
+  white-space: nowrap;
 
   ${props => props.kind === 'primary' && css`
     background-color: ${props.theme.colors.primary};
     color: #FFF;
     border: solid 1px ${props.theme.colors.primary}
+  `}
+
+  ${props => props.size === 'small' && css`
+    padding: 0px 15px;
+    height: 40px;
+  `}
+
+  ${props => props.kind === 'danger' && css`
+    color: #c02026;
   `}
 `;
 

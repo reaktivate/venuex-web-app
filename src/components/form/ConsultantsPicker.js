@@ -9,6 +9,7 @@ import btnOwnerImage from 'assets/btn-owner.svg';
 import ownerImage from 'assets/owner.svg';
 import Checkbox from 'components/Checkbox';
 import BaseInput from 'components/form/BaseInput';
+import ConsultantLabel from 'components/Consultant';
 
 const Container = styled.div`
   border-bottom: solid 1px #d8d8d8;
@@ -85,19 +86,6 @@ const Consultant = styled.div`
   `}
 `;
 
-const Name = styled.div`
-  font-size: 15px;
-  color: #222222;
-  font-weight: 500;
-`;
-
-const Picture = styled.img`
-  width: 50px;
-  object-fit: contain;
-  border-radius: 50%;
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
-  margin-right: 10px;
-`;
 
 const Group = styled.div`
   display: flex;
@@ -175,8 +163,10 @@ class ConsultantsPicker extends PureComponent {
             <Placeholder>
               {value.picked.length === 0 ? 'Pick a staff' : value.picked.map(id => (
                 <Group key={id} style={{ margin: '10px 0px' }}>
-                  <Picture src={this.getEmployeeById(id).picture} />
-                  <Name style={{ marginRight: 10 }}>{this.getEmployeeById(id).name}</Name>
+                  <ConsultantLabel
+                    name={this.getEmployeeById(id).name}
+                    picture={this.getEmployeeById(id).picture}
+                  />
                   {value.owner === id && <Img src={ownerImage} />}
                 </Group>
               ))}
@@ -202,8 +192,10 @@ class ConsultantsPicker extends PureComponent {
                         onCheck={() =>
                           this.handleEmployeeChecked(employee.id)}
                       />
-                      <Picture src={employee.picture} />
-                      <Name>{employee.name}</Name>
+                      <ConsultantLabel
+                        picture={employee.picture}
+                        name={employee.name}
+                      />
                     </Group>
                     <Group>
                       <Img

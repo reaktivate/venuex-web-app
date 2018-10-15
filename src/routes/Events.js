@@ -6,6 +6,7 @@ import { firebaseConnect, isLoaded } from 'react-redux-firebase';
 import SidebarLayout from 'components/Sidebar.js';
 import Calendar from 'components/Calendar';
 import AddEventModal from 'components/events/AddEventModal';
+import EventDetailModal from 'components/events/EventDetailModal';
 import moment from 'moment';
 
 const LegendItem = styled.div`
@@ -82,7 +83,11 @@ class Events extends PureComponent {
   }
 
   render() {
-    const { eventsByDate } = this.props;
+    const { eventsByDate, match } = this.props;
+    let event;
+    if (this.props.allEvents && match.params.id) {
+      event = this.props.allEvents[match.params.id];
+    }
     return (
       <SidebarLayout>
         <div style={{ flex: 1, padding: 20 }}>
@@ -90,12 +95,19 @@ class Events extends PureComponent {
             isOpen={this.state.isAddingEvent}
             onClose={() => this.setState({ isAddingEvent: false })}
           />
+
+          <EventDetailModal
+            event={event}
+            top={100}
+            bottom="initial"
+          />
           <Calendar
             events={eventsByDate}
             date={this.state.date}
             onNextMonth={this.handleNextMonth}
             onPreviousMonth={this.handlePreviousMonth}
             onAdd={this.handleAdd}
+            onEventClicked={event => this.props.history.push(`/events/${event.data.id}`)}
           />
           <div>
             <LegendItem opacity="FF"><div /> = 1st payment</LegendItem>
@@ -124,18 +136,24 @@ export default compose(
     }
 
     const eventsByDate = {};
-    Object.values(state.firebase.data.events).forEach(event => {
+    Object.keys(state.firebase.data.events).forEach(eventId => {
+      const event = state.firebase.data.events[eventId];
       const eventDate = moment(event.start).format('YYYY-MM-DD');
       const events = eventsByDate[eventDate] || [];
       events.push({
         label: event.name,
         opacity: 'FF',
+        data: {
+          ...event,
+          id: eventId,
+        },
       });
       eventsByDate[eventDate] = events;
     });
 
     return {
       eventsByDate,
+      allEvents: state.firebase.data.events,
     };
   }),
 )(Events);
