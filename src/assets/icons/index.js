@@ -27,6 +27,7 @@ import Camera from './Camera';
 import LogOut from './LogOut';
 import Filter from './Filter';
 import Lock from './Lock';
+import Search from './Search';
 
 const Icons = {};
 
@@ -59,5 +60,6 @@ Icons.Camera = Camera;
 Icons.LogOut = LogOut;
 Icons.Filter = Filter;
 Icons.Lock = Lock;
+Icons.Search = Search;
 
 export default Icons;
