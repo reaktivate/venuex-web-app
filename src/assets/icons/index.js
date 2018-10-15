@@ -33,6 +33,11 @@ import ImportFile from './ImportFile';
 import AddGroup from './AddGroup';
 import Home from './Home';
 import Phone from './Phone';
+import Email from './Email';
+import Checklist from './Checklist';
+import MoneyIcon from './MoneyIcon';
+import Photos from './Photos';
+import RSVP from './RSVP';
 
 const Icons = {};
 
@@ -71,5 +76,10 @@ Icons.ImportFile = ImportFile;
 Icons.AddGroup = AddGroup;
 Icons.Home = Home;
 Icons.Phone = Phone;
+Icons.Email = Email;
+Icons.Checklist = Checklist;
+Icons.MoneyIcon = MoneyIcon;
+Icons.Photos = Photos;
+Icons.RSVP = RSVP;
 
 export default Icons;
