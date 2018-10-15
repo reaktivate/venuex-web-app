@@ -28,6 +28,11 @@ import LogOut from './LogOut';
 import Filter from './Filter';
 import Lock from './Lock';
 import Search from './Search';
+import AddUserIcon from './AddUserIcon';
+import ImportFile from './ImportFile';
+import AddGroup from './AddGroup';
+import Home from './Home';
+import Phone from './Phone';
 
 const Icons = {};
 
@@ -61,5 +66,10 @@ Icons.LogOut = LogOut;
 Icons.Filter = Filter;
 Icons.Lock = Lock;
 Icons.Search = Search;
+Icons.AddUserIcon = AddUserIcon;
+Icons.ImportFile = ImportFile;
+Icons.AddGroup = AddGroup;
+Icons.Home = Home;
+Icons.Phone = Phone;
 
 export default Icons;
