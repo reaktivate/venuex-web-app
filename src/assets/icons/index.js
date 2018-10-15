@@ -15,6 +15,18 @@ import User from './User';
 import ChairIcon from './ChairIcon';
 import Room from './Room';
 import Notes from './Notes';
+import CaretDown from './CaretDown';
+import CaretLeft from './CaretLeft';
+import People from './People';
+import CaretRight from './CaretRight';
+import Checkmark from './Checkmark';
+import Exclamation from './Exclamation';
+import Line from './Line';
+import Key from './Key';
+import Camera from './Camera';
+import LogOut from './LogOut';
+import Filter from './Filter';
+import Lock from './Lock';
 
 const Icons = {};
 
@@ -35,5 +47,17 @@ Icons.User = User;
 Icons.ChairIcon = ChairIcon;
 Icons.Room = Room;
 Icons.Notes = Notes;
+Icons.CaretDown = CaretDown;
+Icons.People = People;
+Icons.CaretLeft = CaretLeft;
+Icons.CaretRight = CaretRight;
+Icons.Checkmark = Checkmark;
+Icons.Exclamation = Exclamation;
+Icons.Line = Line;
+Icons.Key = Key;
+Icons.Camera = Camera;
+Icons.LogOut = LogOut;
+Icons.Filter = Filter;
+Icons.Lock = Lock;
 
 export default Icons;
