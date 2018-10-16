@@ -3,8 +3,8 @@ import SidebarLayout from 'components/Sidebar.js';
 import Table from 'components/Table/';
 import Icons from 'assets/icons';
 
-const iconColor = '';
-const size = 48;
+const iconColor = '#419ad4';
+
 const iconRows = Object.keys(Icons).map(icon => (
   <Table.Row>
     <Table.Cell width="20%">
@@ -13,8 +13,7 @@ const iconRows = Object.keys(Icons).map(icon => (
     </Table.Cell>
     <Table.Cell width="20%">
       {React.createElement(Icons[icon], {
-        color: iconColor,
-        size
+        color: iconColor
       })}
     </Table.Cell>
   </Table.Row>
@@ -51,7 +50,7 @@ class ManageStaff extends PureComponent {
             <Table.Row>
               <Table.Cell width="20%">Icons.Bell (alert = true)</Table.Cell>
               <Table.Cell width="20%">
-                <Icons.Bell alert size={size} color={iconColor} />
+                <Icons.Bell alert color={iconColor} />
               </Table.Cell>
             </Table.Row>
             {iconRows}
