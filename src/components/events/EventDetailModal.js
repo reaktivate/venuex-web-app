@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
+import { compose } from 'redux';
+import { withFirebase } from 'react-redux-firebase';
 import moment from 'moment';
 import styled from 'styled-components';
 import Modal from 'components/Modal';
@@ -95,192 +97,234 @@ const StyledButton = styled(Button)`
   margin: 0 5px;
 `;
 
-const EventDetailModal = ({ venueConfig, event, ...restProps }) => {
-  if (!event) {
-    return <div />;
-  }
+class EventDetailModal extends PureComponent {
 
-  const room = venueConfig.rooms[event.room];
+  state = {
+    isSendingReminder: false,
+  };
 
-  const { numberOfTables } = room.layouts[event.tableLayout];
+  handleSendReminder = async () => {
+    this.setState({
+      isSendingReminder: true,
+    });
+    const { firebase } = this.props;
+    const sendEmail = firebase.functions().httpsCallable('sendMail');
+    try {
+      await sendEmail({
+        eventId: this.props.event.id,
+      });
+    } catch (err) {
+      const { code, message, details } = err;
+      console.log(code, message, details);
+      debugger; // eslint-disable-line
+    }
+    this.setState({
+      isSendingReminder: false,
+    });
+  };
 
-  const { guestsPerTable } = event;
+  render() {
+    const { venueConfig, event, ...restProps } = this.props;
+    if (!event) {
+      return <div />;
+    }
 
-  return (
-    <Modal {...restProps} isOpen={Boolean(event)}>
-      <Header>
-        <EventKindBadge>
-          <KindImage src={ringsImage} />
-        </EventKindBadge>
-        <div>
-          <Title>Sarah & Kyle’s Wedding</Title>
-          <SubTitle>Friday, September 12th</SubTitle>
-        </div>
-      </Header>
-      <div style={{ flex: 1, overflow: 'hidden' }}>
-        <SideTabs
-          tabs={[
-            {
-              title: 'Event overview',
-              icon: calendarIcon,
-              content: (
-                <DescriptionList>
-                  <div className="row">
-                    <dt>Consultant:</dt>
-                    <dd>
-                      <ConsultantLabel
-                        picture="https://placehold.it/100x100"
-                        name="Matthew chow"
-                      />
-                    </dd>
-                  </div>
+    const room = venueConfig.rooms[event.room];
 
-                  <div className="row">
-                    <dt>Event Type:</dt>
-                    <dd>{humanize(event.type)}</dd>
-                  </div>
+    const { numberOfTables } = room.layouts[event.tableLayout];
 
-                  <div className="row">
-                    <dt>Start Time:</dt>
-                    <dd>{moment(event.start).format('HH:mm a')}</dd>
-                  </div>
+    const { guestsPerTable } = event;
 
-                  <div className="row">
-                    <dt>End Time:</dt>
-                    <dd>{moment(event.end).format('HH:mm a')}</dd>
-                  </div>
-                </DescriptionList>
-              )
-            },
-            {
-              title: 'Client details',
-              icon: clientDetailsIcon,
-              content: (
-                <DescriptionList>
-                  <div className="row">
-                    <dt>Client Name:</dt>
-                    <dd>{event.clientName}</dd>
-                  </div>
+    return (
+      <Modal {...restProps} isOpen={Boolean(event)}>
+        <Header>
+          <EventKindBadge>
+            <KindImage src={ringsImage} />
+          </EventKindBadge>
+          <div>
+            <Title>Sarah & Kyle’s Wedding</Title>
+            <SubTitle>Friday, September 12th</SubTitle>
+          </div>
+        </Header>
+        <div style={{ flex: 1, overflow: 'hidden' }}>
+          <SideTabs
+            tabs={[
+              {
+                title: 'Event overview',
+                icon: calendarIcon,
+                content: (
+                  <DescriptionList>
+                    <div className="row">
+                      <dt>Consultant:</dt>
+                      <dd>
+                        <ConsultantLabel
+                          picture="https://placehold.it/100x100"
+                          name="Matthew chow"
+                        />
+                      </dd>
+                    </div>
 
-                  <div className="row">
-                    <dt>Client email:</dt>
-                    <dd>{event.clientEmail}</dd>
-                  </div>
+                    <div className="row">
+                      <dt>Event Type:</dt>
+                      <dd>{humanize(event.type)}</dd>
+                    </div>
 
-                  <div className="row">
-                    <dt>Client phone:</dt>
-                    <dd>{event.clientPhone}</dd>
-                  </div>
+                    <div className="row">
+                      <dt>Start Time:</dt>
+                      <dd>{moment(event.start).format('HH:mm a')}</dd>
+                    </div>
 
-                  <div className="row" style={{ paddingRight: 15 }}>
-                    <dt>Payment:</dt>
-                    <dd>
-                      <div className="row">
-                        <Flex>
-                          <div style={{ marginRight: 10 }}>
-                            <dt>1st:</dt>
-                            <dd>10/01/17</dd>
-                          </div>
-                          <div>
-                            <dt>Paid:</dt>
-                            <dd>Y / N</dd>
-                          </div>
-                        </Flex>
-                      </div>
-                      <div className="row">
-                        <Flex>
-                          <div style={{ marginRight: 10 }}>
-                            <dt>2st:</dt>
-                            <dd>10/01/17</dd>
-                          </div>
-                          <div>
-                            <dt>Paid:</dt>
-                            <dd>Y / N</dd>
-                          </div>
-                        </Flex>
-                      </div>
-                      <div className="row">
-                        <Flex>
-                          <div style={{ marginRight: 10 }}>
-                            <dt>2st:</dt>
-                            <dd>10/01/17</dd>
-                          </div>
-                          <div>
-                            <dt>Paid:</dt>
-                            <dd>Y / N</dd>
-                          </div>
-                        </Flex>
-                      </div>
-                      <div className="row">
-                        <div>
-                          <dt>Payment Notification:</dt>
-                          <dd><Switch input={{ value: true }} /></dd>
+                    <div className="row">
+                      <dt>End Time:</dt>
+                      <dd>{moment(event.end).format('HH:mm a')}</dd>
+                    </div>
+                  </DescriptionList>
+                )
+              },
+              {
+                title: 'Client details',
+                icon: clientDetailsIcon,
+                content: (
+                  <DescriptionList>
+                    <div className="row">
+                      <dt>Client Name:</dt>
+                      <dd>{event.clientName}</dd>
+                    </div>
+
+                    <div className="row">
+                      <dt>Client email:</dt>
+                      <dd>{event.clientEmail}</dd>
+                    </div>
+
+                    <div className="row">
+                      <dt>Client phone:</dt>
+                      <dd>{event.clientPhone}</dd>
+                    </div>
+
+                    <div className="row" style={{ paddingRight: 15 }}>
+                      <dt>Payment:</dt>
+                      <dd>
+                        <div className="row">
+                          <Flex>
+                            <div style={{ marginRight: 10 }}>
+                              <dt>1st:</dt>
+                              <dd>10/01/17</dd>
+                            </div>
+                            <div>
+                              <dt>Paid:</dt>
+                              <dd>Y / N</dd>
+                            </div>
+                          </Flex>
                         </div>
-                      </div>
-                      <div className="row">
-                        <dt>Reminder Email:</dt>
-                        <dd><Button size="small" label="Send now" /></dd>
-                      </div>
-                    </dd>
-                  </div>
-                </DescriptionList>
-              ),
-            },
-            {
-              title: 'Room & Layout',
-              icon: grayRoomIcon,
-              content: (
-                <DescriptionList>
-                  <div className="row">
-                    <dt>Room:</dt>
-                    <dd>{room.name}</dd>
-                  </div>
-                  <div className="row">
-                    <dt>Layout:</dt>
-                    <dd>{numberOfTables}</dd>
-                  </div>
-                  <div className="row">
-                    <dt>Guests per table</dt>
-                    <dd>{guestsPerTable}</dd>
-                  </div>
-                </DescriptionList>
-              )
-            },
-            {
-              title: 'Notes',
-              icon: notesIcon,
-              content: (
-                <DescriptionList>
-                  <div className="row">
-                    <dt>Notes</dt>
-                    <dd>{event.notes}</dd>
-                  </div>
-                </DescriptionList>
-              )
-            },
-          ]}
-        />
-      </div>
-      <Modal.Footer>
-        <FooterButtons>
-          <div>
-            <StyledButton
-              label="Download seating chart"
-            />
-          </div>
-          <div>
-            <StyledButton
-              label="Delete"
-              kind="danger"
-            />
-            <StyledButton
-              label="Edit"
-            />
-          </div>
-        </FooterButtons>
-      </Modal.Footer>
-    </Modal>
-  );
-};
+                        <div className="row">
+                          <Flex>
+                            <div style={{ marginRight: 10 }}>
+                              <dt>2st:</dt>
+                              <dd>10/01/17</dd>
+                            </div>
+                            <div>
+                              <dt>Paid:</dt>
+                              <dd>Y / N</dd>
+                            </div>
+                          </Flex>
+                        </div>
+                        <div className="row">
+                          <Flex>
+                            <div style={{ marginRight: 10 }}>
+                              <dt>2st:</dt>
+                              <dd>10/01/17</dd>
+                            </div>
+                            <div>
+                              <dt>Paid:</dt>
+                              <dd>Y / N</dd>
+                            </div>
+                          </Flex>
+                        </div>
+                        <div className="row">
+                          <div>
+                            <dt>Payment Notification:</dt>
+                            <dd><Switch input={{ value: true }} /></dd>
+                          </div>
+                        </div>
+                        <div className="row">
+                          <dt>Reminder Email:</dt>
+                          <dd>
+                            <Button
+                              size="small"
+                              label={
+                                this.state.isSendingReminder ?
+                                  'Sending...' :
+                                  'Send now'
+                              }
+                              disabled={this.state.isSendingReminder}
+                              onClick={this.handleSendReminder}
+                            />
+                          </dd>
+                        </div>
+                      </dd>
+                    </div>
+                  </DescriptionList>
+                ),
+              },
+              {
+                title: 'Room & Layout',
+                icon: grayRoomIcon,
+                content: (
+                  <DescriptionList>
+                    <div className="row">
+                      <dt>Room:</dt>
+                      <dd>{room.name}</dd>
+                    </div>
+                    <div className="row">
+                      <dt>Layout:</dt>
+                      <dd>{numberOfTables}</dd>
+                    </div>
+                    <div className="row">
+                      <dt>Guests per table</dt>
+                      <dd>{guestsPerTable}</dd>
+                    </div>
+                  </DescriptionList>
+                )
+              },
+              {
+                title: 'Notes',
+                icon: notesIcon,
+                content: (
+                  <DescriptionList>
+                    <div className="row">
+                      <dt>Notes</dt>
+                      <dd>{event.notes}</dd>
+                    </div>
+                  </DescriptionList>
+                )
+              },
+            ]}
+          />
+        </div>
+        <Modal.Footer>
+          <FooterButtons>
+            <div>
+              <StyledButton
+                label="Download seating chart"
+              />
+            </div>
+            <div>
+              <StyledButton
+                label="Delete"
+                kind="danger"
+              />
+              <StyledButton
+                label="Edit"
+              />
+            </div>
+          </FooterButtons>
+        </Modal.Footer>
+      </Modal>
+    );
+  }
+}
 
-export default withVenueConfig(EventDetailModal);
+export default compose(
+  withVenueConfig,
+  withFirebase,
+)(EventDetailModal);

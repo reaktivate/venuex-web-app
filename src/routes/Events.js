@@ -86,7 +86,10 @@ class Events extends PureComponent {
     const { eventsByDate, match } = this.props;
     let event;
     if (this.props.allEvents && match.params.id) {
-      event = this.props.allEvents[match.params.id];
+      event = {
+        ...this.props.allEvents[match.params.id],
+        id: match.params.id,
+      };
     }
     return (
       <SidebarLayout>

@@ -2,6 +2,7 @@ import memoize from 'memoizee';
 import firebase from 'firebase/app';
 import 'firebase/database';
 import 'firebase/auth';
+import 'firebase/functions';
 
 
 export default memoize(() => {

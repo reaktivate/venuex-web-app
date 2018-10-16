@@ -20,7 +20,7 @@ const Button = styled.div`
   ${props => props.kind === 'primary' && css`
     background-color: ${props.theme.colors.primary};
     color: #FFF;
-    border: solid 1px ${props.theme.colors.primary}
+    border: solid 1px ${props.theme.colors.primary};
   `}
 
   ${props => props.size === 'small' && css`
@@ -39,6 +39,16 @@ const Button = styled.div`
   `}
 `;
 
-export default ({ label, ...restProps }) => (
-  <Button {...restProps}>{label}</Button>
+export default ({
+  label,
+  onClick,
+  disabled,
+  ...restProps
+}) => (
+  <Button
+    {...restProps}
+    onClick={disabled ? null : onClick}
+  >
+    {label}
+  </Button>
 );
