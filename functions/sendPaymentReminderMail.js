@@ -45,7 +45,15 @@ module.exports = functions.https.onCall((data, context) => {
         event.clientEmail,
         'Payment reminder email',
         paymentReminderTemplate(emailContext),
-        context
+        context,
+        () => {
+          admin
+            .database()
+            .ref(`/events/${eventId}/lastRemindedAt`)
+            .set(
+              parseInt(moment().format('X'), 10) * 1000
+          );
+        }
       );
   });
 });

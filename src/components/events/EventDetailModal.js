@@ -1,13 +1,16 @@
 import React, { PureComponent } from 'react';
+import { withRouter } from 'react-router';
 import { compose } from 'redux';
-import { withFirebase } from 'react-redux-firebase';
+import { withFirebase, firebaseConnect } from 'react-redux-firebase';
 import moment from 'moment';
 import styled from 'styled-components';
 import Modal from 'components/Modal';
+import ConfirmationModal from 'components/ConfirmationModal';
 import Button from 'components/Button';
 import SideTabs from 'components/SideTabs';
 import ConsultantLabel from 'components/Consultant';
 import Switch from 'components/Switch';
+import EventModalForm from 'components/events/EventModalForm';
 import { withVenueConfig } from 'containers/VenueConfigProvider';
 import { humanize } from 'utils';
 import ringsImage from 'assets/rings.svg';
@@ -97,34 +100,123 @@ const StyledButton = styled(Button)`
   margin: 0 5px;
 `;
 
+const ReminderSentLabel = styled.div`
+  color: #7D7D7D;
+  font-size: 12px;
+  text-transform: lowercase;
+`;
+
 class EventDetailModal extends PureComponent {
 
   state = {
     isSendingReminder: false,
+    isDeleteConfirmationOpen: false,
+    isEditing: false,
   };
+
+  handleStartEditing = () => {
+    this.setState({
+      isEditing: true,
+    });
+  }
+
+  handleEdit = async values => {
+    const { event } = this.props;
+    const valuesToEdit = {
+      start: parseInt(
+        moment(
+          `${values.dateTimeDuration.date.format('YYYY-MM-DD')} ${values.dateTimeDuration.startTime.format('HH:mm')}`,
+          'YYYY-MM-DD HH:mm'
+        ).format('X'),
+        10
+      ) * 1000,
+      end: parseInt(
+        moment(
+          `${values.dateTimeDuration.date.format('YYYY-MM-DD')} ${values.dateTimeDuration.endTime.format('HH:mm')}`,
+          'YYYY-MM-DD HH:mm'
+        ).format('X'),
+        10
+      ) * 1000,
+      name: values.name,
+      notes: values.notes,
+      type: values.type,
+      room: values.room,
+      clientName: values.clientName,
+      tableLayout: values.tableLayout,
+      guestsPerTable: values.guestsPerTable,
+      minimumGuests: values.minimumGuests,
+      owner: values.consultants.owner,
+      consultants: values.consultants.picked.filter(id => id !== values.consultants.owner),
+      firstPaymentDue: parseInt(values.firstPaymentDue.format('X'), 10) * 1000,
+      secondPaymentDue: parseInt(values.secondPaymentDue.format('X'), 10) * 1000,
+      thirdPaymentDue: parseInt(values.thirdPaymentDue.format('X'), 10) * 1000,
+      ceremonyKind: values.ceremonyKind,
+    };
+
+    const edits = {};
+
+    Object.keys(valuesToEdit).forEach(key => {
+      edits[`/events/${event.id}/${key}`] = valuesToEdit[key];
+    });
+
+    await this.props.firebase.database().ref().update(edits);
+
+    this.setState({ isEditing: false });
+  };
+
+  handleDelete = () => {
+    this.setState({
+      isDeleteConfirmationOpen: true,
+    });
+  }
+
+  handleCancelDeleting = () => {
+    this.setState({
+      isDeleteConfirmationOpen: false,
+    });
+  }
+
+  handleConfirmDelete = async () => {
+    await this.props.firebase
+      .remove(`/events/${this.props.event.id}`);
+    this.props.history.push('/events');
+  }
 
   handleSendReminder = async () => {
     this.setState({
       isSendingReminder: true,
     });
     const { firebase } = this.props;
-    const sendEmail = firebase.functions().httpsCallable('sendMail');
+    const sendPaymentReminderMail = firebase
+      .functions()
+      .httpsCallable('sendPaymentReminderMail');
+
     try {
-      await sendEmail({
+      await sendPaymentReminderMail({
         eventId: this.props.event.id,
       });
     } catch (err) {
       const { code, message, details } = err;
       console.log(code, message, details);
-      debugger; // eslint-disable-line
     }
+
+    firebase.database().ref(
+      `/events/${this.props.event.id}/lastRemindedAt`
+    ).set(
+      parseInt(moment().format('X'), 10) * 1000
+    );
     this.setState({
       isSendingReminder: false,
     });
   };
 
   render() {
-    const { venueConfig, event, ...restProps } = this.props;
+    const {
+      firebase,
+      venueConfig,
+      event,
+      ...restProps
+    } = this.props;
     if (!event) {
       return <div />;
     }
@@ -134,6 +226,38 @@ class EventDetailModal extends PureComponent {
     const { numberOfTables } = room.layouts[event.tableLayout];
 
     const { guestsPerTable } = event;
+
+    if (this.state.isEditing) {
+      return (
+        <EventModalForm
+          isOpen={Boolean(event)}
+          onSubmit={this.handleEdit}
+          initialValues={{
+            consultants: {
+              owner: event.owner,
+              picked: [event.owner],
+            },
+            name: event.name,
+            dateTimeDuration: {
+              date: moment(event.start),
+              startTime: moment(event.start),
+              endTime: moment(event.end),
+            },
+            minimumGuests: event.minimumGuests,
+            type: event.type,
+            room: event.room,
+            tableLayout: event.tableLayout,
+            guestsPerTable: event.guestsPerTable,
+            clientName: event.clientName,
+            notes: event.notes,
+            firstPaymentDue: moment(event.firstPaymentDue),
+            secondPaymentDue: moment(event.secondPaymentDue),
+            thirdPaymentDue: moment(event.thirdPaymentDue),
+            ceremonyKind: event.ceremonyKind,
+          }}
+        />
+      );
+    }
 
     return (
       <Modal {...restProps} isOpen={Boolean(event)}>
@@ -147,6 +271,12 @@ class EventDetailModal extends PureComponent {
           </div>
         </Header>
         <div style={{ flex: 1, overflow: 'hidden' }}>
+          <ConfirmationModal
+            label="Are you sure you want to delete this event?"
+            isOpen={this.state.isDeleteConfirmationOpen}
+            onCancel={this.handleCancelDeleting}
+            onConfirm={this.handleConfirmDelete}
+          />
           <SideTabs
             tabs={[
               {
@@ -243,11 +373,27 @@ class EventDetailModal extends PureComponent {
                         <div className="row">
                           <div>
                             <dt>Payment Notification:</dt>
-                            <dd><Switch input={{ value: true }} /></dd>
+                            <dd>
+                              <Switch
+                                value={Boolean(event.isPaymentBannerEnabled)}
+                                onChange={newVal =>
+                                  firebase
+                                    .database()
+                                    .ref(`events/${event.id}/isPaymentBannerEnabled`)
+                                    .set(newVal)
+                                }
+                              />
+                            </dd>
                           </div>
                         </div>
                         <div className="row">
-                          <dt>Reminder Email:</dt>
+                          <dt>
+                            <div>Reminder Email:</div>
+                            {event.lastRemindedAt &&
+                              <ReminderSentLabel>
+                                last sent {moment(event.lastRemindedAt).format('YYYY-MM-DD')}
+                              </ReminderSentLabel>}
+                          </dt>
                           <dd>
                             <Button
                               size="small"
@@ -312,9 +458,11 @@ class EventDetailModal extends PureComponent {
               <StyledButton
                 label="Delete"
                 kind="danger"
+                onClick={this.handleDelete}
               />
               <StyledButton
                 label="Edit"
+                onClick={this.handleStartEditing}
               />
             </div>
           </FooterButtons>
@@ -326,5 +474,7 @@ class EventDetailModal extends PureComponent {
 
 export default compose(
   withVenueConfig,
+  withRouter,
+  firebaseConnect(),
   withFirebase,
 )(EventDetailModal);

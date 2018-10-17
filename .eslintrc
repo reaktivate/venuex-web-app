@@ -15,6 +15,7 @@
         "no-plusplus": "off",
         "no-shadow": "off",
         "no-underscore-dangle": "off",
+        "function-paren-newline": "off",
 
         "padded-blocks": "off",
 

@@ -100,7 +100,7 @@ class ConsultantsPicker extends PureComponent {
     isOpen: false,
   };
 
-  getEmployeeById = (id) => this.props.employees.filter(emp => emp.id === id)[0];
+  getEmployeeById = (id) => this.props.employees.filter(emp => emp.id === id)[0] || {};
 
   handleToggle = () => {
     this.setState(({ isOpen }) => ({

@@ -6,7 +6,7 @@ sgMail.setApiKey(
   functions.config().sendgrid.key
 );
 
-module.exports = (recipientEmail, subject, html, requestContext) => {
+module.exports = (recipientEmail, subject, html, requestContext, onFinish) => {
   const userEmail = requestContext.auth.token.email;
   const venueId = userEmail.split('+')[0];
   admin
@@ -23,5 +23,7 @@ module.exports = (recipientEmail, subject, html, requestContext) => {
         subject: subject,
         html: html,
       });
+
+      onFinish && onFinish();
     });
 };

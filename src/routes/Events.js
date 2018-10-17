@@ -98,7 +98,6 @@ class Events extends PureComponent {
             isOpen={this.state.isAddingEvent}
             onClose={() => this.setState({ isAddingEvent: false })}
           />
-
           <EventDetailModal
             event={event}
             top={100}
@@ -128,7 +127,7 @@ export default compose(
     path: 'events',
     queryParams: [
       'orderByChild=venueId',
-      'equalTo=test_venue'
+      'equalTo=test_venue',
     ],
   }]),
   connect(state => {
