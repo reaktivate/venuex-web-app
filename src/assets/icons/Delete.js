@@ -10,6 +10,7 @@ const Delete = props => (
     />
   </svg>
 );
+
 Delete.defaultProps = {
   size: 24
 };

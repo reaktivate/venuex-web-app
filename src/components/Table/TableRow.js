@@ -9,6 +9,14 @@ const TableRow = styled.div`
   display: flex;
   justify-content: left;
   align-items: center;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &:hover {
+    background-color: #fafafa;
+  }
 `;
 
 export default ({ label, ...restProps }) => <TableRow {...restProps} />;

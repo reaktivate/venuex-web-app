@@ -1,9 +1,9 @@
 import React, { PureComponent } from 'react';
 import styled, { css } from 'styled-components';
+import AddButton from 'components/AddButton';
 import leftArrowIcon from 'assets/caret-left-custom.svg';
 import rightArrowIcon from 'assets/caret-right-custom.svg';
 import closeIcon from 'assets/close.svg';
-import plusIcon from 'assets/plus.svg';
 import moment from 'moment';
 
 const Container = styled.div`
@@ -164,23 +164,6 @@ const ExpandedHeader = styled.div`
   }
 `;
 
-const AddButton = styled.div`
-  height: 50px;
-  width: 50px;
-  background-color: ${props => props.theme.colors.primary};
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-shadow: 0 2px 2px 0 rgba(125, 125, 125, 0.2);
-  cursor: pointer;
-`;
-
-const AddIcon = styled.img`
-  height: 17px;
-  width: 17px;
-`;
-
 export default class Calendar extends PureComponent {
 
   state = {
@@ -216,9 +199,7 @@ export default class Calendar extends PureComponent {
             <ArrowIcon src={rightArrowIcon} onClick={onNextMonth} />
           </MonthPicker>
           <div>
-            <AddButton onClick={onAdd}>
-              <AddIcon src={plusIcon} />
-            </AddButton>
+            <AddButton onClick={onAdd} />
           </div>
         </Header>
         <WeekdaysBar>

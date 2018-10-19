@@ -6,7 +6,6 @@ const Name = styled.div`
   font-size: 15px;
   color: #222222;
   font-weight: 500;
-  padding-bottom: 8px;
 `;
 
 const Picture = styled.img`
@@ -19,7 +18,7 @@ const Picture = styled.img`
 
 const Container = styled.div`
   display: flex;
-  align-items: flex-end;
+  align-items: center;
 `;
 
 export default props => (
