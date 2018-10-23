@@ -7,7 +7,6 @@ const TableCell = styled.div`
   font-stretch: normal;
   line-height: normal;
   letter-spacing: 0.3px;
-  color: #888888;
   display: flex;
   min-width: 50px;
   ${props =>

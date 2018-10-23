@@ -23,6 +23,11 @@ const Button = styled.div`
     border: solid 1px ${props.theme.colors.primary};
   `}
 
+  ${props => props.kind === 'success' && css`
+    background-color: #2cb070;
+    color: #FFF;
+  `}
+
   ${props => props.size === 'small' && css`
     padding: 0px 15px;
     height: 40px;

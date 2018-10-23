@@ -1,4 +1,6 @@
 import React from 'react';
+import { withRouter } from 'react-router';
+import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 import calendarWhiteIcon from 'assets/calendar-white.svg';
 import peopleWhiteIcon from 'assets/people-white.svg';
@@ -12,7 +14,9 @@ const Container = styled.div`
   color: #FFF;
 `;
 
-const Item = styled.div`
+const Item = styled(Link)`
+  color: #FFF;
+  text-decoration: none;
   height: 70px;
   cursor: pointer;
   display: flex;
@@ -60,22 +64,22 @@ const Layout = styled.div`
   height: 100vh;
 `;
 
-export default ({ children }) => (
+export default withRouter(({ children, match }) => (
   <Layout>
     <Container>
-      <Item isActive>
+      <Item isActive={match.path.indexOf('/events') !== -1} to="/events">
         <ItemIcon src={calendarWhiteIcon} />
         <div>Events overview</div>
       </Item>
-      <Item>
+      <Item isActive={match.path.indexOf('/managestaff') !== -1} to="/managestaff">
         <ItemIcon src={peopleWhiteIcon} />
         <div>Manage Staff</div>
       </Item>
-      <Item>
+      <Item isActive={match.path.indexOf('/billing') !== -1} to="/billing">
         <ItemIcon src={billingWhiteIcon} />
         <div>Billing</div>
       </Item>
     </Container>
     {children}
   </Layout>
-);
+));
