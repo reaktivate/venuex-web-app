@@ -5,6 +5,7 @@ import { firebaseConnect, isLoaded } from 'react-redux-firebase';
 import moment from 'moment';
 import styled from 'styled-components';
 import { humanize } from 'utils';
+import { withVenueConfig } from 'containers/VenueConfigProvider';
 import SidebarLayout from 'components/Sidebar';
 import Button from 'components/Button';
 import Table from 'components/Table';
@@ -80,6 +81,9 @@ const TableContainer = styled.div`
   margin-bottom: 20px;
 `;
 
+const DueLabel = styled.span`
+  color: ${props => props.color || '#b0b0b0'};
+`;
 
 class Billing extends PureComponent {
 
@@ -121,6 +125,14 @@ class Billing extends PureComponent {
 
     const dueDate = moment(this.state.date).add(1, 'M');
 
+    const balance = (
+      this.props.venueConfig.billingMethod === 'payPerGuest' ?
+        total : 250 * eventsThisMonth.length
+    );
+
+
+    const daysUntilDue = dueDate.diff(moment(), 'days');
+
     return (
       <SidebarLayout>
         <div style={{ flex: 1, padding: 20 }}>
@@ -154,10 +166,17 @@ class Billing extends PureComponent {
               </Stat>
               <Stat>
                 <div className="label">Current Balance</div>
-                <div className="value">$5,000</div>
+                <div className="value">${balance}</div>
               </Stat>
               <Stat>
-                <div className="label">Due date: {dueDate.fromNow()}</div>
+                <div className="label">
+                  Due date:&nbsp;
+                  <DueLabel
+                    color={daysUntilDue <= 8 ? '#c02026' : '#b0b0b0'}
+                  >
+                    {dueDate.fromNow()}
+                  </DueLabel>
+                </div>
                 <div className="value">{dueDate.format('MMM D, YYYY')}</div>
               </Stat>
               <div>
@@ -246,6 +265,7 @@ class Billing extends PureComponent {
 }
 
 export default compose(
+  withVenueConfig,
   firebaseConnect(() => [{
     path: 'events',
     queryParams: [
