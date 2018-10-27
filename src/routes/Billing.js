@@ -5,6 +5,7 @@ import { firebaseConnect, isLoaded } from 'react-redux-firebase';
 import moment from 'moment';
 import styled from 'styled-components';
 import { humanize } from 'utils';
+import { getUser } from 'reducers/core';
 import { withVenueConfig } from 'containers/VenueConfigProvider';
 import SidebarLayout from 'components/Sidebar';
 import Button from 'components/Button';
@@ -57,6 +58,8 @@ const Stat = styled.div`
   padding-left: 30px;
   margin-left: 30px;
   border-left: solid 1px #b0b0b0;
+  font-family: Lora;
+  font-weight: 500;
 
   &:first-child {
     border-left: none;
@@ -266,7 +269,7 @@ class Billing extends PureComponent {
 
 export default compose(
   withVenueConfig,
-  firebaseConnect(() => [{
+  firebaseConnect(({ venueConfig }) => [{
     path: 'events',
     queryParams: [
       'orderByChild=venueId',
@@ -278,7 +281,9 @@ export default compose(
       'orderByChild=venueId',
       'equalTo=test_venue'
     ],
-  }]),
+  },
+  `invoices/${venueConfig.id}`,
+  ]),
   connect(state => {
     const isEventsLoaded = isLoaded(state.firebase.data.events);
     const isEmployeesLoaded = isLoaded(state.firebase.data.employees);
@@ -295,6 +300,7 @@ export default compose(
       isDataLoaded,
       allEvents: isDataLoaded ? allEvents : [],
       employees: state.firebase.data.employees,
+      currentUser: getUser(state),
     };
   }),
 )(Billing);

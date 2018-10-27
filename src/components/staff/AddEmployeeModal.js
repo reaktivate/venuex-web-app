@@ -148,6 +148,7 @@ class AddEmployeeModal extends PureComponent {
         <Modal.Footer>
           <StyledButton
             label="Discard"
+            onClick={onRequestClose}
           />
           <StyledButton
             label={this.state.isLoading ?

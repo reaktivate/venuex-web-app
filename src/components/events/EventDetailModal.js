@@ -106,6 +106,11 @@ const ReminderSentLabel = styled.div`
   text-transform: lowercase;
 `;
 
+const StyledTitle = styled(Title)`
+  font-family: Lora;
+  font-size: 24px;
+`;
+
 class EventDetailModal extends PureComponent {
 
   state = {
@@ -266,7 +271,7 @@ class EventDetailModal extends PureComponent {
             <KindImage src={ringsImage} />
           </EventKindBadge>
           <div>
-            <Title>Sarah & Kyle’s Wedding</Title>
+            <StyledTitle>{event.name}</StyledTitle>
             <SubTitle>Friday, September 12th</SubTitle>
           </div>
         </Header>

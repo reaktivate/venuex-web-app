@@ -1,6 +1,8 @@
 import React, { PureComponent } from 'react';
 import styled, { css } from 'styled-components';
 import AddButton from 'components/AddButton';
+import Button from 'components/Button';
+import PersonalMenu from 'components/PersonalMenu';
 import leftArrowIcon from 'assets/caret-left-custom.svg';
 import rightArrowIcon from 'assets/caret-right-custom.svg';
 import closeIcon from 'assets/close.svg';
@@ -164,6 +166,11 @@ const ExpandedHeader = styled.div`
   }
 `;
 
+const CalTitle = styled.div`
+  font-family: Lora;
+  font-size: 20px;
+`;
+
 export default class Calendar extends PureComponent {
 
   state = {
@@ -184,6 +191,7 @@ export default class Calendar extends PureComponent {
       onPreviousMonth,
       onAdd,
       onEventClicked,
+      onToday,
     } = this.props;
     const weekdays = [1, 2, 3, 4, 5, 6, 7].map(dateNumber => (
       moment(date).set('date', dateNumber).format('ddd')
@@ -192,13 +200,19 @@ export default class Calendar extends PureComponent {
     return (
       <Container>
         <Header>
-          <div />
+          <div>
+            <Button
+              label="Today"
+              onClick={onToday}
+            />
+          </div>
           <MonthPicker>
             <ArrowIcon src={leftArrowIcon} onClick={onPreviousMonth} />
-            <div>{date.format('MMMM YYYY')}</div>
+            <CalTitle>{date.format('MMMM YYYY')}</CalTitle>
             <ArrowIcon src={rightArrowIcon} onClick={onNextMonth} />
           </MonthPicker>
-          <div>
+          <div style={{ display: 'flex' }}>
+            <PersonalMenu />
             <AddButton onClick={onAdd} />
           </div>
         </Header>

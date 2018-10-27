@@ -76,6 +76,12 @@ class Events extends PureComponent {
     });
   }
 
+  handleToday = () => {
+    this.setState({
+      date: moment(),
+    });
+  };
+
   handleAdd = () => {
     this.setState({
       isAddingEvent: true,
@@ -110,6 +116,7 @@ class Events extends PureComponent {
             onPreviousMonth={this.handlePreviousMonth}
             onAdd={this.handleAdd}
             onEventClicked={event => this.props.history.push(`/events/${event.data.id}`)}
+            onToday={this.handleToday}
           />
           <div>
             <LegendItem opacity="FF"><div /> = 1st payment</LegendItem>
