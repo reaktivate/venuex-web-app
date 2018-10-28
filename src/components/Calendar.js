@@ -59,6 +59,7 @@ const CalItem = styled.div`
   position: relative;
   text-align: right;
 
+
   small {
     display: inline-flex;
     text-align: right;
@@ -106,11 +107,15 @@ const CalEvent = styled.div`
   white-space: nowrap;
   color: #fff;
   border-radius: 2px;
-  padding: 7px 3px;
-  text-overflow: ellipsis;
-  font-size: 12px;
-  text-align: center;
+  padding: 7px 5px;
+  font-size: 11px;
+  text-align: left;
   max-width: 100%;
+  overflow: hidden;
+
+  div {
+    overflow: hidden;
+  }
 `;
 
 const EventsContainer = styled.div`
@@ -236,7 +241,7 @@ export default class Calendar extends PureComponent {
                 .set('hour', 0)
                 .set('date', currentDate);
 
-              let label = actualDate.format('DD');
+              let label = actualDate.format('D');
 
               if (actualDate.date() === 1 && currentDate !== 1) {
                 label = actualDate.format('MMM DD');
@@ -303,7 +308,11 @@ export default class Calendar extends PureComponent {
                             opacity={event.opacity}
                             onClick={() => onEventClicked(event)}
                           >
-                            {event.label}
+                            <div>
+                              {' '}
+                              {moment(event.start).format('h:mma')} &nbsp;
+                              {event.label}
+                            </div>
                           </CalEvent>
                         ))
                       )}
