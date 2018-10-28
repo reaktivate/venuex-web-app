@@ -19,7 +19,6 @@ import notesIcon from 'assets/notes-icon.svg';
 import clientDetailsIcon from 'assets/client-details-icon.svg';
 import grayRoomIcon from 'assets/room-gray.svg';
 
-
 const Header = styled.div`
   height: 160px;
   box-shadow: box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
@@ -27,12 +26,13 @@ const Header = styled.div`
   align-items: center;
   background-color: ${props => props.theme.colors.primary}66;
   padding: 0px 20px;
+  margin-bottom: 30px;
 `;
 
 const EventKindBadge = styled.div`
   height: 120px;
   width: 120px;
-  background-color: #FFF;
+  background-color: #fff;
   border-radius: 50%;
   margin-right: 15px;
   box-shadow: 0px 2px 4px rgba(125, 125, 125, 0.2);
@@ -60,11 +60,13 @@ const DescriptionList = styled.dl`
   padding-left: 35px;
   font-weight: 500;
   font-size: 15px;
+  margin-top: 0px;
+  letter-spacing: -0.3px;
 
   .row {
-    padding: 10px 0px;
     display: flex;
     align-items: center;
+    height: 46px;
   }
 
   dt {
@@ -76,6 +78,7 @@ const DescriptionList = styled.dl`
     display: inline-block;
     color: #222222;
     margin-left: 15px;
+    align-items: center;
   }
 `;
 
@@ -101,7 +104,7 @@ const StyledButton = styled(Button)`
 `;
 
 const ReminderSentLabel = styled.div`
-  color: #7D7D7D;
+  color: #7d7d7d;
   font-size: 12px;
   text-transform: lowercase;
 `;
@@ -109,39 +112,45 @@ const ReminderSentLabel = styled.div`
 const StyledTitle = styled(Title)`
   font-family: Lora;
   font-size: 24px;
+  letter-spacing: -0.6px;
 `;
 
 class EventDetailModal extends PureComponent {
-
   state = {
     isSendingReminder: false,
     isDeleteConfirmationOpen: false,
-    isEditing: false,
+    isEditing: false
   };
 
   handleStartEditing = () => {
     this.setState({
-      isEditing: true,
+      isEditing: true
     });
-  }
+  };
 
   handleEdit = async values => {
     const { event } = this.props;
     const valuesToEdit = {
-      start: parseInt(
-        moment(
-          `${values.dateTimeDuration.date.format('YYYY-MM-DD')} ${values.dateTimeDuration.startTime.format('HH:mm')}`,
-          'YYYY-MM-DD HH:mm'
-        ).format('X'),
-        10
-      ) * 1000,
-      end: parseInt(
-        moment(
-          `${values.dateTimeDuration.date.format('YYYY-MM-DD')} ${values.dateTimeDuration.endTime.format('HH:mm')}`,
-          'YYYY-MM-DD HH:mm'
-        ).format('X'),
-        10
-      ) * 1000,
+      start:
+        parseInt(
+          moment(
+            `${values.dateTimeDuration.date.format(
+              'YYYY-MM-DD'
+            )} ${values.dateTimeDuration.startTime.format('HH:mm')}`,
+            'YYYY-MM-DD HH:mm'
+          ).format('X'),
+          10
+        ) * 1000,
+      end:
+        parseInt(
+          moment(
+            `${values.dateTimeDuration.date.format(
+              'YYYY-MM-DD'
+            )} ${values.dateTimeDuration.endTime.format('HH:mm')}`,
+            'YYYY-MM-DD HH:mm'
+          ).format('X'),
+          10
+        ) * 1000,
       name: values.name,
       notes: values.notes,
       type: values.type,
@@ -155,7 +164,7 @@ class EventDetailModal extends PureComponent {
       firstPaymentDue: parseInt(values.firstPaymentDue.format('X'), 10) * 1000,
       secondPaymentDue: parseInt(values.secondPaymentDue.format('X'), 10) * 1000,
       thirdPaymentDue: parseInt(values.thirdPaymentDue.format('X'), 10) * 1000,
-      ceremonyKind: values.ceremonyKind,
+      ceremonyKind: values.ceremonyKind
     };
 
     const edits = {};
@@ -164,59 +173,59 @@ class EventDetailModal extends PureComponent {
       edits[`/events/${event.id}/${key}`] = valuesToEdit[key];
     });
 
-    await this.props.firebase.database().ref().update(edits);
+    await this.props.firebase
+      .database()
+      .ref()
+      .update(edits);
 
     this.setState({ isEditing: false });
   };
 
   handleDelete = () => {
     this.setState({
-      isDeleteConfirmationOpen: true,
+      isDeleteConfirmationOpen: true
     });
-  }
+  };
 
   handleCancelDeleting = () => {
     this.setState({
-      isDeleteConfirmationOpen: false,
+      isDeleteConfirmationOpen: false
     });
-  }
+  };
 
   handleConfirmDelete = async () => {
-    await this.props.firebase
-      .remove(`/events/${this.props.event.id}`);
+    await this.props.firebase.remove(`/events/${this.props.event.id}`);
     this.props.history.push('/events');
-  }
+  };
 
   handleSendReminder = async () => {
     this.setState({
-      isSendingReminder: true,
+      isSendingReminder: true
     });
     const { firebase } = this.props;
-    const sendPaymentReminderMail = firebase
-      .functions()
-      .httpsCallable('sendPaymentReminderMail');
+    const sendPaymentReminderMail = firebase.functions().httpsCallable('sendPaymentReminderMail');
 
     try {
       await sendPaymentReminderMail({
-        eventId: this.props.event.id,
+        eventId: this.props.event.id
       });
     } catch (err) {
       const { code, message, details } = err;
       console.log(code, message, details);
     }
 
-    firebase.database().ref(
-      `/events/${this.props.event.id}/lastRemindedAt`
-    ).set(
-      parseInt(moment().format('X'), 10) * 1000
-    );
+    firebase
+      .database()
+      .ref(`/events/${this.props.event.id}/lastRemindedAt`)
+      .set(parseInt(moment().format('X'), 10) * 1000);
     this.setState({
-      isSendingReminder: false,
+      isSendingReminder: false
     });
   };
 
   render() {
     const {
+      //
       firebase,
       venueConfig,
       event,
@@ -240,13 +249,13 @@ class EventDetailModal extends PureComponent {
           initialValues={{
             consultants: {
               owner: event.owner,
-              picked: [event.owner],
+              picked: [event.owner]
             },
             name: event.name,
             dateTimeDuration: {
               date: moment(event.start),
               startTime: moment(event.start),
-              endTime: moment(event.end),
+              endTime: moment(event.end)
             },
             minimumGuests: event.minimumGuests,
             type: event.type,
@@ -258,14 +267,14 @@ class EventDetailModal extends PureComponent {
             firstPaymentDue: moment(event.firstPaymentDue),
             secondPaymentDue: moment(event.secondPaymentDue),
             thirdPaymentDue: moment(event.thirdPaymentDue),
-            ceremonyKind: event.ceremonyKind,
+            ceremonyKind: event.ceremonyKind
           }}
         />
       );
     }
 
     return (
-      <Modal {...restProps} isOpen={Boolean(event)}>
+      <Modal {...restProps} isOpen={Boolean(event)} height="530px">
         <Header>
           <EventKindBadge>
             <KindImage src={ringsImage} />
@@ -298,20 +307,18 @@ class EventDetailModal extends PureComponent {
                         />
                       </dd>
                     </div>
-
                     <div className="row">
                       <dt>Event Type:</dt>
                       <dd>{humanize(event.type)}</dd>
                     </div>
-
                     <div className="row">
                       <dt>Start Time:</dt>
-                      <dd>{moment(event.start).format('HH:mm a')}</dd>
+                      <dd>{moment(event.start).format('h:mm a')}</dd>
                     </div>
 
                     <div className="row">
                       <dt>End Time:</dt>
-                      <dd>{moment(event.end).format('HH:mm a')}</dd>
+                      <dd>{moment(event.end).format('h:mm a')}</dd>
                     </div>
                   </DescriptionList>
                 )
@@ -394,19 +401,16 @@ class EventDetailModal extends PureComponent {
                         <div className="row">
                           <dt>
                             <div>Reminder Email:</div>
-                            {event.lastRemindedAt &&
+                            {event.lastRemindedAt && (
                               <ReminderSentLabel>
                                 last sent {moment(event.lastRemindedAt).format('YYYY-MM-DD')}
-                              </ReminderSentLabel>}
+                              </ReminderSentLabel>
+                            )}
                           </dt>
                           <dd>
                             <Button
                               size="small"
-                              label={
-                                this.state.isSendingReminder ?
-                                  'Sending...' :
-                                  'Send now'
-                              }
+                              label={this.state.isSendingReminder ? 'Sending...' : 'Send now'}
                               disabled={this.state.isSendingReminder}
                               onClick={this.handleSendReminder}
                             />
@@ -415,7 +419,7 @@ class EventDetailModal extends PureComponent {
                       </dd>
                     </div>
                   </DescriptionList>
-                ),
+                )
               },
               {
                 title: 'Room & Layout',
@@ -448,27 +452,18 @@ class EventDetailModal extends PureComponent {
                     </div>
                   </DescriptionList>
                 )
-              },
+              }
             ]}
           />
         </div>
         <Modal.Footer>
           <FooterButtons>
             <div>
-              <StyledButton
-                label="Download seating chart"
-              />
+              <StyledButton label="Download seating chart" />
             </div>
             <div>
-              <StyledButton
-                label="Delete"
-                kind="danger"
-                onClick={this.handleDelete}
-              />
-              <StyledButton
-                label="Edit"
-                onClick={this.handleStartEditing}
-              />
+              <StyledButton label="Delete" kind="danger" onClick={this.handleDelete} />
+              <StyledButton label="Edit" onClick={this.handleStartEditing} />
             </div>
           </FooterButtons>
         </Modal.Footer>
@@ -481,5 +476,5 @@ export default compose(
   withVenueConfig,
   withRouter,
   firebaseConnect(),
-  withFirebase,
+  withFirebase
 )(EventDetailModal);

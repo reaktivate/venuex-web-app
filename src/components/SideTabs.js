@@ -21,26 +21,29 @@ const Tab = styled.div`
   justify-content: flex-start;
   text-transform: uppercase;
   font-size: 11px;
-  font-weight: 800;
+  letter-spacing: -0.1px;
+  font-weight: 700;
   color: #b0b0b0;
   width: 100%;
   position: relative;
   cursor: pointer;
 
-  ${props => props.isActive && css`
-    color: ${props.theme.colors.primary};
+  ${props =>
+    props.isActive &&
+    css`
+      color: ${props.theme.colors.primary};
 
-    &:after {
-      content: '';
-      position: absolute;
-      top: 0px;
-      bottom: 0px;
-      right: 0px;
-      width: 4px;
-      background-color: ${props.theme.colors.primary};
-      box-shadow: -2px 0 4px 0 rgba(0, 0, 0, 0.15);
-    }
-  `}
+      &:after {
+        content: '';
+        position: absolute;
+        top: 0px;
+        bottom: 0px;
+        right: 0px;
+        width: 4px;
+        background-color: ${props.theme.colors.primary};
+        box-shadow: -2px 0 4px 0 rgba(0, 0, 0, 0.15);
+      }
+    `};
 `;
 
 const Icon = styled.img`
@@ -57,10 +60,9 @@ const Content = styled.div`
 `;
 
 class SideTabs extends PureComponent {
-
   state = {
-    activeTab: 0,
-  }
+    activeTab: 0
+  };
 
   render() {
     const { tabs } = this.props;
@@ -77,9 +79,7 @@ class SideTabs extends PureComponent {
             </Tab>
           ))}
         </Tabs>
-        <Content>
-          {tabs[this.state.activeTab].content}
-        </Content>
+        <Content>{tabs[this.state.activeTab].content}</Content>
       </Container>
     );
   }
