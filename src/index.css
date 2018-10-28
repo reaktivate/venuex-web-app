@@ -6,8 +6,15 @@ body {
 
 body {
   font-family: 'Montserrat';
-  font-smoothing: antialiased;
+  -webkit-font-smoothing: antialiased;
   font-weight: 400;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url(./assets/fonts/Montserrat-Light.ttf) format('truetype');
+  font-weight: 300;
+  font-style: normal;
 }
 
 @font-face {
@@ -19,15 +26,36 @@ body {
 
 @font-face {
   font-family: 'Montserrat';
-  src: url(./assets/fonts/Montserrat-Black.ttf) format('truetype');
+  src: url(./assets/fonts/Montserrat-Medium.ttf) format('truetype');
   font-weight: 500;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Montserrat';
+  src: url(./assets/fonts/Montserrat-SemiBold.ttf) format('truetype');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Montserrat';
   src: url(./assets/fonts/Montserrat-Bold.ttf) format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url(./assets/fonts/Montserrat-ExtraBold.ttf) format('truetype');
   font-weight: 800;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url(./assets/fonts/Montserrat-Black.ttf) format('truetype');
+  font-weight: 900;
   font-style: normal;
 }
 

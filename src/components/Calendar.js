@@ -66,6 +66,7 @@ const CalItem = styled.div`
     align-items: center;
     justify-content: center;
     margin-top: -5px;
+    font-weight: 600;
     color: #7d7d7d;
     ${props =>
       props.isPast &&
@@ -108,7 +109,8 @@ const CalEvent = styled.div`
   color: #fff;
   border-radius: 2px;
   padding: 7px 5px;
-  font-size: 11px;
+  font-size: 12px;
+  font-weight: 600;
   text-align: left;
   max-width: 100%;
   overflow: hidden;
@@ -122,7 +124,7 @@ const EventsContainer = styled.div`
   position: absolute;
   left: 2px;
   right: 2px;
-  top: 35px;
+  top: 30px;
   bottom: 10px;
 `;
 
@@ -183,6 +185,7 @@ const CalTitle = styled.div`
   font-size: 20px;
   font-weight: 400;
   color: #222222;
+  letter-spacing: -0.2px;
 `;
 
 export default class Calendar extends PureComponent {
