@@ -45,6 +45,7 @@ const WeekdaysBar = styled.div`
     padding: 25px 0px;
     text-align: center;
     font-size: 12px;
+    font-weight: 600;
     text-transform: uppercase;
     color: #888888;
     height: 9px;
