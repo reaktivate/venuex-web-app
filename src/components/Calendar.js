@@ -61,18 +61,22 @@ const CalItem = styled.div`
     justify-content: center;
     margin-top: -5px;
     color: #7d7d7d;
-    ${props => props.isPast && css`
-      color: #b0b0b0;
-    `}
+    ${props =>
+      props.isPast &&
+      css`
+        color: #b0b0b0;
+      `}
     font-size: 14px;
     height: 22px;
 
-    ${props => props.isToday && css`
-      width: 22px;
-      background-color: #000;
-      border-radius: 50%;
-      color: #FFF;
-    `}
+    ${props =>
+      props.isToday &&
+      css`
+        width: 22px;
+        background-color: #000;
+        border-radius: 50%;
+        color: #fff;
+      `}
   }
 
   &:first-child {
@@ -95,7 +99,7 @@ const CalEvent = styled.div`
   background-color: ${props => `${props.theme.colors.primary}${props.opacity}`};
   margin: 2px 0px;
   white-space: nowrap;
-  color: #FFF;
+  color: #fff;
   border-radius: 2px;
   padding: 7px 3px;
   text-overflow: ellipsis;
@@ -128,7 +132,7 @@ const ExpandedItem = styled.div`
   right: -16px;
   top: -50px;
   bottom: -30px;
-  background-color: #FFF;
+  background-color: #fff;
   z-index: 10;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2);
   border-radius: 2px;
@@ -143,8 +147,6 @@ const ExpandedItem = styled.div`
     font-weight: 500;
     color: #7d7d7d;
   }
-
-
 `;
 
 const ExpandedHeader = styled.div`
@@ -169,19 +171,20 @@ const ExpandedHeader = styled.div`
 const CalTitle = styled.div`
   font-family: Lora;
   font-size: 20px;
+  font-weight: 400;
+  color: #222222;
 `;
 
 export default class Calendar extends PureComponent {
-
   state = {
-    expandedDate: null,
+    expandedDate: null
   };
 
-  handleMoreClicked = (actualDate) => {
+  handleMoreClicked = actualDate => {
     this.setState({
-      expandedDate: actualDate.format('YYYY-MM-DD'),
+      expandedDate: actualDate.format('YYYY-MM-DD')
     });
-  }
+  };
 
   render() {
     const {
@@ -191,20 +194,19 @@ export default class Calendar extends PureComponent {
       onPreviousMonth,
       onAdd,
       onEventClicked,
-      onToday,
+      onToday
     } = this.props;
-    const weekdays = [1, 2, 3, 4, 5, 6, 7].map(dateNumber => (
-      moment(date).set('date', dateNumber).format('ddd')
-    ));
+    const weekdays = [1, 2, 3, 4, 5, 6, 7].map(dateNumber =>
+      moment(date)
+        .set('date', dateNumber)
+        .format('ddd')
+    );
     let displayingDate = 1;
     return (
       <Container>
         <Header>
           <div>
-            <Button
-              label="Today"
-              onClick={onToday}
-            />
+            <Button label="Today" onClick={onToday} />
           </div>
           <MonthPicker>
             <ArrowIcon src={leftArrowIcon} onClick={onPreviousMonth} />
@@ -218,16 +220,16 @@ export default class Calendar extends PureComponent {
         </Header>
         <WeekdaysBar>
           {weekdays.map(day => (
-            <div key={day}>
-              {day}
-            </div>
+            <div key={day}>{day}</div>
           ))}
         </WeekdaysBar>
         {[1, 2, 3, 4, 5].map(() => (
           <CalRow>
             {[1, 2, 3, 4, 5, 6, 7].map(() => {
               const currentDate = displayingDate++;
-              const actualDate = moment(date).set('hour', 0).set('date', currentDate);
+              const actualDate = moment(date)
+                .set('hour', 0)
+                .set('date', currentDate);
 
               let label = actualDate.format('DD');
 
@@ -235,41 +237,45 @@ export default class Calendar extends PureComponent {
                 label = actualDate.format('MMM DD');
               }
 
-              const eventsThisDate = events[actualDate.format('YYYY-MM-DD')] || [];
+              const eventsThisDate =
+                events[actualDate.format('YYYY-MM-DD')] || [];
 
               return (
-                <CalItem isToday={moment().isSame(actualDate, 'day')} isPast={moment().isAfter(actualDate)}>
+                <CalItem
+                  isToday={moment().isSame(actualDate, 'day')}
+                  isPast={moment().isAfter(actualDate)}
+                >
                   <small>{label}</small>
-                  {eventsThisDate.length > 0 &&
+                  {eventsThisDate.length > 0 && (
                     <EventsContainer>
-                      {eventsThisDate.length > 3 ?
-                        this.state.expandedDate === actualDate.format('YYYY-MM-DD') ?
-                        <ExpandedItem>
-                          <ExpandedHeader>
-                            <div className="item">
-                              <span>{label}</span>
-                              <div>{actualDate.format('ddd')}</div>
-                            </div>
-                            <div
-                              className="item"
-                              onClick={() => this.setState({ expandedDate: null })}
-                            >
-                              <img
-                                alt=""
-                                src={closeIcon}
-                              />
-                            </div>
-                          </ExpandedHeader>
-                          {eventsThisDate.map(event => (
-                            <CalEvent
-                              opacity={event.opacity}
-                              onClick={() => onEventClicked(event)}
-                            >
-                              {event.label}
-                            </CalEvent>
-                          ))}
-                        </ExpandedItem> :
-                        (
+                      {eventsThisDate.length > 3 ? (
+                        this.state.expandedDate ===
+                        actualDate.format('YYYY-MM-DD') ? (
+                          <ExpandedItem>
+                            <ExpandedHeader>
+                              <div className="item">
+                                <span>{label}</span>
+                                <div>{actualDate.format('ddd')}</div>
+                              </div>
+                              <div
+                                className="item"
+                                onClick={() =>
+                                  this.setState({ expandedDate: null })
+                                }
+                              >
+                                <img alt="" src={closeIcon} />
+                              </div>
+                            </ExpandedHeader>
+                            {eventsThisDate.map(event => (
+                              <CalEvent
+                                opacity={event.opacity}
+                                onClick={() => onEventClicked(event)}
+                              >
+                                {event.label}
+                              </CalEvent>
+                            ))}
+                          </ExpandedItem>
+                        ) : (
                           <React.Fragment>
                             {eventsThisDate.slice(0, 2).map(event => (
                               <CalEvent
@@ -279,11 +285,14 @@ export default class Calendar extends PureComponent {
                                 {event.label}
                               </CalEvent>
                             ))}
-                            <MoreButton onClick={() => this.handleMoreClicked(actualDate)}>
+                            <MoreButton
+                              onClick={() => this.handleMoreClicked(actualDate)}
+                            >
                               + {eventsThisDate.slice(2).length} more
                             </MoreButton>
                           </React.Fragment>
-                        ) :
+                        )
+                      ) : (
                         eventsThisDate.map(event => (
                           <CalEvent
                             opacity={event.opacity}
@@ -291,8 +300,10 @@ export default class Calendar extends PureComponent {
                           >
                             {event.label}
                           </CalEvent>
-                        ))}
-                    </EventsContainer>}
+                        ))
+                      )}
+                    </EventsContainer>
+                  )}
                 </CalItem>
               );
             })}
