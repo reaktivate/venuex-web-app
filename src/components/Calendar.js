@@ -38,11 +38,16 @@ const ArrowIcon = styled.img`
 
 const WeekdaysBar = styled.div`
   display: flex;
+  margin: 0px -15px;
 
   div {
     flex: 1;
     padding: 25px 0px;
     text-align: center;
+    font-size: 12px;
+    text-transform: uppercase;
+    color: #888888;
+    height: 9px;
   }
 `;
 
