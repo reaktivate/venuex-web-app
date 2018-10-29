@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const Name = styled.div`
   font-size: 15px;
   color: #222222;
-  font-weight: 500;
+  font-weight: 600;
 `;
 
 const Picture = styled.img`

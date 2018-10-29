@@ -73,12 +73,14 @@ const DescriptionList = styled.dl`
     display: inline-block;
     color: #7d7d7d;
     white-space: nowrap;
+    font-weight: 600;
   }
   dd {
     display: inline-block;
     color: #222222;
     margin-left: 15px;
     align-items: center;
+    font-weight: 600;
   }
 `;
 
@@ -160,9 +162,12 @@ class EventDetailModal extends PureComponent {
       guestsPerTable: values.guestsPerTable,
       minimumGuests: values.minimumGuests,
       owner: values.consultants.owner,
-      consultants: values.consultants.picked.filter(id => id !== values.consultants.owner),
+      consultants: values.consultants.picked.filter(
+        id => id !== values.consultants.owner
+      ),
       firstPaymentDue: parseInt(values.firstPaymentDue.format('X'), 10) * 1000,
-      secondPaymentDue: parseInt(values.secondPaymentDue.format('X'), 10) * 1000,
+      secondPaymentDue:
+        parseInt(values.secondPaymentDue.format('X'), 10) * 1000,
       thirdPaymentDue: parseInt(values.thirdPaymentDue.format('X'), 10) * 1000,
       ceremonyKind: values.ceremonyKind
     };
@@ -203,7 +208,9 @@ class EventDetailModal extends PureComponent {
       isSendingReminder: true
     });
     const { firebase } = this.props;
-    const sendPaymentReminderMail = firebase.functions().httpsCallable('sendPaymentReminderMail');
+    const sendPaymentReminderMail = firebase
+      .functions()
+      .httpsCallable('sendPaymentReminderMail');
 
     try {
       await sendPaymentReminderMail({
@@ -391,7 +398,11 @@ class EventDetailModal extends PureComponent {
                                 onChange={newVal =>
                                   firebase
                                     .database()
-                                    .ref(`events/${event.id}/isPaymentBannerEnabled`)
+                                    .ref(
+                                      `events/${
+                                        event.id
+                                      }/isPaymentBannerEnabled`
+                                    )
                                     .set(newVal)
                                 }
                               />
@@ -403,14 +414,21 @@ class EventDetailModal extends PureComponent {
                             <div>Reminder Email:</div>
                             {event.lastRemindedAt && (
                               <ReminderSentLabel>
-                                last sent {moment(event.lastRemindedAt).format('YYYY-MM-DD')}
+                                last sent{' '}
+                                {moment(event.lastRemindedAt).format(
+                                  'YYYY-MM-DD'
+                                )}
                               </ReminderSentLabel>
                             )}
                           </dt>
                           <dd>
                             <Button
                               size="small"
-                              label={this.state.isSendingReminder ? 'Sending...' : 'Send now'}
+                              label={
+                                this.state.isSendingReminder
+                                  ? 'Sending...'
+                                  : 'Send now'
+                              }
                               disabled={this.state.isSendingReminder}
                               onClick={this.handleSendReminder}
                             />
@@ -462,7 +480,11 @@ class EventDetailModal extends PureComponent {
               <StyledButton label="Download seating chart" />
             </div>
             <div>
-              <StyledButton label="Delete" kind="danger" onClick={this.handleDelete} />
+              <StyledButton
+                label="Delete"
+                kind="danger"
+                onClick={this.handleDelete}
+              />
               <StyledButton label="Edit" onClick={this.handleStartEditing} />
             </div>
           </FooterButtons>

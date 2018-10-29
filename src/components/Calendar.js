@@ -3,10 +3,9 @@ import styled, { css } from 'styled-components';
 import AddButton from 'components/AddButton';
 import Button from 'components/Button';
 import PersonalMenu from 'components/PersonalMenu';
-import leftArrowIcon from 'assets/caret-left-custom.svg';
-import rightArrowIcon from 'assets/caret-right-custom.svg';
 import closeIcon from 'assets/close.svg';
 import moment from 'moment';
+import Icons from 'assets/icons';
 
 const Container = styled.div`
   border: solid 1px #ededed;
@@ -27,13 +26,8 @@ const MonthPicker = styled.div`
   font-size: 20px;
   color: #222222;
   align-items: center;
-`;
-
-const ArrowIcon = styled.img`
-  height: 17px;
-  object-fit: contain;
-  margin: 0px 20px;
-  cursor: pointer;
+  width: 220px;
+  justify-content: space-between;
 `;
 
 const WeekdaysBar = styled.div`
@@ -223,9 +217,17 @@ export default class Calendar extends PureComponent {
             <Button label="Today" onClick={onToday} />
           </div>
           <MonthPicker>
-            <ArrowIcon src={leftArrowIcon} onClick={onPreviousMonth} />
+            <Icons.CaretLeft
+              onClick={onPreviousMonth}
+              size="16"
+              style={{ cursor: 'pointer' }}
+            />
             <CalTitle>{date.format('MMMM YYYY')}</CalTitle>
-            <ArrowIcon src={rightArrowIcon} onClick={onNextMonth} />
+            <Icons.CaretRight
+              onClick={onNextMonth}
+              size="16"
+              style={{ cursor: 'pointer' }}
+            />
           </MonthPicker>
           <div style={{ display: 'flex' }}>
             <PersonalMenu />
