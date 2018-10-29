@@ -23,7 +23,6 @@ const IconsContainer = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  width: 100%;
 
   svg {
     margin: 0px 5px;
@@ -40,7 +39,6 @@ const Header = styled.div`
 `;
 
 const StyledTableRow = styled(Table.Row)`
-
   .actions {
     display: none;
 
@@ -57,31 +55,36 @@ const StyledTableRow = styled(Table.Row)`
 `;
 
 class ManageStaff extends PureComponent {
-
   state = {
-    isAddingEmployee: false,
+    isAddingEmployee: false
+  };
+
+  getInitials = string => {
+    const names = string.split(' ');
+    let initials = names[0].substring(0, 1).toUpperCase();
+
+    if (names.length > 1) {
+      initials += names[names.length - 1].substring(0, 1).toUpperCase();
+    }
+    return initials;
   };
 
   getSelectedEmployees = () => {
     const { isAddingEmployee, ...selectedEmployees } = this.state; // eslint-disable-line
-    return Object.keys(
-      selectedEmployees
-    ).filter(
-      key => selectedEmployees[key]
-    );
-  }
+    return Object.keys(selectedEmployees).filter(key => selectedEmployees[key]);
+  };
 
   handleStartAddingEmployee = () => {
     this.setState({
-      isAddingEmployee: true,
+      isAddingEmployee: true
     });
-  }
+  };
 
   handleCancelAddingEmployee = () => {
     this.setState({
-      isAddingEmployee: false,
+      isAddingEmployee: false
     });
-  }
+  };
 
   handleAllEmployeesChecked = () => {
     const updates = {};
@@ -124,8 +127,8 @@ class ManageStaff extends PureComponent {
               </div>
             </Header>
             <Table>
-              <Table.Row>
-                <Table.Cell width="5%">
+              <Table.Row style={{ fontWeight: '600', letterSpacing: '0.3px' }}>
+                <Table.Cell width="5.7%">
                   <Table.HeaderCell
                     title={
                       <Checkbox
@@ -138,31 +141,26 @@ class ManageStaff extends PureComponent {
                 </Table.Cell>
                 {this.getSelectedEmployees().length === 0 ? (
                   <React.Fragment>
-                    <Table.Cell width="20%">
+                    <Table.Cell width="22.3%">
                       <Table.HeaderCell
                         title="Name"
                         color="#c0b59d"
+                        style={{ marginLeft: '50px' }}
                       />
                     </Table.Cell>
 
-                    <Table.Cell width="20%">
-                      <Table.HeaderCell
-                        title="Email"
-                        color="#c0b59d"
-                      />
+                    <Table.Cell width="23.7%" center>
+                      <Table.HeaderCell title="Email" color="#c0b59d" />
                     </Table.Cell>
 
-                    <Table.Cell width="20%">
-                      <Table.HeaderCell
-                        title="Permission"
-                      />
+                    <Table.Cell width="17.6%" center>
+                      <Table.HeaderCell title="Permission" />
                     </Table.Cell>
 
-                    <Table.Cell width="20%">
-                      <Table.HeaderCell
-                        title="Date Added"
-                      />
+                    <Table.Cell width="12.5%" center>
+                      <Table.HeaderCell title="Date Added" />
                     </Table.Cell>
+                    <Table.Cell width="18.2%" />
                   </React.Fragment>
                 ) : (
                   <React.Fragment>
@@ -170,13 +168,8 @@ class ManageStaff extends PureComponent {
                       <EditStaffPermissionsDropdown
                         selectedEmployees={this.getSelectedEmployees()}
                       />
-
                       &nbsp;
-
-                      <Button
-                        label="Delete 2 staff members"
-                        kind="danger"
-                      />
+                      <Button label="Delete 2 staff members" kind="danger" />
                     </Table.Cell>
                   </React.Fragment>
                 )}
@@ -185,50 +178,75 @@ class ManageStaff extends PureComponent {
               <Table.Body>
                 {employees.map(employee => (
                   <StyledTableRow>
-                    <Table.Cell width="5%">
+                    <Table.Cell width="5.7%">
                       <Checkbox
                         onCheck={() => this.setState({ [employee.id]: true })}
-                        onUncheck={() => this.setState({ [employee.id]: false })}
+                        onUncheck={() =>
+                          this.setState({ [employee.id]: false })
+                        }
                         checked={this.state[employee.id]}
                       />
                     </Table.Cell>
-                    <Table.Cell width="20%">
+                    <Table.Cell width="22.3%">
                       <ConsultantLabel
                         name={employee.fullName}
-                        picture={employee.picture}
+                        initials={this.getInitials(employee.fullName)}
+                        //      picture={employee.picture}
                       />
                     </Table.Cell>
 
-                    <Table.Cell width="20%">
+                    <Table.Cell width="23.7%" fontWeight="500" fontSize="15px">
                       {employee.email}
                     </Table.Cell>
 
-                    <Table.Cell width="20%">
+                    <Table.Cell width="17.6%" center>
                       <IconsContainer>
                         <Icons.CalendarEdit
                           size={24}
-                          color={!employee.permissions.createAndEditEvents ? '#d8d8d8' : undefined}
+                          color={
+                            !employee.permissions.createAndEditEvents
+                              ? '#d8d8d8'
+                              : undefined
+                          }
                         />
                         <Icons.CalendarDelete
                           size={24}
-                          color={!employee.permissions.deleteEvents ? '#d8d8d8' : undefined}
+                          color={
+                            !employee.permissions.deleteEvents
+                              ? '#d8d8d8'
+                              : undefined
+                          }
                         />
                         <Icons.Billing
                           size={24}
-                          color={!employee.permissions.viewBilling ? '#d8d8d8' : undefined}
+                          color={
+                            !employee.permissions.viewBilling
+                              ? '#d8d8d8'
+                              : undefined
+                          }
                         />
                         <Icons.ManageStaff
                           size={24}
-                          color={!employee.permissions.manageStaffPermissions ? '#d8d8d8' : undefined}
+                          color={
+                            !employee.permissions.manageStaffPermissions
+                              ? '#d8d8d8'
+                              : undefined
+                          }
                         />
                       </IconsContainer>
                     </Table.Cell>
 
-                    <Table.Cell width="20%">
-                      {moment(employee.createdAt).format('YYYY-MM-DD')}
+                    <Table.Cell
+                      width="12.5%"
+                      color="#7d7d7d"
+                      fontWeight="500"
+                      fontSize="15px"
+                      center
+                    >
+                      {moment(employee.createdAt).format('MM/DD/YYYY')}
                     </Table.Cell>
 
-                    <Table.Cell width="15%">
+                    <Table.Cell width="18.2%">
                       <div className="actions">
                         <Icons.Delete size={24} color="#7d7d7d" />
                         <Icons.Delete size={24} color="#7d7d7d" />
@@ -246,25 +264,24 @@ class ManageStaff extends PureComponent {
 }
 
 export default compose(
-  firebaseConnect(() => [{
-    path: 'employees',
-    queryParams: [
-      'orderByChild=venueId',
-      'equalTo=test_venue'
-    ],
-  }]),
+  firebaseConnect(() => [
+    {
+      path: 'employees',
+      queryParams: ['orderByChild=venueId', 'equalTo=test_venue']
+    }
+  ]),
   connect(state => {
     if (!isLoaded(state.firebase.data.employees)) {
       return {
-        employees: [],
+        employees: []
       };
     }
 
     return {
       employees: Object.keys(state.firebase.data.employees).map(key => ({
         ...state.firebase.data.employees[key],
-        id: key,
-      })),
+        id: key
+      }))
     };
   })
 )(ManageStaff);
