@@ -127,7 +127,10 @@ class ManageStaff extends PureComponent {
               </div>
             </Header>
             <Table>
-              <Table.Row style={{ fontWeight: '600', letterSpacing: '0.3px' }}>
+              <Table.Row
+                style={{ fontWeight: '600', letterSpacing: '0.3px' }}
+                hoverOff
+              >
                 <Table.Cell width="5.7%">
                   <Table.HeaderCell
                     title={
@@ -143,22 +146,46 @@ class ManageStaff extends PureComponent {
                   <React.Fragment>
                     <Table.Cell width="22.3%">
                       <Table.HeaderCell
-                        title="Name"
                         color="#c0b59d"
-                        style={{ marginLeft: '50px' }}
-                      />
+                        style={{
+                          marginLeft: '50px',
+                          width: '63px',
+                          justifyContent: 'space-between'
+                        }}
+                      >
+                        NAME
+                        <Icons.CaretDown size="12" />
+                      </Table.HeaderCell>
                     </Table.Cell>
 
                     <Table.Cell width="23.7%" center>
-                      <Table.HeaderCell title="Email" color="#c0b59d" />
+                      <Table.HeaderCell
+                        color="#c0b59d"
+                        style={{
+                          width: '63px',
+                          justifyContent: 'space-between'
+                        }}
+                      >
+                        EMAIL
+                        <Icons.CaretDown size="12" />
+                      </Table.HeaderCell>
                     </Table.Cell>
 
                     <Table.Cell width="17.6%" center>
-                      <Table.HeaderCell title="Permission" />
+                      <Table.HeaderCell>PERMISSION</Table.HeaderCell>
                     </Table.Cell>
 
                     <Table.Cell width="12.5%" center>
-                      <Table.HeaderCell title="Date Added" />
+                      <Table.HeaderCell
+                        color="#c0b59d"
+                        style={{
+                          width: '107px',
+                          justifyContent: 'space-between'
+                        }}
+                      >
+                        Date Added
+                        <Icons.CaretDown size="12" />
+                      </Table.HeaderCell>
                     </Table.Cell>
                     <Table.Cell width="18.2%" />
                   </React.Fragment>

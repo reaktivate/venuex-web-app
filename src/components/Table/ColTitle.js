@@ -1,6 +1,5 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import ColIcon from './ColIcon';
 
 const ColTitle = styled.div`
   font-family: Montserrat;
@@ -12,7 +11,7 @@ const ColTitle = styled.div`
   letter-spacing: 0.3px;
   color: #888888;
   display: flex;
-  align-content: center;
+  align-items: center;
   ${props =>
     props.selected === true &&
     css`
@@ -21,9 +20,4 @@ const ColTitle = styled.div`
     `};
 `;
 
-export default ({ title, ...restProps }) => (
-  <ColTitle {...restProps}>
-    <div>{title}</div>
-    <ColIcon {...restProps} />
-  </ColTitle>
-);
+export default ({ title, ...restProps }) => <ColTitle {...restProps} />;
