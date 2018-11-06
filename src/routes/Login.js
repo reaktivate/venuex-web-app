@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { Redirect } from 'react-router';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { getUser } from 'reducers/core';
+import { getUser, login } from 'reducers/core';
 import { withFirebase } from 'react-redux-firebase';
 import { reduxForm, Field } from 'redux-form';
 import styled from 'styled-components';
@@ -25,6 +25,10 @@ class Login extends PureComponent {
   state = {
     error: '',
   };
+
+  handleFixture = () => {
+    this.props.dispatch(login({}));
+  }
 
   handleLogin = (values) => {
     console.log('logging in');
@@ -67,6 +71,12 @@ class Login extends PureComponent {
           kind="primary"
           label="Login"
           onClick={this.props.handleSubmit(this.handleLogin)}
+        />
+
+        <Button
+          kind="primary"
+          label="fixture it"
+          onClick={this.handleFixture}
         />
       </Container>
     );
