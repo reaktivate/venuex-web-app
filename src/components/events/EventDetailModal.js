@@ -18,14 +18,13 @@ import calendarIcon from 'assets/calendar-gray.svg';
 import notesIcon from 'assets/notes-icon.svg';
 import clientDetailsIcon from 'assets/client-details-icon.svg';
 import grayRoomIcon from 'assets/room-gray.svg';
+import ModalDialog from 'components/Dialog/ModalDialog';
 
 
 const Header = styled.div`
   height: 160px;
-  box-shadow: box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
   display: flex;
   align-items: center;
-  background-color: ${props => props.theme.colors.primary}66;
   padding: 0px 20px;
 `;
 
@@ -264,17 +263,20 @@ class EventDetailModal extends PureComponent {
       );
     }
 
+    const HeaderBlock = () => (
+      <Header>
+        <EventKindBadge>
+          <KindImage src={ringsImage} />
+        </EventKindBadge>
+        <div>
+          <StyledTitle>{event.name}</StyledTitle>
+          <SubTitle>Friday, September 12th</SubTitle>
+        </div>
+      </Header>
+    );
+
     return (
-      <Modal {...restProps} isOpen={Boolean(event)}>
-        <Header>
-          <EventKindBadge>
-            <KindImage src={ringsImage} />
-          </EventKindBadge>
-          <div>
-            <StyledTitle>{event.name}</StyledTitle>
-            <SubTitle>Friday, September 12th</SubTitle>
-          </div>
-        </Header>
+      <ModalDialog {...restProps} open={Boolean(event)} Header={HeaderBlock}>
         <div style={{ flex: 1, overflow: 'hidden' }}>
           <ConfirmationModal
             label="Are you sure you want to delete this event?"
@@ -472,7 +474,7 @@ class EventDetailModal extends PureComponent {
             </div>
           </FooterButtons>
         </Modal.Footer>
-      </Modal>
+      </ModalDialog>
     );
   }
 }
