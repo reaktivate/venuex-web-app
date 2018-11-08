@@ -1,13 +1,15 @@
-import React, { PureComponent } from 'react';
+/* eslint-disable */
+import React, { PureComponent, Children } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { firebaseConnect, isLoaded } from 'react-redux-firebase';
 import SidebarLayout from 'components/Sidebar.js';
-import Calendar from 'components/Calendar';
 import AddEventModal from 'components/events/AddEventModal';
 import EventDetailModal from 'components/events/EventDetailModal';
 import moment from 'moment';
+import EventsCalendar from 'components/events/EventsCalendar';
+import EventsHeader from 'components/events/EventsHeader';
 
 const LegendItem = styled.div`
   margin-top: 15px;
@@ -19,7 +21,7 @@ const LegendItem = styled.div`
     margin-left: 0px;
   }
 
-  div {
+  div {s
     display: inline-block;
     background-color: ${props =>
       `${props.theme.colors.primary}${props.opacity}`};
@@ -30,37 +32,11 @@ const LegendItem = styled.div`
   }
 `;
 
-// const events = {
-//   '2018-10-19': [
-//     {
-//       label: 'It\'s luis birthday!',
-//       opacity: 'A6',
-//     },
-//     {
-//       label: 'It\'s luis birthday!',
-//       opacity: 'FF',
-//     },
-//     {
-//       label: 'Something else',
-//       opacity: '59'
-//     },
-//     {
-//       label: 'It\'s luis birthday!',
-//       opacity: 'A6',
-//     },
-//   ],
-//   '2018-10-13': [
-//     {
-//       label: 'Graduation time',
-//       opacity: 'A6',
-//     },
-//   ],
-// };
-
 class Events extends PureComponent {
 
   state = {
     date: moment(),
+    addDate: new Date(),
     isAddingEvent: false,
   };
 
@@ -82,14 +58,19 @@ class Events extends PureComponent {
     });
   };
 
-  handleAdd = () => {
+  handleAdd = (date = null) => {
+    console.log(date);
     this.setState({
       isAddingEvent: true,
+      addDate: date?date:this.state.date
     });
   }
 
+  handleEventClick = event => this.props.history.push(`/events/${event.id}`)
+
   render() {
-    const { eventsByDate, match } = this.props;
+    const { eventsByDate, match, allEvents } = this.props;
+
     let event;
     if (this.props.allEvents && match.params.id) {
       event = {
@@ -97,27 +78,50 @@ class Events extends PureComponent {
         id: match.params.id,
       };
     }
+    let events = [];
+
+    for (let id in allEvents) {
+      let event = {
+        ...allEvents[id],
+        start: new Date(allEvents[id].start),
+        end: new Date(allEvents[id].start),
+        title: allEvents[id].name,
+        id: id
+      }
+      events.push(event)
+    }
+
     return (
       <SidebarLayout>
         <div style={{ flex: 1, padding: 20 }}>
           <AddEventModal
             isOpen={this.state.isAddingEvent}
             onClose={() => this.setState({ isAddingEvent: false })}
+            initialValues={{
+              dateTimeDuration: {
+                date: moment(this.state.addDate)
+              },
+            }}
           />
           <EventDetailModal
             event={event}
             top={100}
             bottom="initial"
           />
-          <Calendar
-            events={eventsByDate}
+          <EventsHeader
             date={this.state.date}
             onNextMonth={this.handleNextMonth}
             onPreviousMonth={this.handlePreviousMonth}
             onAdd={this.handleAdd}
-            onEventClicked={event => this.props.history.push(`/events/${event.data.id}`)}
             onToday={this.handleToday}
           />
+          <EventsCalendar
+            events={events}
+            date={this.state.date.toDate()}
+            onEventClick = {this.handleEventClick}
+            onCellClick = {this.handleAdd}
+          />
+
           <div>
             <LegendItem opacity="FF"><div /> = 1st payment</LegendItem>
             <LegendItem opacity="A6"><div /> = 2nd payment</LegendItem>
@@ -137,32 +141,7 @@ export default compose(
       'equalTo=test_venue',
     ],
   }]),
-  connect(state => {
-    if (!isLoaded(state.firebase.data.events)) {
-      return {
-        eventsByDate: {},
-      };
-    }
-
-    const eventsByDate = {};
-    Object.keys(state.firebase.data.events).forEach(eventId => {
-      const event = state.firebase.data.events[eventId];
-      const eventDate = moment(event.start).format('YYYY-MM-DD');
-      const events = eventsByDate[eventDate] || [];
-      events.push({
-        label: event.name,
-        opacity: 'FF',
-        data: {
-          ...event,
-          id: eventId,
-        },
-      });
-      eventsByDate[eventDate] = events;
-    });
-
-    return {
-      eventsByDate,
-      allEvents: state.firebase.data.events,
-    };
-  }),
+  connect(state => ({
+      allEvents: isLoaded(state.firebase.data.events) ? state.firebase.data.events : {},
+    })),
 )(Events);
