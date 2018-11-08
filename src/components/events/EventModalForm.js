@@ -18,10 +18,9 @@ import DateTimeDurationField from 'components/form/DateTimeDurationField';
 import { withVenueConfig } from 'containers/VenueConfigProvider';
 import DatePickerField from 'components/form/DatePickerField';
 import Input from 'components/form/Input';
+import ModalDialog from 'components/Dialog/ModalDialog';
 
 const Header = styled.div`
-  background-color: ${props => props.theme.colors.primary}66;
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
   padding: 30px 0px;
   font-size: 24px;
   text-align: center;
@@ -54,6 +53,11 @@ const StyledButton = styled(Button)`
   margin: 0px 5px;
 `;
 
+const HeaderBlock = () => (
+  <Header>
+    <div>Add New Event</div>
+  </Header>
+);
 
 class EventModalForm extends PureComponent {
 
@@ -118,13 +122,11 @@ class EventModalForm extends PureComponent {
     );
 
     return (
-      <Modal
-        isOpen={this.props.isOpen}
-        onRequestClose={this.props.onClose}
+      <ModalDialog
+        open={this.props.isOpen}
+        onClose={this.props.onClose}
+        Header={HeaderBlock}
       >
-        <Header>
-          <div>Add New Event</div>
-        </Header>
         <Content>
           <Help>* All fields are required except the Notes.</Help>
 
@@ -272,7 +274,7 @@ class EventModalForm extends PureComponent {
             onClick={this.props.handleSubmit}
           />
         </Modal.Footer>
-      </Modal>
+      </ModalDialog>
     );
   }
 }

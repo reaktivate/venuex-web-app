@@ -6,7 +6,6 @@ import EventModalForm from 'components/events/EventModalForm';
 import { withVenueConfig } from 'containers/VenueConfigProvider';
 import generateId from 'utils/generateId';
 
-
 class AddEventModal extends PureComponent {
 
   handleSubmitted = async values => {
