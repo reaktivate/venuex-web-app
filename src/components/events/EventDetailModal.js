@@ -4,8 +4,6 @@ import { compose } from 'redux';
 import { withFirebase, firebaseConnect } from 'react-redux-firebase';
 import moment from 'moment';
 import styled from 'styled-components';
-import Modal from 'components/Modal';
-import ConfirmationModal from 'components/ConfirmationModal';
 import Button from 'components/Button';
 import SideTabs from 'components/SideTabs';
 import ConsultantLabel from 'components/Consultant';
@@ -19,7 +17,7 @@ import notesIcon from 'assets/notes-icon.svg';
 import clientDetailsIcon from 'assets/client-details-icon.svg';
 import grayRoomIcon from 'assets/room-gray.svg';
 import ModalDialog from 'components/Dialog/ModalDialog';
-
+import ConfirmationDialog from 'components/Dialog/ConfirmationDialog';
 
 const Header = styled.div`
   height: 160px;
@@ -236,6 +234,7 @@ class EventDetailModal extends PureComponent {
         <EventModalForm
           isOpen={Boolean(event)}
           onSubmit={this.handleEdit}
+          title={event.name}
           initialValues={{
             consultants: {
               owner: event.owner,
@@ -275,14 +274,41 @@ class EventDetailModal extends PureComponent {
       </Header>
     );
 
+    const FooterBlock = () => (
+      <FooterButtons>
+        <div>
+          <StyledButton
+            label="Download seating chart"
+          />
+        </div>
+        <div>
+          <StyledButton
+            label="Delete"
+            kind="danger"
+            onClick={this.handleDelete}
+          />
+          <StyledButton
+            label="Edit"
+            onClick={this.handleStartEditing}
+          />
+        </div>
+      </FooterButtons>
+    );
+
     return (
-      <ModalDialog {...restProps} open={Boolean(event)} Header={HeaderBlock}>
+      <ModalDialog
+        {...restProps}
+        open={Boolean(event)}
+        Header={HeaderBlock}
+        Footer={FooterBlock}
+      >
         <div style={{ flex: 1, overflow: 'hidden' }}>
-          <ConfirmationModal
-            label="Are you sure you want to delete this event?"
-            isOpen={this.state.isDeleteConfirmationOpen}
-            onCancel={this.handleCancelDeleting}
+          <ConfirmationDialog
+            open={this.state.isDeleteConfirmationOpen}
+            onClose={this.handleCancelDeleting}
             onConfirm={this.handleConfirmDelete}
+            title="Are you sure you want to delete this event?"
+            confirmButtonTitle="Yes, delete"
           />
           <SideTabs
             tabs={[
@@ -454,26 +480,6 @@ class EventDetailModal extends PureComponent {
             ]}
           />
         </div>
-        <Modal.Footer>
-          <FooterButtons>
-            <div>
-              <StyledButton
-                label="Download seating chart"
-              />
-            </div>
-            <div>
-              <StyledButton
-                label="Delete"
-                kind="danger"
-                onClick={this.handleDelete}
-              />
-              <StyledButton
-                label="Edit"
-                onClick={this.handleStartEditing}
-              />
-            </div>
-          </FooterButtons>
-        </Modal.Footer>
       </ModalDialog>
     );
   }

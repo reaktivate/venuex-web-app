@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import DialogActions from '@material-ui/core/DialogActions';
 import closeIcon from 'assets/icons/Close';
 
 const StyledDialog = styled(Dialog)``;
@@ -25,11 +26,14 @@ const StyledDialogTitle = styled(DialogTitle)`
   }
 `;
 
-const FooterWrapper = styled.div`
-  margin: 0;
-  border: none;
-  padding: 14px 15px 15px 15px;
-  border-top: solid 1px #d8d8d8;
+const StyledDialogActions = styled(DialogActions)`
+  &&{
+    margin: 0;
+    border: none;
+    padding: 14px 15px 15px 15px;
+    border-top: solid 1px #d8d8d8;
+    display: block;
+  }
 `;
 
 class ModalDialog extends PureComponent {
@@ -55,7 +59,7 @@ class ModalDialog extends PureComponent {
         <StyledDialogContent>
           {children}
         </StyledDialogContent>
-        {Footer && (<FooterWrapper><Footer /></FooterWrapper>)}
+        {Footer && (<StyledDialogActions><Footer /></StyledDialogActions>)}
       </StyledDialog>
     );
   }
