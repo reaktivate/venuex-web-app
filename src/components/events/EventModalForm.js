@@ -54,24 +54,6 @@ const StyledButton = styled(Button)`
 `;
 
 class EventModalForm extends PureComponent {
-
-  componentDidUpdate(prevProps) {
-    if (prevProps.selectedLayout !== this.props.selectedLayout) {
-      if (!this.props.selectedLayout) {
-        this.props.change('guestsPerTable', '');
-      } else {
-        this.props.change(
-          'guestsPerTable',
-          this.props.venueConfig.rooms[
-            this.props.selectedRoom
-          ].layouts[
-            this.props.selectedLayout
-          ].perTable
-        );
-      }
-    }
-  }
-
   renderCustomField = (field) => {
     let FieldComponent;
     let validators;

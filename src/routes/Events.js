@@ -95,7 +95,7 @@ class Events extends PureComponent {
     return (
       <SidebarLayout>
         <div style={{ flex: 1, padding: 20 }}>
-          <AddEventModal
+          {this.state.isAddingEvent && <AddEventModal
             isOpen={this.state.isAddingEvent}
             onClose={() => this.setState({ isAddingEvent: false })}
             initialValues={{
@@ -103,12 +103,12 @@ class Events extends PureComponent {
                 date: moment(this.state.addDate)
               },
             }}
-          />
-          <EventDetailModal
+          />}
+          {event &&<EventDetailModal
             event={event}
             top={100}
             bottom="initial"
-          />
+          />}
           <EventsHeader
             date={this.state.date}
             onNextMonth={this.handleNextMonth}

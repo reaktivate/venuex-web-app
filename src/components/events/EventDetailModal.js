@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import React, { PureComponent } from 'react';
 import { withRouter } from 'react-router';
 import { compose } from 'redux';
@@ -18,6 +20,10 @@ import clientDetailsIcon from 'assets/client-details-icon.svg';
 import grayRoomIcon from 'assets/room-gray.svg';
 import ModalDialog from 'components/Dialog/ModalDialog';
 import ConfirmationDialog from 'components/Dialog/ConfirmationDialog';
+import Drawer from '@material-ui/core/Drawer';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
 
 const Header = styled.div`
   height: 160px;
@@ -119,6 +125,12 @@ class EventDetailModal extends PureComponent {
   handleStartEditing = () => {
     this.setState({
       isEditing: true,
+    });
+  }
+
+  handleCancelEditing = () => {
+    this.setState({
+      isEditing: false,
     });
   }
 
@@ -233,6 +245,7 @@ class EventDetailModal extends PureComponent {
       return (
         <EventModalForm
           isOpen={Boolean(event)}
+          onClose = {this.handleCancelEditing}
           onSubmit={this.handleEdit}
           title={event.name}
           initialValues={{
@@ -310,6 +323,8 @@ class EventDetailModal extends PureComponent {
             title="Are you sure you want to delete this event?"
             confirmButtonTitle="Yes, delete"
           />
+          
+
           <SideTabs
             tabs={[
               {
