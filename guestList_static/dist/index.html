@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Guestlist</title>
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Lora" rel="stylesheet">
+	<link rel="stylesheet" href="css/libs.min.css">
+	<link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+	<aside class="sidebar">
+		<a href="#" class="sidebar__logo">
+			<img src="img/logo.png" alt="#">
+		</a>
+		<nav>
+			<a href="#" class="sidebar__item">
+				<div>
+					<img src="img/home-white.svg" alt="#">
+				</div>
+				<span>ITEM #1</span>
+			</a>
+			<a href="#" class="sidebar__item">
+				<div>
+					<img src="img/home-white.svg" alt="#">
+				</div>
+				<span>ITEM #1</span>
+			</a>
+			<a href="#" class="sidebar__item active">
+				<div>
+					<img src="img/home-white.svg" alt="#">
+				</div>
+				<span>ITEM #1</span>
+			</a>
+			<a href="#" class="sidebar__item">
+				<div>
+					<img src="img/home-white.svg" alt="#">
+				</div>
+				<span>ITEM #1</span>
+			</a>
+			<a href="#" class="sidebar__item">
+				<div>
+					<img src="img/home-white.svg" alt="#">
+				</div>
+				<span>ITEM #1</span>
+			</a>
+			<a href="#" class="sidebar__item">
+				<div>
+					<img src="img/home-white.svg" alt="#">
+				</div>
+				<span>ITEM #1</span>
+			</a>
+		</nav>
+		<div class="sidebar__powered">Powered by <a href="#">VenueX</a></div>
+		<a href="#" id="mobile_menu_btn"><i class="menu-btn"></i></a>
+	</aside>
+	<main class="wrap">
+		<div class="main-container">
+			<div class="main-container__header">
+				<div class="guest-search">
+					<input type="text" placeholder="Search guest name">
+					<img src="img/search.svg" alt="Search">
+				</div>
+				<div class="user-box">
+					<a href="#" class="user-box__item">
+						<img src="img/importguest-white.svg" alt="Import">
+					</a>
+					<a href="#" class="user-box__item">
+						<img src="img/importguest-white.svg" alt="Import">
+					</a>
+					<a href="#" class="user-box__item">
+						<img src="img/importguest-white.svg" alt="Import">
+					</a>
+					<a href="#" class="user-box__user">
+						<img src="img/user.jpg" alt="USER">
+					</a>
+				</div>
+			</div>
+			<div class="guest-summary">
+				<div class="guest-summary__item total">
+					<span>Total Guests</span>
+					<span>200</span>
+				</div>
+				<div class="guest-summary__item yes">
+					<span>Yes</span>
+					<span>96</span>
+				</div>
+				<div class="guest-summary__item no">
+					<span>No</span>
+					<span>28</span>
+				</div>
+				<div class="guest-summary__item maybe">
+					<span>Maybe</span>
+					<span>32</span>
+				</div>
+				<div class="guest-summary__item awaiting">
+					<span>Awaiting</span>
+					<span>44</span>
+				</div>
+				<div class="guest-summary__item t_assigned">
+					<span>Table Assigned</span>
+					<span>82</span>
+				</div>
+				<a href="#" class="export-btn large ready">
+					<img src="img/home-white.svg" alt="Export">	
+					<span>Export guest list</span>
+				</a>
+			</div>
+			<div class="guest-table">
+				<div class="guest-table__header">
+					<div class="guest-table__h-column" style="width: 10%;">
+						<button class='radio-btn'>
+							<img src="img/checkmark-white.svg" alt="ok"/>
+						</button>
+					</div>
+					<div class="guest-table__h-column" style="width: 10%;">Party Size</div>
+					<div class="guest-table__h-column" style="width: 20%;"><button class='sort-btn'>Name</button></div>
+					<div class="guest-table__h-column" style="width: 15%;">Contact</div>
+					<div class="guest-table__h-column" style="width: 10%;">
+						<div class="dropdown-box">
+							<button class='filter-btn'>RSVP</button>
+							<div>
+								<button class="radio-btn_2 yes">Yes</button>
+								<button class="radio-btn_2 no">No</button>
+								<button class="radio-btn_2 maybe">Maybe</button>
+								<button class="radio-btn_2 awaiting">Awating</button>
+							</div>
+						</div>
+					</div>
+					<div class="guest-table__h-column" style="width: 10%;">
+						<div class="dropdown-box">
+							<button class='filter-btn'>TABLE</button>
+							<div>
+								<button class="radio-btn_2">5</button>
+								<button class="radio-btn_2">7</button>
+								<button class="radio-btn_2">10</button>
+								<button class="radio-btn_2">15</button>
+								<button class="radio-btn_2">16</button>
+							</div>
+						</div>
+					</div>
+					<div class="guest-table__h-column" style="width: 15%;">THANK YOU NOTE</div>
+					<div class="action-bar">
+						<div class="dropdown-box">
+							<span><img src="img/rsvp-custom.svg" alt="Update">Update RSVP for 4 guests</span>
+							<div>
+								<button class="radio-btn_2 yes">Yes</button>
+								<button class="radio-btn_2 no">No</button>
+								<button class="radio-btn_2 maybe">Maybe</button>
+								<button class="radio-btn_2 awaiting">Awating</button>
+							</div>
+						</div>
+						<button class="group_guest_dellete"><img src="img/trash-custom-copy.svg" alt="Update">delete 4 guests</button>
+					</div>
+					<div class="guest-table__column options" style="width: 20%;"></div>
+				</div>
+				<div class="guest-table__content">
+					<!-- <div class="guest-table__row">
+						<div class="guest-table__column" style="width: 10%;"><button class='radio-btn'><img src="img/checkmark-white.svg" alt="ok"></button></div>
+						<div class="guest-table__column size" style="width: 10%;">4 <i>(2 kids)</i></div>
+						<div class="guest-table__column name" style="width: 20%;">Arkell Charles</div>
+						<div class="guest-table__column contact" style="width: 15%;"><img src="img/home.png" alt=""><img src="img/home.png" alt=""><img src="img/home.png" alt=""></div>
+						<div class="guest-table__column rsvp" style="width: 10%;"><button class='rvsp-btn yes'>YES</button></div>
+						<div class="guest-table__column table" style="width: 10%;">16</div>
+						<div class="guest-table__column send" style="width: 15%;"><button>Send</button></div>
+						<div class="guest-table__column options" style="width: 20%;"><button><img src="img/trash-custom-copy.svg" alt=""></button><button><img src="img/trash-custom-copy.svg" alt=""></button></div>
+					</div>
+					<div class="guest-table__row">
+						<div class="guest-table__column" style="width: 10%;"><button class='radio-btn'><img src="img/checkmark-white.svg" alt="ok"></button></div>
+						<div class="guest-table__column size" style="width: 10%;">4 <i class="gray">(2 kids)</i></div>
+						<div class="guest-table__column name" style="width: 20%;">Arkell Charles</div>
+						<div class="guest-table__column contact" style="width: 15%;"><img src="img/home.png" alt=""><img src="img/home.png" alt=""><img src="img/home.png" alt=""></div>
+						<div class="guest-table__column rsvp" style="width: 10%;"><button class='rvsp-btn no'>no</button></div>
+						<div class="guest-table__column table" style="width: 10%;">4</div>
+						<div class="guest-table__column send" style="width: 15%;"><button>Send</button></div>
+						<div class="guest-table__column options" style="width: 20%;"><button><img src="img/trash-custom-copy.svg" alt=""></button><button><img src="img/trash-custom-copy.svg" alt=""></button></div>
+					</div> -->
+					<div class="guest-table__super-row">
+						<div class="guest-table__super-row-title">
+							<img src="img/arrow.png" alt="">
+							<span>Bridesmaids <i>(4)</i></span>
+							<div class="dropdown-group">
+								<button><i></i></button>
+								<div>
+									<button>
+										<img src="img/edit.png" alt="">edit group
+									</button>
+									<button>
+										<img src="img/edit.png" alt="">edit group
+									</button>
+								</div>
+							</div>
+						</div>
+						<div class="guest-table__row">
+							<div class="guest-table__column" style="width: 10%;"><button class='radio-btn'><img src="img/checkmark-white.svg" alt="ok"></button></div>
+							<div class="guest-table__column size" style="width: 10%;">4 <i>(2 kids)</i></div>
+							<div class="guest-table__column name" style="width: 20%;">Arkell Charles</div>
+							<div class="guest-table__column contact" style="width: 15%;"><img src="img/home.png" alt=""><img src="img/home.png" alt=""><img src="img/home.png" alt=""></div>
+							<div class="guest-table__column rsvp" style="width: 10%;"><button class='rvsp-btn yes'>YES</button></div>
+							<div class="guest-table__column table" style="width: 10%;">16</div>
+							<div class="guest-table__column send" style="width: 15%;"><button>Send</button></div>
+							<div class="guest-table__column options" style="width: 20%;"><button><img src="img/trash-custom-copy.svg" alt=""></button><button><img src="img/trash-custom-copy.svg" alt=""></button></div>
+						</div>
+						<div class="guest-table__row">
+							<div class="guest-table__column" style="width: 10%;"><button class='radio-btn'><img src="img/checkmark-white.svg" alt="ok"></button></div>
+							<div class="guest-table__column size" style="width: 10%;">4 <i>(2 kids)</i></div>
+							<div class="guest-table__column name" style="width: 20%;">Arkell Charles</div>
+							<div class="guest-table__column contact" style="width: 15%;"><img src="img/home.png" alt=""><img src="img/home.png" alt=""><img src="img/home.png" alt=""></div>
+							<div class="guest-table__column rsvp" style="width: 10%;"><button class='rvsp-btn yes'>YES</button></div>
+							<div class="guest-table__column table" style="width: 10%;">16</div>
+							<div class="guest-table__column send" style="width: 15%;"><button>Send</button></div>
+							<div class="guest-table__column options" style="width: 20%;"><button><img src="img/trash-custom-copy.svg" alt=""></button><button><img src="img/trash-custom-copy.svg" alt=""></button></div>
+						</div>
+						<div class="guest-table__row">
+							<div class="guest-table__column" style="width: 10%;"><button class='radio-btn'><img src="img/checkmark-white.svg" alt="ok"></button></div>
+							<div class="guest-table__column size" style="width: 10%;">4 <i>(2 kids)</i></div>
+							<div class="guest-table__column name" style="width: 20%;">Arkell Charles</div>
+							<div class="guest-table__column contact" style="width: 15%;"><img src="img/home.png" alt=""><img src="img/home.png" alt=""><img src="img/home.png" alt=""></div>
+							<div class="guest-table__column rsvp" style="width: 10%;"><button class='rvsp-btn yes'>YES</button></div>
+							<div class="guest-table__column table" style="width: 10%;">16</div>
+							<div class="guest-table__column send" style="width: 15%;"><button>Send</button></div>
+							<div class="guest-table__column options" style="width: 20%;"><button><img src="img/trash-custom-copy.svg" alt=""></button><button><img src="img/trash-custom-copy.svg" alt=""></button></div>
+						</div>
+						<div class="guest-table__row">
+							<div class="guest-table__column" style="width: 10%;"><button class='radio-btn'><img src="img/checkmark-white.svg" alt="ok"></button></div>
+							<div class="guest-table__column size" style="width: 10%;">4 <i>(2 kids)</i></div>
+							<div class="guest-table__column name" style="width: 20%;">Arkell Charles</div>
+							<div class="guest-table__column contact" style="width: 15%;"><img src="img/home.png" alt=""><img src="img/home.png" alt=""><img src="img/home.png" alt=""></div>
+							<div class="guest-table__column rsvp" style="width: 10%;"><button class='rvsp-btn yes'>YES</button></div>
+							<div class="guest-table__column table" style="width: 10%;">16</div>
+							<div class="guest-table__column send" style="width: 15%;"><button>Send</button></div>
+							<div class="guest-table__column options" style="width: 20%;"><button><img src="img/trash-custom-copy.svg" alt=""></button><button><img src="img/trash-custom-copy.svg" alt=""></button></div>
+						</div>
+						<div class="guest-table__row">
+							<div class="guest-table__column" style="width: 10%;"><button class='radio-btn'><img src="img/checkmark-white.svg" alt="ok"></button></div>
+							<div class="guest-table__column size" style="width: 10%;">4 <i>(2 kids)</i></div>
+							<div class="guest-table__column name" style="width: 20%;">Arkell Charles</div>
+							<div class="guest-table__column contact" style="width: 15%;"><img src="img/home.png" alt=""><img src="img/home.png" alt=""><img src="img/home.png" alt=""></div>
+							<div class="guest-table__column rsvp" style="width: 10%;"><button class='rvsp-btn yes'>YES</button></div>
+							<div class="guest-table__column table" style="width: 10%;">16</div>
+							<div class="guest-table__column send" style="width: 15%;"><button>Send</button></div>
+							<div class="guest-table__column options" style="width: 20%;"><button><img src="img/trash-custom-copy.svg" alt=""></button><button><img src="img/trash-custom-copy.svg" alt=""></button></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+	<span class="info-box info-box_update" style="display: none;">RSVP updated!</span>
+	<script src="js/libs.min.js"></script>
+	<script src="js/common.js"></script>
+</body>
+</html>

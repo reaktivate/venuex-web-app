@@ -1,0 +1,792 @@
+body
+	padding: 0
+	margin: 0
+	font-family: 'Montserrat', sans-serif
+	background-color: #ffffff
+button
+	outline: none
+	cursor: pointer
+	background: transparent
+	border: none
+	padding: 0
+.sidebar
+	color: #ffffff
+	max-width: 227px
+	width: 100%
+	position: fixed
+	left: 0
+	top: 0
+	bottom: 0
+	background-color: #000000
+	display: flex
+	flex-direction: column
+	padding: 40px 0 30px 0
+	overflow-y: scroll
+	&__logo
+		display: block
+		max-width: 192px
+		width: 100%
+		margin: 0 auto 55px auto
+		img
+			width: 100%
+			height: auto
+	&__item
+		box-sizing: border-box
+		padding: 10px 20px
+		display: flex
+		align-items: center
+		width: 100%
+		min-height: 70px
+		transition-timing-function: ease-in
+		transition: 0.2s
+		text-decoration: none
+		>div
+			width: 23px
+			display: flex
+			align-items: center
+			justify-content: center
+			margin-right: 10px
+			img
+				max-width: 100%
+				height: auto
+		span
+			font-size: 12px
+			font-weight: bold
+			font-style: normal
+			font-stretch: normal
+			line-height: normal
+			letter-spacing: -0.1px
+			color: #ffffff
+		&:hover
+			background-color: rgba(192, 182, 155, 0.2)
+		&.active
+			position: relative
+			background-color: rgba(192, 182, 155, 0.6)
+			&:after
+				display: block
+				content: ''
+				position: absolute
+				top: 0
+				bottom: 0
+				left: 0
+				width: 6px
+				box-shadow: 3px 0 4px 0 rgba(0, 0, 0, 0.1)
+				background-color: #c0b69b
+	&__powered
+		margin-top: auto
+		font-weight: 600
+		font-style: normal
+		font-stretch: normal
+		line-height: normal
+		letter-spacing: normal
+		text-align: center
+		color: rgba(255,255,255, .6)
+		font-size: 12px
+		a
+			color: rgba(255,255,255, .6)
+			text-decoration: none
+			position: relative
+			&:after
+				content: ''
+				position: absolute
+				bottom: -1px
+				height: 1px
+				left: 0
+				background-color: #ffffff
+				width: 0
+				transition-timing-function: ease-in
+				transition: 0.2s
+			&:hover
+				&:after
+					width: 100%
+.wrap
+	padding: 19px 11px 20px 258px
+.main-container
+	width: 100%
+	box-sizing: border-box
+	border: 1px solid #ededed
+	background-color: #fcfbfc
+	&__header
+		padding: 15px 20px
+		position: relative
+		display: flex
+		align-items: center
+		&:after
+			content: ''
+			position: absolute
+			left: 0
+			width: 100%
+			bottom: 0
+			height: 0.1px
+			background-color: #eeeeee
+			border-top: 0.5px solid #ededed
+			border-bottom: 0.5px solid #ededed
+.guest-search
+	display: flex
+	width: 250px
+	height: 48px
+	border-radius: 25px
+	box-shadow: 0 2px 4px 0 rgba(125, 125, 125, 0.2)
+	background-color: #ffffff
+	border: 1px solid #ededed
+	position: relative
+	align-items: center
+	input
+		z-index: 2
+		position: relative
+		border: none
+		outline: none
+		padding: 0 35px 0 18px
+		box-sizing: border-box
+		border-radius: 25px
+		height: 100%
+		width: 100%
+		background-color: transparent
+		font-family: Montserrat
+		font-size: 15px
+		font-weight: 600
+		font-style: normal
+		font-stretch: normal
+		line-height: normal
+		letter-spacing: -0.1px
+		color: #7c7a7a
+		&::-webkit-input-placeholder
+			font-family: Montserrat
+			font-size: 15px
+			font-weight: 600
+			font-style: normal
+			font-stretch: normal
+			line-height: normal
+			letter-spacing: -0.1px
+			color: #b0b0b0
+		&::-moz-placeholder
+			font-family: Montserrat
+			font-size: 15px
+			font-weight: 600
+			font-style: normal
+			font-stretch: normal
+			line-height: normal
+			letter-spacing: -0.1px
+			color: #b0b0b0
+		&:-ms-input-placeholder
+			font-family: Montserrat
+			font-size: 15px
+			font-weight: 600
+			font-style: normal
+			font-stretch: normal
+			line-height: normal
+			letter-spacing: -0.1px
+			color: #b0b0b0
+		&:-moz-placeholder
+			font-family: Montserrat
+			font-size: 15px
+			font-weight: 600
+			font-style: normal
+			font-stretch: normal
+			line-height: normal
+			letter-spacing: -0.1px
+			color: #b0b0b0
+	img
+		position: absolute
+		z-index: 1
+		right: 15px
+		max-width: 14px
+		width: 100%
+.user-box
+	display: flex
+	margin-left: auto
+	a
+		height: 50px
+		width: 50px
+		border-radius: 50%
+		overflow: hidden
+		display: flex
+		align-items: center
+		justify-content: center
+	&__item
+		margin-right: 18px
+		background-color: #c0b69b
+		box-shadow: 0 0 0 0 rgba(0, 0, 0, 0)
+		transition-timing-function: ease-in
+		transition: .2s box-shadow
+		&:hover
+			box-shadow: 0 0 10px 0 rgba(151,134,89,.5)
+		img
+			max-width: 50%
+			height: auto
+	&__user
+		img
+			width: 100%
+			height: auto
+.guest-summary
+	display: flex
+	padding: 25px 7px 14px 7px
+	border-radius: 2px
+	box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.1)
+	background-color: #ffffff
+	max-width: calc(100% - 30px)
+	width: 100%
+	box-sizing: border-box
+	margin: 20px auto
+	align-items: center
+	&__item
+		padding: 0 23px 10px 23px
+		display: flex
+		flex-direction: column
+		justify-content: center
+		align-items: center
+		>span:first-child
+			margin-bottom: 11px
+			font-size: 15px
+			font-weight: 600
+			font-style: normal
+			font-stretch: normal
+			line-height: normal
+			letter-spacing: -0.3px
+			color: #b0b0b0
+		>span:last-child
+			font-family: Lora
+			font-size: 46px
+			font-weight: normal
+			font-style: normal
+			font-stretch: normal
+			line-height: 1
+			letter-spacing: -0.9px
+			color: #181818
+		&.total
+			position: relative
+			&:after, &:before
+				content: ''
+				right: 4px
+				position: absolute
+				width: 4px
+				border-radius: 50%
+				height: 4px
+				background-color: #b0b0b0
+			&:after
+				top: 52px
+			&:before
+				top: 45px
+		&.yes
+			span:first-child
+				color: #2cb070
+		&.no
+			span:first-child
+				color: #c02026
+		&.maybe
+			span:first-child
+				color: #f9cc4f
+		&.awaiting
+			span:first-child
+				color: #888888
+		&.t_assigned
+			border-left: 1px solid #b0b0b0
+			span:first-child
+				color: #b0b0b0
+	.export-btn
+		margin-left: auto
+.export-btn
+	padding: 5px
+	justify-content: center
+	display: flex
+	max-width: 184px
+	width: 100%
+	height: 50px
+	opacity: 0.4
+	border-radius: 4px
+	box-shadow: 0 2px 2px 0 rgba(125, 125, 125, 0.2)
+	background-color: #c0b69b
+	align-items: center
+	box-sizing: border-box
+	text-decoration: none
+	img
+		max-width: 24px
+		height: auto
+		margin-right: 5px
+	span
+		text-transform: uppercase
+		font-size: 12px
+		font-weight: bold
+		font-style: normal
+		font-stretch: normal
+		line-height: normal
+		letter-spacing: normal
+		text-align: center
+		color: #ffffff
+		transition-timing-function: ease-in
+		transition: .2s opacity
+	&.ready
+		opacity: 1;
+		transition: .2s box-shadow
+		&:hover
+			box-shadow: 0 0px 15px 0 rgba(192,182,155, 1)
+.guest-table
+	display: flex
+	flex-direction: column
+	padding: 0
+	border-radius: 2px
+	box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.1)
+	background-color: #ffffff
+	max-width: calc(100% - 30px)
+	width: 100%
+	box-sizing: border-box
+	margin: 20px auto 20px auto
+	align-items: center
+	&__header
+		position: relative
+		width: 100%
+		display: flex
+		height: 65px
+		border-bottom: 1px solid #ededed
+		&.open-action-bar
+			.action-bar
+				pointer-events: auto
+				opacity: 1
+			.guest-table__h-column
+				opacity: 0;
+				pointer-events: none
+			.guest-table__h-column.first
+				opacity: 1
+	&__content
+		flex-direction: column
+		display: flex
+		width: 100%
+	&__super-row-title
+		width: 100%
+		display: flex
+		height: 40px;
+		align-items: center
+		background-color: rgba(192, 182, 155, 0.2)
+		padding: 5px 20px
+		box-sizing: border-box
+		border-bottom: 1px solid #ededed
+		cursor: pointer
+		img
+			margin-right: 13px
+		span
+			font-size: 15px;
+			font-weight: 600;
+			text-transform: uppercase
+			letter-spacing: 0.9px;
+			color: #7d7d7d;
+			i
+				margin-left: 5px
+				font-size: 15px;
+				font-style: normal;
+				letter-spacing: 0.9px;
+				color: #b0b0b0;
+	&__row
+		display: flex
+		width: 100%;
+		height: 65px
+		border-bottom: 1px solid #ededed
+		transition-timing-function: ease-in
+		transition: 0.2s background-color
+		&:hover
+			background-color: #fafafa;
+			.options
+				button
+					opacity: .5
+	&__h-column
+		height: 100%
+		display: flex
+		justify-content: center
+		align-items: center
+		text-transform: uppercase
+		font-size: 12px;
+		font-weight: 600;
+		letter-spacing: 0.3px;
+		color: #888888
+		opacity: 1
+		transition-timing-function: ease-in
+		transition: 0.2s opacity
+		.dropdown-box
+			display: flex
+			justify-content: center
+			align-items: center
+			width: 100%
+			height: 100%
+			.filter-btn
+				display: flex
+				justify-content: center
+				align-items: center
+				width: 100%
+				height: 100%
+				position: relative
+				transition-timing-function: ease-in
+				transition: 0.2s color
+				&:before
+					content: ''
+					position: absolute
+					bottom: 4px;
+					height: 2px;
+					width: 100%;
+					background-color: transparent;
+					transition-timing-function: ease-in
+					transition: 0.2s background-color
+
+		&:hover
+			.filter-btn
+				color: #c0b69b
+				&:before
+					background-color: #c0b69b;
+	&__column
+		height: 100%
+		display: flex
+		justify-content: center
+		align-items: center
+		font-size: 12px;
+		font-weight: 600;
+		letter-spacing: 0.3px;
+		color: #888888
+		&.size
+			font-size: 15px;
+			font-weight: 600;
+			letter-spacing: -0.3px;
+			color: #222222;
+			i
+				text-transform: lowercase
+				margin-left: 5px
+				font-size: 12px;
+				font-weight: 600;
+				font-style: normal;
+				letter-spacing: -0.2px;
+				color: #222222;
+				&.gray
+					color: #d8d8d8
+		&.name, &.table
+			font-size: 15px;
+			font-weight: 600;
+			letter-spacing: -0.3px;
+			color: #222222;
+		&.contact
+			img
+				padding: 0 6px
+		&.send
+			button
+				font-size: 15px;
+				font-weight: bold;
+				color: #d8d8d8;
+				text-transform: uppercase
+				position: relative
+				transition-timing-function: ease-in
+				transition: 0.2s color
+				&:after
+					content: ''
+					position: absolute
+					width: 0
+					bottom: -4px
+					left: 0
+					transition-timing-function: ease-in
+					transition: 0.2s width
+					height: 2px
+					background-color: #000000
+				&:hover
+					color: #000000;
+					&:after
+						width: 100%
+		&.options
+			button
+				opacity: 0
+				padding: 0 5px
+				transition-timing-function: ease-in
+				transition: 0.2s opacity
+				&:hover
+					opacity: 1!important
+.radio-btn
+	background-color: transparent
+	border: 1px solid #b0b0b0
+	width: 20px
+	height: 20px
+	display: flex
+	align-items: center
+	justify-content: center
+	border-radius: 50%;
+	&.active
+		background-color: #c0b69b
+		border-color: #c0b69b
+.sort-btn
+	text-transform: uppercase
+	font-size: 12px;
+	font-weight: bold;
+	letter-spacing: 0.3px;
+	color: #181818
+	display: flex
+	&:after
+		position: relative
+		top: 0px;
+		margin-left: 9px
+		content: ''
+		display: block
+		height: 5px
+		width: 5px
+		border-bottom: 2px solid #c0b69b
+		border-left: 2px solid #c0b69b
+		transform: rotate(-45deg)
+.filter-btn
+	text-transform: uppercase
+	font-size: 12px;
+	font-weight: bold;
+	letter-spacing: 0.3px;
+	color: #181818
+	display: flex
+	&:after
+		position: relative
+		top: 0;
+		margin-left: 9px
+		content: ''
+		display: block
+		height: 5px
+		width: 5px
+		border-bottom: 2px solid #c0b69b
+		border-left: 2px solid #c0b69b
+		transform: rotate(-45deg)
+.rvsp-btn
+	min-width: 68px;
+	height: 20px;
+	border-radius: 10px;
+	font-size: 10px;
+	font-weight: bold;
+	letter-spacing: -0.1px;
+	text-align: center;
+	color: #ffffff;
+	text-transform: uppercase
+	box-shadow: 0px 0px 0px 0 rgba(0, 0, 0, 0.2);
+	transition-timing-function: ease-in
+	transition: 0.4s box-shadow
+	&.yes
+		background-color: #2cb070
+		&:hover
+			box-shadow: 0px 0px 10px 0 rgba(44,176,112, 1);
+	&.awaiting
+		background-color: #b0b0b0
+		&:hover
+			box-shadow: 0px 0px 10px 0 rgba(176,176,176, 1);
+	&.no
+		background-color: #c02026
+		&:hover
+			box-shadow: 0px 0px 10px 0 rgba(192,32,38, 1);
+	&.maybe
+		background-color: #f9cc4f;
+		&:hover
+			box-shadow: 0px 0px 10px 0 rgba(249,204,79, 1);
+.radio-btn_2
+	position: relative;
+	width: 100%;
+	height: 52px
+	padding: 0 5px 0 63px;
+	text-align: left
+	font-size: 15px;
+	font-weight: 600;
+	font-style: normal;
+	font-stretch: normal;
+	line-height: normal;
+	letter-spacing: -0.3px;
+	color: #222222;
+	&:after, &:before
+		content: ''
+		display: block
+		position: absolute
+		border-radius: 50%;
+	&:after
+		top: 19px
+		left: 22px
+		width: 14px
+		height: 14px
+		background-color: transparent
+		transition-timing-function: ease-in
+		transition: 0.4s background-color
+	&:before
+		top: 16px
+		left: 19px
+		border: 2px solid #c0b69b
+		width: 16px;
+		height: 16px
+	&.yes
+		&:before
+			border-color: #2cb070
+	&.awaiting
+		&:before
+			border-color: #b0b0b0
+	&.no
+		&:before
+			border-color: #c02026
+	&.maybe
+		&:before
+			border-color: #f9cc4f
+	&:hover, &.active
+		&:after
+			background-color: #c0b69b
+		&.yes
+			&:after
+				background-color: #2cb070
+		&.awaiting
+			&:after
+				background-color: #b0b0b0
+		&.no
+			&:after
+				background-color: #c02026
+		&.maybe
+			&:after
+				background-color: #f9cc4f
+.dropdown-box
+	position: relative
+	align-items: center
+	flex-direction: column
+	display: flex
+	span
+		cursor: pointer
+		display: flex
+		align-items: center
+	div
+		top: 100%
+		min-width: 164px
+		max-height: 210px;
+		overflow-y: scroll
+		padding: 0;
+		border-radius: 2px;
+		box-shadow: 2px 2px 10px 0 rgba(0, 0, 0, 0.2);
+		background-color: #ffffff;
+		pointer-events: none;
+		transition-timing-function: ease-in
+		transition: 0.2s opacity
+		opacity: 0;
+		z-index: -20
+		position: absolute
+	&:hover
+		div
+			width: 100%;
+			pointer-events: auto;
+			opacity: 1;
+			z-index: 2
+.action-bar
+	position: absolute;
+	top: 5px;
+	pointer-events: none
+	background: #fff;
+	left: 10%;
+	opacity: 0;
+	display: flex
+	transition-timing-function: ease-in
+	transition: 0.2s opacity
+	.dropdown-box
+		span
+			padding: 0 18px;
+			height: 50px;
+			border-radius: 4px;
+			box-shadow: 0 2px 4px 0 rgba(192, 182, 155, 0.2);
+			border: 2px solid #c0b69b
+			background-color: #ffffff;
+			font-size: 12px;
+			font-weight: bold
+			text-transform: uppercase
+			color: #c0b69b;
+			img
+				margin-right: 7.5px;
+.group_guest_dellete
+	display: flex
+	align-items: center
+	width: 174px;
+	height: 54px;
+	margin-left: 15px
+	border-radius: 4px;
+	padding-left: 18px
+	box-shadow: 0 2px 4px 0 rgba(125, 125, 125, 0.2);
+	background-color: #ffffff;
+	color: #c02026;
+	font-size: 12px;
+	font-weight: bold;
+	text-transform: uppercase
+	position: relative
+	transition-timing-function: ease-in
+	transition: 0.2s box-shadow
+	&:hover
+		box-shadow: 0px 0px 20px 0 rgba(192,32,38, .5)
+	img
+		margin-right: 7.5px
+.dropdown-group
+	display: flex
+	margin-left: auto;
+	position: relative
+	&>button
+		width: 30px
+		height: 20px
+		i
+			display: block
+			position: relative
+			margin: auto
+			height: 4px;
+			width: 4px;
+			background-color: #d8d8d8;
+			border-radius: 50%;
+			&:after, &:before
+				content: ''
+				border-radius: 50%;
+				position: absolute
+				height: inherit
+				width: inherit
+				background-color: inherit
+			&:after
+				left: 7px;
+			&:before
+				right: 7px
+	div
+		right: -20px;
+		top: 100%
+		min-width: 180px
+		overflow-y: scroll
+		padding: 0;
+		border-radius: 2px;
+		box-shadow: 2px 2px 10px 0 rgba(0, 0, 0, 0.2);
+		background-color: #ffffff;
+		pointer-events: none;
+		transition-timing-function: ease-in
+		transition: 0.2s opacity
+		opacity: 0;
+		z-index: -20
+		position: absolute
+		button
+			width: 100%
+			display: flex
+			height: 50px
+			font-size: 11px;
+			padding: 0 20px
+			font-weight: bold;
+			font-style: normal;
+			letter-spacing: -0.1px;
+			color: #c0b69b
+			text-transform: uppercase
+			align-items: center
+			opacity: .7
+			transition-timing-function: ease-in
+			transition: 0.2s opacity
+			img
+				max-width: 24px
+			&:hover
+				opacity: 1
+
+	&:hover
+		div
+			width: 100%;
+			pointer-events: auto;
+			opacity: 1;
+			z-index: 2
+.info-box
+	position: fixed
+	display: flex
+	align-items: center
+	justify-content: center
+	font-size: 18px;
+	font-weight: 600;
+	letter-spacing: -0.1px;
+	max-width: 340px;
+	width: 100%;
+	height: 50px;
+	border-radius: 25px;
+	box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.3);
+	background-color: #fafafa
+	left: calc(50% - 88px);
+	bottom: 30px;
+	user-select: none
+	&_update
+		color: #c0b69b
