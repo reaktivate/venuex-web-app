@@ -1,6 +1,5 @@
 /* eslint-disable */
-
-import React, { PureComponent } from 'react';
+import React, { PureComponent, Children } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
@@ -94,8 +93,8 @@ class Events extends PureComponent {
 
     return (
       <SidebarLayout>
-        <div style={{ flex: 1, padding: 20 }}>
-          {this.state.isAddingEvent && <AddEventModal
+        <div style={{ flex: 1, padding: 20, overflow:'auto' }}>
+          <AddEventModal
             isOpen={this.state.isAddingEvent}
             onClose={() => this.setState({ isAddingEvent: false })}
             initialValues={{
@@ -103,12 +102,12 @@ class Events extends PureComponent {
                 date: moment(this.state.addDate)
               },
             }}
-          />}
-          {event &&<EventDetailModal
+          />
+          <EventDetailModal
             event={event}
             top={100}
             bottom="initial"
-          />}
+          />
           <EventsHeader
             date={this.state.date}
             onNextMonth={this.handleNextMonth}

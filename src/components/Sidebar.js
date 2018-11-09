@@ -5,7 +5,7 @@ import styled, { css } from 'styled-components';
 import calendarWhiteIcon from 'assets/calendar-white.svg';
 import peopleWhiteIcon from 'assets/people-white.svg';
 import billingWhiteIcon from 'assets/bill-white.svg';
-
+import Logo from 'components/layout/Logo';
 
 const Container = styled.div`
   width: 226px;
@@ -67,6 +67,7 @@ const Layout = styled.div`
 export default withRouter(({ children, match }) => (
   <Layout>
     <Container>
+      <Logo />
       <Item isActive={match.path.indexOf('/events') !== -1} to="/events">
         <ItemIcon src={calendarWhiteIcon} />
         <div>Events overview</div>
@@ -80,6 +81,6 @@ export default withRouter(({ children, match }) => (
         <div>Billing</div>
       </Item>
     </Container>
-    {children}
+      {children}
   </Layout>
 ));
