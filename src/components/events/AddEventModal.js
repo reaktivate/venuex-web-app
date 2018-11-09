@@ -45,7 +45,11 @@ class AddEventModal extends PureComponent {
 
   render() {
     return (
-      <EventModalForm onSubmit={this.handleSubmitted} {...this.props} />
+      <EventModalForm
+        onSubmit={this.handleSubmitted}
+        title="Add new Event"
+        {...this.props}
+      />
     );
   }
 }

@@ -9,7 +9,7 @@ const StyledDialog = styled(Dialog)``;
 
 const StyledDialogContent = styled(DialogContent)`
 &&{
-  padding: 0px 0px 0px 0px;
+  padding: 20px 50px 20px 50px;
 }
 `;
 
@@ -25,6 +25,13 @@ const StyledDialogTitle = styled(DialogTitle)`
   }
 `;
 
+const FooterWrapper = styled.div`
+  margin: 0;
+  border: none;
+  padding: 14px 15px 15px 15px;
+  border-top: solid 1px #d8d8d8;
+`;
+
 class ModalDialog extends PureComponent {
 
   render() {
@@ -32,6 +39,7 @@ class ModalDialog extends PureComponent {
       open,
       onClose,
       Header,
+      Footer,
       children
     } = this.props;
 
@@ -47,7 +55,7 @@ class ModalDialog extends PureComponent {
         <StyledDialogContent>
           {children}
         </StyledDialogContent>
-        <div>footer</div>
+        {Footer && (<FooterWrapper><Footer /></FooterWrapper>)}
       </StyledDialog>
     );
   }
