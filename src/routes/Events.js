@@ -93,7 +93,7 @@ class Events extends PureComponent {
 
     return (
       <SidebarLayout>
-        <div style={{ flex: 1, padding: 20 }}>
+        <div style={{ flex: 1, padding: 20, overflow:'auto' }}>
           <AddEventModal
             isOpen={this.state.isAddingEvent}
             onClose={() => this.setState({ isAddingEvent: false })}

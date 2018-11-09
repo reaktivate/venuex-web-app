@@ -31,7 +31,7 @@ const MModal = props => {
   };
 
   return (
-    <Modal style={customStyles} {...props} />
+    <Modal shouldCloseOnOverlayClick style={customStyles} {...props} />
   );
 };
 
