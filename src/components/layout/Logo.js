@@ -1,9 +1,9 @@
 import React, { PureComponent } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import { getLogoThunk } from '../../reducers/VenueConfig';
+import defaultLogo from 'assets/default-logo.png';
+import { getLogoThunk } from 'reducers/VenueConfig';
 
-import defaultLogo from 'assets/defaultLogo.png';
 
 const Container = styled.div`
   display: flex;
