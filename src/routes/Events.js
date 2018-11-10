@@ -21,7 +21,7 @@ const LegendItem = styled.div`
     margin-left: 0px;
   }
 
-  div {s
+  div {
     display: inline-block;
     background-color: ${props =>
       `${props.theme.colors.primary}${props.opacity}`};
