@@ -32,6 +32,16 @@ const LegendItem = styled.div`
   }
 `;
 
+const EventsFrame = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%; 
+`;
+
+const EventsFooter = styled.div`
+`;
+
 class Events extends PureComponent {
 
   state = {
@@ -93,7 +103,7 @@ class Events extends PureComponent {
 
     return (
       <SidebarLayout>
-        <div style={{ flex: 1, padding: 20, overflow:'auto' }}>
+        <EventsFrame>
           <AddEventModal
             isOpen={this.state.isAddingEvent}
             onClose={() => this.setState({ isAddingEvent: false })}
@@ -120,14 +130,15 @@ class Events extends PureComponent {
             date={this.state.date.toDate()}
             onEventClick = {this.handleEventClick}
             onCellClick = {this.handleAdd}
+            style={{"flex-grow": 1}}
           />
 
-          <div>
+          <EventsFooter>
             <LegendItem opacity="FF"><div /> = 1st payment</LegendItem>
             <LegendItem opacity="A6"><div /> = 2nd payment</LegendItem>
             <LegendItem opacity="59"><div /> = 3rd payment</LegendItem>
-          </div>
-        </div>
+          </EventsFooter>
+        </EventsFrame>
       </SidebarLayout>
     );
   }
