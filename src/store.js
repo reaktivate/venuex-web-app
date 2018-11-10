@@ -3,6 +3,7 @@ import { connectRouter, routerMiddleware } from 'connected-react-router';
 import { reactReduxFirebase } from 'react-redux-firebase';
 import { devToolsEnhancer } from 'redux-devtools-extension/logOnlyInProduction';
 import logger from 'redux-logger';
+import thunkMiddleware from 'redux-thunk';
 
 import rootReducer from './reducers';
 
@@ -17,6 +18,7 @@ const configureStore = ({ initialState, firebase, history }) => {
     const middleware = [
         routerMiddleware(history),
         logger,
+        thunkMiddleware
     ];
 
     const enhancers = [

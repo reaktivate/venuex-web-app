@@ -1,5 +1,7 @@
+/* eslint-disable */
 import { createAction, handleAction } from 'redux-actions';
 import { getVal } from 'react-redux-firebase';
+import { GET_LOGO } from './VenueConfig';
 
 
 export const setVenueId = createAction('SET_VENUE_ID');
@@ -20,6 +22,16 @@ const user = handleAction(
   null,
 );
 
+const venueConfigReducer = handleAction(
+  GET_LOGO,
+  (state, action) => {
+    return {
+      ...state,
+      logo: action.payload
+    };
+  },
+  null
+);
 
 export const firebaseGet = (state, ...args) => getVal(state.firebase, ...args);
 
@@ -27,4 +39,5 @@ export const firebaseGet = (state, ...args) => getVal(state.firebase, ...args);
 export default {
   venueId,
   user,
+  venueConfig:venueConfigReducer
 };

@@ -1,6 +1,9 @@
 import React, { PureComponent } from 'react';
 import styled from 'styled-components';
-import { withFirebase } from 'react-redux-firebase';
+import { connect } from 'react-redux';
+import { getLogoThunk } from '../../reducers/VenueConfig';
+
+import defaultLogo from 'assets/defaultLogo.png';
 
 const Container = styled.div`
   display: flex;
@@ -15,24 +18,28 @@ const LogoImage = styled.img`
 
 
 class Logo extends PureComponent {
-  state = {
-    url: 'about:blank',
-  };
+  state = {};
 
   componentWillMount() {
-    this.props.firebase.storage().ref().child('venues/test_venue/assets/images/splash_screen_logo.png').getDownloadURL()
-      .then((url) => {
-        this.setState({ url });
-      });
+    this.props.getLogo();
   }
 
   render() {
       return (
         <Container >
-          <LogoImage src={this.state.url} alt="Home" />
+          <LogoImage src={(this.props.config && this.props.config.logo) ? this.props.config.logo : defaultLogo} alt="Home" />
         </Container>
       );
   }
 }
 
-export default withFirebase(Logo);
+const mapStateToProps = (state) => ({
+    config: state.venueConfig
+  });
+
+const mapDispatchToProps = (dispatch) => ({
+    // same effect
+    getLogo: () => dispatch(getLogoThunk()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Logo);
