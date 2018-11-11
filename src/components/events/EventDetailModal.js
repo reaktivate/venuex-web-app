@@ -129,9 +129,10 @@ class EventDetailModal extends PureComponent {
   }
 
   handleCancelEditing = () => {
-    this.setState({
+    this.props.onClose();
+    /*this.setState({
       isEditing: false,
-    });
+    });*/
   }
 
   handleEdit = async values => {

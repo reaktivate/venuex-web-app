@@ -77,6 +77,7 @@ class Events extends PureComponent {
   }
 
   handleEventClick = event => this.props.history.push(`/events/${event.id}`)
+  handleEventCloseClick = event => this.props.history.push(`/events`)
 
   render() {
     const { eventsByDate, match, allEvents } = this.props;
@@ -117,6 +118,7 @@ class Events extends PureComponent {
             event={event}
             top={100}
             bottom="initial"
+            onClose={this.handleEventCloseClick}
           />
           <EventsHeader
             date={this.state.date}
