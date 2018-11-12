@@ -7,6 +7,7 @@ import Home from './Home';
 import Login from './Login';
 import Events from './Events';
 import ManageStaff from './ManageStaff';
+import Guestlist from './Guestlist';
 import Billing from './Billing';
 
 const _RedirectRoute = ({ currentUser }) => (
@@ -17,6 +18,7 @@ const _RedirectRoute = ({ currentUser }) => (
     <Route exact path="/events" component={Events} />
     <Route exact path="/managestaff" component={ManageStaff} />
     <Route exact path="/billing" component={Billing} />
+    <Route exact path="/guestlist" component={Guestlist} />
   </React.Fragment>
 );
 
